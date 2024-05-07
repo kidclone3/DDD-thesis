@@ -1,0 +1,47 @@
+\documentclass[../main.tex]{subfiles}
+
+% DOCUMENT
+
+\begin{document}
+Bài toán tìm đường đi có thời gian đến nhỏ nhất (MATP). Phương pháp đầu
+tiên được phát triển để giải quyết vấn đề này dựa trên thuật toán
+Bellman-Ford (\cite{bellman1958routing}, \cite{ford2010flows}) và được mô tả bởi
+\cite{cooke1966shortest}. Tổng quan về các phương pháp khác cho biến thể
+này được đề cập bởi \cite{dean2004shortest}.
+
+MDP được nghiên cứu trong bối cảnh mạng lưới giao thông (\cite{demiryurek2011online}), thậm chí trong phân tích mạng xã hội (Gunturi et al., 2012).
+MTTP đặc biệt quan trọng trong việc tính toán giảm khí thải trong môi
+trường đô thị, vì khí thải của một xe hơi trên tuyến đường có thể xấp xỉ
+theo tỉ lệ với thời gian di chuyển trên tuyến đường đó; phạm vi tốc độ
+giới hạn trong đô thị (công thức khi thải được đề cập ở \cite{jabali2012analysis} với bài toán định tuyến phương tiện phụ thuộc thời gian).
+
+Trong \cite{boland2017continuous} có giới thiệu thuật toán DDD để giải quyết bài
+toán tối thiểu hóa chi phí cho mạng dịch vụ theo thời gian liên tục,
+thông qua việc sử dụng các biểu thức quy hoạch nguyên trên mạng thời
+gian. Giải pháp ở đây là tìm ra các \textbf{thời điểm thích hợp nhất},
+cho chúng đi qua các hàm tính toán theo tuần tự nhất định để tạo ra mạng
+thời gian từng phần. Các mạng này được thiết kế để luôn giải được, cho
+ra một giới hạn kép (cận trên và dưới) cho giá trị tối ưu của thời gian
+liên tục. Sau khi tìm được tập thích hợp (số ít các thời điểm), mô hình
+quy hoạch nguyên sẽ cho ra kết quả tối ưu.
+
+% Trong bài luận này, tôi trình bày và phân tích thuật toán tìm kiếm
+% rời rạc động cho bài toán MDP và bài toán MTTP khi thời gian di chuyển
+% trên các cung (cạnh) được xác định bởi các hàm tuyến tính từng đoạn
+% (piecewise linear function). Thuật toán sẽ tìm một \textbf{chuỗi} các
+% bài toán con (bài toán tìm đường đi ngắn nhất) và giải chúng trong mạng
+% thời gian từng phần, cho ra kết quả là cận dưới của bài toán với thời
+% gian liên tục. Mỗi đỉnh trong mạng là một cặp (thời gian - vị trí) được
+% lấy từ các điểm dừng (breakpoint) của hàm tuyến tính từng đoạn cho việc
+% di chuyển.
+
+% \textbf{Chuỗi} kết thúc khi độ dài của đường đi ngắn nhất trong mạng
+% thời gian từng phần hiện tại khớp với cận trên tốt nhất.
+
+Các định nghĩa sử dụng trong các phần sau: - \textbf{Cây đường đi ngắn
+nhất (Shortest-path tree):} Cho đồ thị \(G=(V,E)\), một cây gốc \(s\)
+(\(s\in V\)) trong đó nút \(v\) (\(v\in V\)) thuộc cây thì đường đi từ
+nút gốc \(s\) đến nút \(v\) chính là đường đi ngắn nhất.
+\backmatter
+\end{document}
+% END DOCUMENT
