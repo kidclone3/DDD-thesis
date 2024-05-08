@@ -149,9 +149,9 @@ việc xây dựng mạng thời gian có độ dài của cung, gọi tắt là
 \tightlist
 \item
   Đối với mỗi~\textbf{điểm dừng}~\((i, t)\), giải hai bài toán con
-  \textbf{TDSPP}: \(i-FSPT\) (kí hiệu \(\cal F^{i,t}\)) và \(i-BSPT\)
-  (kí hiệu \(\cal B^{i,t}\)). Tạo ra TEN từ tất cả các nút và cung trong
-  \(\cal F^{i,t}\) và \(\cal B^{i,t}\) với mọi \textbf{điểm
+  \textbf{TDSPP}: \(i-FSPT\) (kí hiệu \(\mathcal F^{i,t}\)) và \(i-BSPT\)
+  (kí hiệu \(\mathcal B^{i,t}\)). Tạo ra TEN từ tất cả các nút và cung trong
+  \(\mathcal F^{i,t}\) và \(\mathcal B^{i,t}\) với mọi \textbf{điểm
   dừng}~\((i,t)\) có trong đó.
 \item
   Đối với mỗi nút trong mạng TEN mới tạo, thêm các cung chờ đợi giữa các
@@ -221,9 +221,9 @@ TEN dưới dạng hợp của hai TEN.
 \begin{definition}
 \label{def:mangrove}
 Một \(mangrove\) cho điểm dừng \((i, t)\), ký
-hiệu là \(\cal M ^{i,t}\), là một TEN được tạo bằng cách lấy hợp của
-\(\cal F^{i,t}\) và \(\cal B ^{i,t}\), hay
-\(\cal M ^{i,t} = \cal F ^{i,t} \cup \cal B ^{i,t}\). Tôi gọi bất kì
+hiệu là \(\mathcal M ^{i,t}\), là một TEN được tạo bằng cách lấy hợp của
+\(\mathcal F^{i,t}\) và \(\mathcal B ^{i,t}\), hay
+\(\mathcal M ^{i,t} = \mathcal F ^{i,t} \cup \mathcal B ^{i,t}\). Tôi gọi bất kì
 \(mangrove\) nào như vậy là~\(i-mangrove\)~và sử dụng
 \((i, t)-mangrove\) nếu chúng tôi muốn chỉ định cho điểm dừng
 \((i, t)\).
@@ -232,23 +232,23 @@ hiệu là \(\cal M ^{i,t}\), là một TEN được tạo bằng cách lấy h�
 Giống với khi tính toán BSPT cho MDP, tính chất FIFO phải được đảm bảo
 cho bất kì đỉnh \(i\) nào. Tập tất cả các \(i-mangrove\) luôn được sắp
 xếp theo thời gian đối với các nút trong \(i-FSPT\) và tương tự với
-\(i-BSPT\) của chúng. Cụ thể, nếu \(\cal M^{i, t}=F^{i,t}\cup B^{i,t}\)
-và \(\cal M^{i, t'}=F^{i,t'}\cup B^{i,t'}\) với \((t’ > t\)), thì với
-bất kì nút \(j\) nào có \((j,s) \in \cal F^{i, t}\) và
-\((j,s’) \in \cal F^{i, t’}\) thì \(s’ > s\). Tương tự với các nút trong
+\(i-BSPT\) của chúng. Cụ thể, nếu \(\mathcal M^{i, t}=F^{i,t}\cup B^{i,t}\)
+và \(\mathcal M^{i, t'}=F^{i,t'}\cup B^{i,t'}\) với \((t’ > t\)), thì với
+bất kì nút \(j\) nào có \((j,s) \in \mathcal F^{i, t}\) và
+\((j,s’) \in \mathcal F^{i, t’}\) thì \(s’ > s\). Tương tự với các nút trong
 \(i-BSPT\).
 
 Do đó, bất kỳ đường đi con i nào đến đỉnh \(i\) tại thời gian \(t\) hoặc
 muộn tạo thành nút \((i,t)\) hơn đều nằm trong một dãy các nút thuộc
-\(\cal M^{i, t}\). Đương nhiên điều kiện là phải có các cung nối giữa
+\(\mathcal M^{i, t}\). Đương nhiên điều kiện là phải có các cung nối giữa
 chúng. Đối với điểm gãy \((i, t)\) đã cho, cây AFSPT (kí hiệu
-\(\cal \overline{F}^{i,t}\)) được tạo từ \(\cal F^{i,t}\) sau khi thêm
+\(\mathcal{\overline{F}}^{i,t}\)) được tạo từ \(\mathcal F^{i,t}\) sau khi thêm
 các cung \(((j, t'), (k, t''))\) chưa tồn tại, sao cho
 \(\forall (j, k) \in A\) thì cả \((j,t')\) và \((k,t'')\) đều nằm trong
 \(FSPT.\) Tương tự ta có định nghĩa của ABSPT như đã đề cập ở chương về
 MDP. \(Mangrove\) hoàn chỉnh cho điểm dừng \((i, t)\), kí hiệu
-(\(\overline{\cal M}^{i,t}\)) và là một TEN được tạo ra từ hợp của
-\(\cal \overline{F}^{i,t}\) và \(\cal \overline{B}^{i,t}\).
+(\(\overline{\mathcal M}^{i,t}\)) và là một TEN được tạo ra từ hợp của
+\(\mathcal{\overline{F}}^{i,t}\) và \(\mathcal{\overline{B}}^{i,t}\).
 
 Thuật toán được thực hiện bằng cách duy trì một tập các TEN, mỗi TEN là
 một \(mangrove\) hoặc \(mangrove\) hoàn chỉnh cho một số điểm dừng. Mỗi
@@ -256,7 +256,7 @@ tập TEN con có chung đỉnh này được sắp xếp theo thời gian của
 dừng. Với mỗi đỉnh \(i\) tương ứng có một danh sách \(L^i\) chứa các
 điểm dừng \((i, t)\) sắp xếp theo thời gian. Với mỗi \((i, t)\) được
 thêm vào \(L^i\) thì sẽ tính toán \(M^{i, t}\) và
-\(\overline{\cal M}^{i,t}\). Với mỗi điểm dừng liên tiếp trong \(L^i\),
+\(\overline{\mathcal M}^{i,t}\). Với mỗi điểm dừng liên tiếp trong \(L^i\),
 ví dụ như \((i,t)\) và \((i,t^+)\) với \(t^+ > t\), ta tiến hành như
 sau:
 
@@ -268,17 +268,17 @@ sau:
   \(mangrove\) cho \((i, t)\) đã được giải quyết. Đặt UTT thành thời
   gian di chuyển thực tế:
   \[\underline c_{(i, s), (k, s')}:=c_{j, k}(s)\] với mỗi cung
-  \(((j,s),(k,s’))\) trong \(\cal M^{i,t}\).
+  \(((j,s),(k,s’))\) trong \(\mathcal M^{i,t}\).
 \item
   Trường hợp còn lại khi \(mangrove\) cho \((i, t)\) chưa được giải
   quyết: \\
   Thuật toán đặt UTT trên mỗi cung \(((j, s), (k, s’))\) trong
-  \(\cal M^{i,t}\)
+  \(\mathcal M^{i,t}\)
   \[\underline c_{(i, s), (k, s')}:=\min_\tau\{c_{i, k}(\tau):s\le \tau \le s^+\}\]
   với \(s^+\) là thời gian duy nhất để nút \((j, s^+)\) nằm trong
-  \(\cal\overline{F}^{i,t}\) (tương tự với \(\cal \overline{B}^{i,t}\)).
+  \(\mathcal{\overline{F}}^{i,t}\) (tương tự với \(\mathcal{\overline{B}}^{i,t}\)).
   Lúc này, bất kỳ đường con tại \(i\) trong khoảng thời gian \([t,t^+]\)
-  xuất hiện trong đường đi của \(\overline{\cal M}^{i,t}\) thì đều có
+  xuất hiện trong đường đi của \(\overline{\mathcal M}^{i,t}\) thì đều có
   tổng UTT không lớn hơn thời gian di chuyển của đường đi đó.
 \end{itemize}
 
@@ -288,7 +288,7 @@ trong \(mangrove\) hoặc \(mangrove\) hoàn chỉnh với \(UTT\) là cận dư
 của thời gian di chuyển. Không mất tính tổng quát, thuật toán khởi tạo
 \(L^i\) với điểm dừng \((i, 0)\) cho mỗi \(i\). (Trong thực nghiệm, việc
 dùng \((i, t)\) với \(t\) là thời điểm ngay sau \(s\) nếu \((i, s)\)
-thuộc \(\cal F^{1,0}\) sẽ hiệu quả hơn). Theo cách tương tự, tôi thêm
+thuộc \(\mathcal F^{1,0}\) sẽ hiệu quả hơn). Theo cách tương tự, tôi thêm
 \((i, T)\) vào \(L^i\) và coi \((i, T)-mangrove\) được giải quyết và UTT
 cho các cung là thời gian di chuyển thực tế.
 
@@ -316,7 +316,7 @@ dương tại \(j\).
 
 \begin{figure}
     \centering
-    \includegraphics{images/figure8_9.png} 
+    \includegraphics{images/Figure8_9.png} 
     \caption{Hình vuông nhỏ kí hiệu cho ``gốc'' của \(mangrove\), hình
 tròn biểu diễn cho một nút và đường con được biểu diễn bởi đường xoắn
 màu xanh biển.}
@@ -339,12 +339,12 @@ Các trường hợp có thể xảy ra như sau:
 \item[\textbf{TH2:}]
    Đối với mỗi đỉnh \(k\neq i\), lấy \(r\) là thời
   điểm ngay trước \(s\) sao cho nút \((j,r)\) xuất hiện trong BSPT cho
-  một \(mangrove-k\), giả sử là \(\cal M^{k,t'}\). (Cách chọn này sẽ
-  không tồn tại \(t'' > t'\) với \(\cal M^{k,t''}\) trong \(L^k\) có
-  chứa \((j,r')\) trong \(\cal B^{k,t''}\) với \(r < r' < s\).) Chắc
+  một \(mangrove-k\), giả sử là \(\mathcal M^{k,t'}\). (Cách chọn này sẽ
+  không tồn tại \(t'' > t'\) với \(\mathcal M^{k,t''}\) trong \(L^k\) có
+  chứa \((j,r')\) trong \(\mathcal B^{k,t''}\) với \(r < r' < s\).) Chắc
   chắn phải tồn tại \(t'\) và \(r\) như vậy, vì \((j, s)\) trong
-  \(\cal F^{i,t}\) đồng nghĩa với việc hoặc \(s>0\), hoặc \(i = j\) và
-  \(s = t = 0\), trong khi bất kì nút nào trong \(\cal B^{k,0}\) đều có
+  \(\mathcal F^{i,t}\) đồng nghĩa với việc hoặc \(s>0\), hoặc \(i = j\) và
+  \(s = t = 0\), trong khi bất kì nút nào trong \(\mathcal B^{k,0}\) đều có
   thời gian âm ngoại trừ ở \(k\) và tôi đã khởi tại \(L^k\) với
   \((k,0)\) nằm trong. Ngoài ra, nếu \(t'<T\), lấy \(r^+\) sao cho
   \((j,r^+)\) nằm trong BSPT cho \(mangrove\) có điểm dừng tiếp theo
@@ -417,10 +417,10 @@ Xét một nghiệm tối ưu trong MTTP, gồm hai đoạn con:
 
 Gọi \((i, s)\) là điểm cuối của danh sách \(L^i\) với \(s \leq \alpha\)
 và \((k,t')\) là điểm cuối của \(L^k\) với \(t' \leq \beta'\). Lúc này
-\(P_1^*\) là đường đi trong \(\overline{\cal M}^{i,s}\) với UTT cận trên
+\(P_1^*\) là đường đi trong \(\overline{\mathcal M}^{i,s}\) với UTT cận trên
 là thời gian di chuyển của \(P_1^*\) và tương tự với \(P_2^*\) cho
-\(\overline{\cal M}^{k,t'}\). Từ \(\cal \overline{F}^{i,s}\) cho ra duy
-nhất nút \((j, s')\) và \(\cal \overline{B}^{k,t'}\) cho ra duy nhất nút
+\(\overline{\mathcal M}^{k,t'}\). Từ \(\mathcal{\overline{F}}^{i,s}\) cho ra duy
+nhất nút \((j, s')\) và \(\mathcal{\overline{B}}^{k,t'}\) cho ra duy nhất nút
 \((j,t)\) đỉnh \(j\). Luôn có một đường đi trong \(\mathcal D_{LB}\) từ
 \((j, s')\) đến \((j,t)\) với UTT bằng \(0\), theo như cách xây dựng ở
 trên. Quan sát rằng \(s'\leq \alpha\) và \(t\leq \beta\) bởi thứ tự đã
@@ -446,7 +446,7 @@ Tuy nhiên \(t-s'\) có thể âm:
   \item
     Ngược lại, gọi \((i,r)\) là điểm đầu tiên ngay sau \((i,s)\) trong
     danh sách \(L^i\) sao cho điểm duy nhất \((j,r')\) từ
-    \(\cal F^{i,r}\) có \(r' \geq t\). (\(r\) luôn tồn tại vì
+    \(\mathcal F^{i,r}\) có \(r' \geq t\). (\(r\) luôn tồn tại vì
     \(j\neq n\) và \((i,T)\) thuộc \(L^i\)). Lúc này:
 
     \begin{itemize}
@@ -539,12 +539,12 @@ Thuật toán sẽ sử dụng hai hàm dưới đây để tạo ra mạng
 \end{itemize}
 
 Sau khi có các công cụ cần thiết, ta tiến hành xây dựng thuật toán 2 cho
-bài toán MTTP như sau:
+bài toán MTTP theo hai bước như sau:
 
 
 
 \begin{itemize}
-  \item[Bước 1] Khởi tạo: 
+  \item[B1.] Khởi tạo: 
 \end{itemize}  
 \begin{easylist}[itemize]
     @ Xây dựng hai mạng: 
@@ -554,7 +554,7 @@ bài toán MTTP như sau:
 \end{easylist}
 
 \begin{itemize}  
-\item[Bước 2] Lặp lại bước này cho đến khi 2 cận bằng nhau: 
+\item[B2.] Lặp lại bước này cho đến khi 2 cận bằng nhau: 
 \end{itemize}
 \begin{easylist}[itemize]
     @ Nếu hai cận chưa bằng nhau: 

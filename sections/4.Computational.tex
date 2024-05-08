@@ -9,6 +9,7 @@
 %   \array{@{}l@{\quad}l@{}}}
 % \makeatother
 
+
 \begin{document}
 \frontmatter
 \pagestyle{empty}
@@ -105,48 +106,51 @@ liệu}\label{tuxf3m-tux1eaft-cho-mux1ed7i-kiux1ec3u-dux1eef-liux1ec7u}
 \section{Hàm thời gian}\label{huxe0m-thux1eddi-gian}
 
 Để đánh giá mức độ ảnh hưởng của hàm thời gian di chuyển đến hiệu năng
-của thuật toán, có ba loại hàm được sử dụng. Hình 11 minh hoạ cho mỗi
+của thuật toán, có ba loại hàm được sử dụng. \autoref{fig:11} minh hoạ cho mỗi
 loại. Hàm thời gian di chuyển được tạo ra như sau: với mỗi cung
 \((i,j)\), sử dụng nội suy tuyến tính từng khúc của một hàm \(f\) (mô tả
 chi tiết ở dưới) với các điểm là số nguyên.
 
-\textbf{Loại 1:} \(f\) là đa thức bậc 4: 
+\textbf{Loại 1:} \(f\) là đa thức bậc 4:
 
-\[
-   f([0, \frac{T}{4}, \frac{T}{2}, \frac{3T}{4}, T]) \\ = 
+\begin{multline}
+   f\big([0, \frac{T}{4}, \frac{T}{2}, \frac{3T}{4}, T]\big) \\
+   =
    \begin{cases} 
     [1.6, 1, 1.05, 1, 1.6](B_{i,j} \frac{|j − i|}{10}), & \text {nếu } U_{i,j} < \frac{1}{3}, \\ 
     [2, 1, 1.5, 1, 2](B_{i,j} \frac{|j − i|}{10}), & \text {nếu } \frac{1}{3} \leq U_{i,j} < \frac{2}{3}, \\ 
     [2.5, 1, 1.75, 1, 2.5](B_{i,j} \frac{|j − i|}{10}), & \text{ còn lại},
     \end{cases}
-    \] 
+    \end{multline}
     Với \(B_{i, j}, U_{i, j} \sim U[0, 1]\).
 
-\textbf{Loại 2:} \(f\) là đa thức bậc 6: 
-\[
-    f([0, \frac{T}{6}, \frac{T}{3}, \frac{T}{2}, \frac{2T}{3}, \frac{5T}{6}, T]) \newline = 
+\textbf{Loại 2:} \(f\) là đa thức bậc 6:
+\begin{multline}
+    f\big([0, \frac{T}{6}, \frac{T}{3}, \frac{T}{2}, \frac{2T}{3}, \frac{5T}{6}, T]\big) \\
+    = 
     \begin{cases} 
     [1, 1.6, 1, 1.05, 1, 1.6, 1](B_{i,j} \frac{|j − i|}{10}), & \text {nếu }  U_{i,j} < \frac{1}{3}, \\ 
     [1, 2, 1, 1.5, 1, 2, 1](B_{i,j} \frac{|j − i|}{10}), & \text {nếu } \frac{1}{3} \leq U_{i,j} < \frac{2}{3}, \\ 
     [1, 2.5, 1, 1.75, 1, 2.5, 1](B_{i,j} \frac{|j − i|}{10}), & \text{ còn lại},
     \end{cases}
-\] 
+\end{multline}
 
 Với \(B_{i, j}, U_{i, j} \sim U[0, 1]\).
 
-\textbf{Loại 3:}
+\textbf{Loại 3:} 
 \(f(t) = (j − i) + sin (B_{i,j} \times t), \text{ với } B_{i,j} \sim U[0, 1].\)
 
 \begin{figure}
 \centering
 \includegraphics{images/Figure11.png}
 \caption{Figure 11}
+\label{fig:11}
 \end{figure}
 
 \subsection{Nguồn gốc của các hàm thời
 gian}\label{nguux1ed3n-gux1ed1c-cux1ee7a-cuxe1c-huxe0m-thux1eddi-gian}
 
-Hàm \textbf{loại 1} được lấy ý tưởng từ \textbf{Figliozzi (2012)} về
+Hàm \textbf{Loại 1} được lấy ý tưởng từ \cite{figliozzi2012time} về
 việc chia 5 khoảng thời gian bằng nhau, mỗi khoảng có tốc độ di chuyển
 không đổi. Tốc độ di chuyển cơ sở (lấy ngẫu nhiên) được nhân với các hệ
 số lần lượt là \(1.6, 1.0, 1.05, 1.0\) và \(1.6\) tại các thời điểm
@@ -155,13 +159,13 @@ thức qua các điểm này để tạo nên hàm liên tục. Cuối cùng chu
 dạng hàm tuyến tính từng khúc bằng cách nội suy tuyến tính từng khúc của
 đa thức trên tại các điểm nguyên.
 
-Hàm \textbf{loại 2} được mở rộng từ \textbf{loại 1} bằng cách thêm hai
+Hàm \textbf{Loại 2} được mở rộng từ \textbf{Loại 1} bằng cách thêm hai
 điểm ở đầu và cuối để tăng độ khó (tăng bậc).
 
-Hàm \textbf{loại 3} gây ra nhiều thách thức cho thuật toán vì chúng
+Hàm \textbf{Loại 3} gây ra nhiều thách thức cho thuật toán vì chúng
 không đồng pha trên các cung có nhiều điểm cực tiểu và cực đại cục bộ.
 
-Ngoài ra các hàm khác được đề xuất trong \textbf{Figliozzi (2012)} cũng
+Ngoài ra các hàm khác được đề xuất trong \cite{figliozzi2012time} cũng
 được thử nghiệm, nhưng thuật toán này tìm ra nghiệm chỉ sau vài lần lặp.
 Các nghiệm tối ưu thường bắt đầu ở thời điểm sớm nhất hoặc muộn nhất có
 thể, do đó không giúp ích cho việc phân tích hiệu năng của thuật toán.
@@ -228,15 +232,16 @@ tương ứng tồn tại.
 
 \textbf{Đánh giá hiệu năng của lựa chọn BP:}
 
-Đầu tiên, với bài toán MDP, kết quả được biểu diễn ở Hình 12 bằng biểu
+Đầu tiên, với bài toán MDP, kết quả được biểu diễn ở \autoref{fig:12} bằng biểu
 đồ hộp với các tỉ số: thời gian chạy, số lần lặp và số BP được giải
 quyết cho cách chọn \(RAND\) và \(MIN\) khi so sánh với \(MED\).
 
 \begin{figure}
 \centering
 \includegraphics{images/Figure12.png}
-\caption{Hình 12: So sánh các cách chọn với 120 mẫu của bài toán MDP cho
-\(n=20, T=50\)}
+\caption{So sánh các cách chọn với 120 mẫu của bài toán MDP cho \(n=20, T=50\)}
+\label{fig:12}
+
 \end{figure}
 
 \begin{itemize}
@@ -265,8 +270,9 @@ trong mỗi lần lặp khi giải bài toán MTTP.
 \begin{figure}
 \centering
 \includegraphics{images/Figure13.png}
-\caption{Hình 13: So sách các cách chọn với 80 mẫu của bài toán MTTP cho
+\caption{So sách các cách chọn với 80 mẫu của bài toán MTTP cho
 \(n=20, T=50\)}
+\label{fig:13}
 \end{figure}
 
 Hình 13 là biểu đồ hộp của các tỷ số: thời gian chạy, số lần lặp và số
@@ -306,7 +312,7 @@ của phương pháp liệt kê, tỉ lệ phần trăm thời gian chạy của
 phương pháp liệt kê, và số lượng cung trung bình trong nghiệm tối ưu.
 Lưu ý rằng tổng sô BP có thể có trong các mẫu này là
 \(|N − 1| \times (T − 1) + 2\), khác với công thức
-\(|A| \times (T − 1) + 2\) của \textbf{Foschini et al.~(2014)}. Vì đối
+\(|A| \times (T − 1) + 2\) của \cite{foschini2011complexity}. Vì đối
 với các cung có cùng hai đỉnh đầu cuối, ta chỉ cần xử lý một lần.
 
 Kết quả cho thấy phương pháp DDD chỉ cần khám phá một phần nhỏ (từ

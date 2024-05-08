@@ -32,6 +32,15 @@
 % For Vietnamese name of auto-references
 \def\algorithmautorefname{Thuật toán}
 \def\sectionautorefname{Chương}
+
+% To mark the word and create a label for it
+\makeatletter
+\newcommand{\setword}[2]{%
+  \phantomsection
+  #1\def\@currentlabel{\unexpanded{#1}}\label{#2}%
+}
+\makeatother
+
 \AtBeginDocument{%
 \renewcommand{\figureautorefname}{Hình}
 \renewcommand{\tableautorefname}{Bảng}
@@ -475,13 +484,12 @@ ra con này
 
 \begin{sign}
 
-Sinh viên
+Bùi Khánh Duy
 
 \end{sign}
 
 \toc
 
-\chapter{Giới thiệu}\label{introduce}
 \subfile{sections/0.Introduce}%
 \subfile{sections/1.Description}%
 \subfile{sections/2.MDP}%
