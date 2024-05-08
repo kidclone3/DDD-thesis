@@ -110,13 +110,25 @@ thời gian-không gian (\textbf{TEN}) được kí hiệu là \(B^t\), có gố
   biệt mạng với đồ thị, sử dụng các từ nút thay cho đỉnh.} \((i, t_i)\)
 với \(i \in N\) và \(t_i \in (-\infty, T]\), tập hợp các cung\footnote{để
   phân biệt mạng với đồ thị, sử dụng các từ cung thay cho cạnh.}
-\(((i, t_i), (j, t_j))\) thỏa mãn các điều kiện sau: - Với mỗi
-\(i\in N\), chỉ tồn tại \(t_i\) là thời gian khởi hành muộn nhất để đi
-từ \(i\) đến \(n\). Lúc này \((i, t_i)\in B^t\), - \((i, j) \in A\), -
-\(t_i + c_{i, j}(t_i) = t_j\), và - \textbf{Chỉ có một đường đi duy
-nhất}~từ \(i\) đến \(n\) trong \(B^t\). Đường đi này được xác định
-bởi~nghiệm của \emph{TDSPP}~(được gọi là \emph{TDSP}) bắt đầu từ \(i\)
-tại thời gian \(t_i\) và kết thúc ở \(n\). \textbf{BSPT} được tìm ra
+\(((i, t_i), (j, t_j))\) thỏa mãn các điều kiện sau: 
+
+\begin{itemize}
+\tightlist
+\item
+  Với mỗi \(i\in N\), chỉ tồn tại \(t_i\) là thời gian khởi hành muộn
+  nhất để đi từ \(i\) đến \(n\). Lúc này \((i, t_i)\in B^t\),
+\item
+  \((i, j) \in A\),
+\item
+  \(t_i + c_{i, j}(t_i) = t_j\), và
+\item
+  \textbf{Chỉ có một đường đi duy nhất}~từ \(i\) đến \(n\) trong
+  \(B^t\). Đường đi này được xác định bởi~nghiệm của \emph{TDSPP}~(được
+  gọi là \emph{TDSP}) bắt đầu từ \(i\) tại thời gian \(t_i\) và kết thúc
+  ở \(n\).
+\end{itemize}
+
+\textbf{BSPT} được tìm ra
 bằng cách giải bài toán \emph{TDSPP}, bằng cách áp dụng thuật toán SSSP
 với một vài điều chỉnh đơn giản. BSPT cho đỉnh \(4\) tại thời gian
 \(t=2.57\) được biểu diễn ở hình 5(b). Mạng TEN này bao gồm các nút
@@ -178,29 +190,24 @@ Từ những đặc điểm trên, ta có định nghĩa sau:
 \begin{definition}
 \label{def:abspt}  
 Cây \textbf{ABSPT} là một mạng \textbf{TEN} được hình thành bằng cách
-thêm các cung vào \textbf{BSPT} có sẵn. Cụ thể, ta thêm cung
+thêm các cung vào \textbf{BSPT} có sẵn. Ví dụ, ta thêm cung
 \(((i, t_i), (j, t_j))\) cho mọi cặp nút \((i, j) \in A\) nếu cả
-\((i, t_i)\) và \((j, t_j)\) đều có trong \textbf{BSPT}. 
+\((i, t_i)\) và \((j, t_j)\) đều có trong \textbf{BSPT} đó. Mỗi ABSPT sẽ tương 
+ứng với một giá trị thời gian là kết thúc của cây.
 \end{definition}
 
-Theo định nghĩa của BSPT, ta có:
+Theo \autoref{def:abspt}, ta có:
 
-\begin{itemize}
-\tightlist
-\item
-  \(t_i + c_{i,j}(t_i) \ge t_j\)~cho tất cả các cung trong
-  \textbf{ABSPT}.
-\item
-  Nói cách khác, \(t_j - t_i \le c_{i,j}(t_i)\) với mọi
+  \[t_i + c_{i,j}(t_i) \ge t_j\]~cho tất cả các cung trong
+  \textbf{ABSPT}. Hay nói cách khác, \(t_j - t_i \le c_{i,j}(t_i)\) với mọi
   \(((i, t_i), (j, t_j))\) trong \textbf{ABSPT}
-\end{itemize}
 
 Hình 5(c) minh họa
 cho ABSPT của \(B^t\) với \(t = 2.57\). Trong hình, \(c_{i,j}(t_i)\)
 được gạch chéo màu đỏ và thay thế bằng giá trị \(t_j - t_i\) trên tất cả
 các cung mới được thêm vào để tạo thành \textbf{ABSPT}. Các cung mới có
 kí hiệu ba chấm. Ta kí hiệu ABSPT được tạo nên từ \(B^t\) là
-\(\overline{\cal B}^t\).
+\(\overline{\mathcal B}^t\).
 
 Thuật toán hoạt động bằng cách sử dụng một danh sách các ABSPT
 sắp xếp theo thứ tự thời gian tăng dần. Ban đầu có hai ABSPT:
@@ -208,37 +215,41 @@ sắp xếp theo thứ tự thời gian tăng dần. Ban đầu có hai ABSPT:
 \begin{itemize}
 \tightlist
 \item
-  ABSPT cho \textbf{thời gian đến nút đích sớm nhất có thể}.
+  ABSPT cho \textbf{thời gian đến đích sớm nhất có thể}.
 \item
   ABSPT cho \textbf{thời gian kết thúc của khung thời gian.}
 \end{itemize}
 
-Hai thời gian này tạo nên khoảng giới hạn của nghiệm khả thi, tức tất cả các đường đi
+Hai ABSPT này tạo nên khoảng giới hạn của nghiệm khả thi, tức tất cả các đường đi
 hợp lệ theo khung thời gian đều phải đến đích trong giới hạn này. Thuật
-toán sẽ liên tục tạo thêm ABSPT để chia nhỏ giới hạn đấy. Ví dụ với
+toán sẽ liên tục tạo thêm ABSPT để chia nhỏ giới hạn đấy. 
+
+Ví dụ với
 khung thời gian \(t\in [0,5]\), hai ABSPT ban đầu là
-\(\overline{\cal B}^{2.57}\) và \(\overline{\cal B}^{5}\) trong đó
-\(\overline{\cal B}^{5}\) chứa các nút theo thời gian
+\(\overline{\mathcal B}^{2.57}\) và \(\overline{\mathcal B}^{5}\) trong đó
+\(\overline{\mathcal B}^{5}\) chứa các nút theo thời gian
 \((1, 2.90), (2, 2.92), (3, 4.05)\) và \((4, 5)\). Việc so sánh hai ABSPT liên tiếp dựa trên thời gian,
-giả sử \(\overline{\cal B}^t\) và
-\(\overline{\cal B}^{t^+}\) liên tiếp có thời gian kết thúc tương ứng là
+giả sử \(\overline{\mathcal B}^t\) và
+\(\overline{\mathcal B}^{t^+}\) liên tiếp có thời gian kết thúc tương ứng là
 \(t\) và \(t^+\), \(t^+>t\). Đối với mỗi cung \(((i, s_i), (j, s_j))\)
-trong \(\overline{\cal B}^t\), thuật toán tính ra UTT khi ghép với
-\(\overline{\cal B}^{t^+}\) theo công thức:
+trong \(\overline{\mathcal B}^t\), thuật toán tính ra UTT khi ghép với
+\(\overline{\mathcal B}^{t^+}\) theo công thức:
 \[    \underline c_{(i, s_i),(j, s_j)}=\min_\tau\{c_{ij}(\tau)|s_i\le\tau\le s_i^+\},\]
-trong đó \((i, s_i^+)\) là nút cho đỉnh \(i\) trong ABSPT kế tiếp. Hình 5(d)
+trong đó \((i, s_i^+)\) là nút cho đỉnh \(i\) trong ABSPT kế tiếp. 
+
+Hình 5(d)
 minh họa các giá trị \textbf{UTT} trong ví dụ với \(t = 2.57\) và
 \(t^+  = 5\) (các cung màu đen). Chúng được tính dựa trên đoạn thời gian
-tạo thành từ các nút trong \(\overline{\cal B}^{2.57}\) và
-\(\overline{\cal B}^{5}\). Ví dụ: UTT cho cung \(((1, 0),(2, 1.34))\) là
+tạo thành từ các nút trong \(\overline{\mathcal B}^{2.57}\) và
+\(\overline{\mathcal B}^{5}\). Ví dụ: UTT cho cung \(((1, 0),(2, 1.34))\) là
 \(\min c_{1, 2}(\tau) = 0.02\) với \(\tau \in [0, 2.90]\), và \(\tau\)
 nằm ở cuối của đoạn. Ngược lại, UTT cho cung \(((1, 0),(3, 1.76))\) là
-\(\min c_{1,3}(\tau) = 2.85\)\$ với \(\tau \in [0, 4.05]\) và \(\tau\)
+\(\min c_{1,3}(\tau) = 2.85\) với \(\tau \in [0, 4.05]\) và \(\tau\)
 nằm ở đầu đoạn.
 
 Đường đi có chứa UTT nhỏ nhất trong số các ABSPT là \textbf{cận dưới}
-của bất kì nghiệm khả thi nào. Ví dụ, trong hình 5(d), các nút thuộc
-đường đi có \textbf{UTT} nhỏ nhất trong \(\overline{\cal B}^{2.57}\)
+của tất cả nghiệm khả thi. Ví dụ, trong hình 5(d), các nút thuộc
+đường đi có \textbf{UTT} nhỏ nhất trong \(\overline{\mathcal B}^{2.57}\)
 được tô màu xanh. Nhãn của nút cuối là \(1.25\), nghĩa là không có đường
 dẫn hợp lệ nào đến nút cuối trong khung thời gian từ \(2.57\) đến \(5\)
 có thời gian di chuyển nhỏ hơn \(1.25\), tương ứng với cận dưới là
@@ -251,27 +262,25 @@ giảm) các giá trị UTT.
 Từ ABSPT ta luôn tìm được \textbf{cận trên} cho thời gian thực hiện.
 Theo định nghĩa, nếu \((1, t_1)\) và \((n, t_n)\) là hai nút đầu và cuối
 tương ứng, thì \(t_n - t_1\) sẽ là cận trên và thuật toán sẽ lưu lại cận
-trên tốt nhất. Trong ví dụ: \(\overline{\cal B}^{2.57}\) có thời gian
-thực hiện là \(2.57\) và \(\overline{\cal B}^{5}\) là \(2.10\). Từ đây
+trên tốt nhất. Trong ví dụ: \(\overline{\mathcal B}^{2.57}\) có thời gian
+thực hiện là \(2.57\) và \(\overline{\mathcal B}^{5}\) là \(2.10\). Từ đây
 ta có cận dưới tốt nhất là \(1.25\) và cận trên tốt nhất là \(2.10\).
 
-Chỉ với việc áp dụng phương pháp tìm kiếm cận dưới và cận trên từ danh
-sách cùng với thêm các ABSPT mới ngay sau ABSPT cận dưới, thuật toán sẽ luôn hội tụ. 
+Bằng việc áp dụng phương pháp tìm cận dưới và cận trên cùng với thêm các ABSPT mới ngay sau ABSPT cận dưới vào danh sách, thuật toán sẽ luôn hội tụ. 
 Thêm vào đó, \cite{foschini2011complexity} đã chỉ ra rằng luôn tồn tại một phương pháp tối ưu sử dụng
 các BP của hàm thời gian di chuyển. Từ đây ta có thể
 tạo ra các ABSPT mới một cách nhanh chóng hơn
 đồng thời loại bỏ các khoảng thời gian phụ không cần thiết. Cũng vì vậy
 mà thuật toán sẽ dừng lại sau hữu hạn các lần lặp.
 
-Bây giờ sẽ là phần trình bày cách sử dụng các điểm dừng trong hàm thời
+Bây giờ sẽ là phần trình bày cách sử dụng các BP trong hàm thời
 gian di chuyển để xây dựng thuật toán.
 
 \section{Điểm dừng}\label{ux111iux1ec3m-dux1eebng}
 
-Đầu tiên, khởi tạo các ABSPT chứa ít nhất một nút \((i, t)\) là điểm
-dừng. Cụ thể: \((1, 0)\) nằm trong ABSPT thứ nhất và \((n, T)\) nằm
-trong ABSPT thứ 2. Các nút \((1, 0\) và \((n, T)\) đều được coi là điểm
-dừng.
+Đầu tiên, khởi tạo các ABSPT chứa ít nhất một nút \((i, t)\) là BP. 
+Cụ thể: \((1, 0)\) nằm trong ABSPT thứ nhất và \((n, T)\) nằm
+trong ABSPT thứ 2. Các nút \((1, 0\) và \((n, T)\) đều được coi là BP.
 
 Xét hai ABSPT liên tiếp trong danh sách, giả sử ABSPT trước có nút
 \((i, t_i)\) và ABSPT sau có nút là \((i, t_i^+)\) đồng thời ABSPT trước
@@ -295,11 +304,10 @@ Có các trường hợp sau đây sẽ xảy ra:
     Tìm TDSP xuất phát từ \(i\) thời điểm \(\tau_i\) đến \(n\).
   \item
     Giả sử TDSP đi đến \(n\) tại thời điểm \(\tau_n\). Lúc này BSPT từ
-    \(\tau_n\) là \(\cal B ^{\tau_n}\) phải có nút \((i, \tau_i)\). Ta
-    nói các cung đã được hoàn thành và \(\overline {\cal B} ^{\tau_n}\)
-    là ABSPT tương ứng với nút \((i, \tau_i)\). Theo tính chất của việc
-    tạo danh sách các ABSPT, điều kiện \(t_n < \tau_n < t_n^+\) phải
-    thoả mãn. Lúc này ABSPT tương ứng với \((i, \tau_i)\) được chèn vào
+    \(\tau_n\) là \(\mathcal B ^{\tau_n}\) phải có nút \((i, \tau_i)\). Các cung được coi là hoàn thành và \(\overline {\mathcal B} ^{\tau_n}\)
+    là ABSPT tương ứng với nút \((i, \tau_i)\). Điều kiện \(t_n < \tau_n < t_n^+\) phải
+    thoả mãn (theo tính chất của việc
+    tạo danh sách các ABSPT). Lúc này ABSPT tương ứng với \((i, \tau_i)\) được chèn vào
     giữa hai ABSPT có thời gian kết thúc lần lượt là \(t_n\) và
     \(t_n^+\).
   \end{enumerate}
@@ -320,7 +328,7 @@ Tổng quan thuật toán như sau:
 \tightlist
 \item
   Xác định một ABSPT bất kì từ danh sách, giả sử là
-  \(\overline {\cal B} ^{t}\) chứa các nút \((j, t_j)\) với mỗi đỉnh
+  \(\overline {\mathcal B} ^{t}\) chứa các nút \((j, t_j)\) với mỗi đỉnh
   \(j\).
 \item
   Tính toán:
@@ -329,16 +337,16 @@ Tổng quan thuật toán như sau:
   \def\labelenumii{\arabic{enumii}.}
   \tightlist
   \item
-    Hàm cận trên \(computeUB(\overline {\cal B} ^{t}) = t_n -t_1\).
+    Hàm cận trên \(computeUB(\overline {\mathcal B} ^{t}) = t_n -t_1\).
   \item
-    Hàm cận dưới \(computeLB(\overline {\cal B} ^{t}):\)
+    Hàm cận dưới \(computeLB(\overline {\mathcal B} ^{t}):\)
 
     \begin{enumerate}
     \def\labelenumiii{\arabic{enumiii}.}
     \tightlist
     \item
       Xây dựng tập các UTT cho mỗi cung trong
-      \(\overline {\cal B} ^{t}\) kết hợp với ABSPT kế tiếp,
+      \(\overline {\mathcal B} ^{t}\) kết hợp với ABSPT kế tiếp,
     \item
       Tìm đường đi UTT nhỏ nhất từ nút \((1, t_1)\) đến \((n, t_n)\)
       trong ABSPT,
@@ -347,10 +355,10 @@ Tổng quan thuật toán như sau:
     \end{enumerate}
   \item
     Lưu lại các giá trị
-    \(LB^t \gets computeLB(\overline {\cal B} ^{t}), UB^t \gets computeUB(\overline {\cal B} ^{t})\)
+    \(LB^t \gets computeLB(\overline {\mathcal B} ^{t}), UB^t \gets computeUB(\overline {\mathcal B} ^{t})\)
   \end{enumerate}
 \item
-  Đối với ABSPT cuối cùng trong danh sách: \(\overline {\cal B} ^{T}\):
+  Đối với ABSPT cuối cùng trong danh sách: \(\overline {\mathcal B} ^{T}\):
 
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
@@ -414,14 +422,21 @@ các cách chọn được sử dụng.
 \includegraphics{images/Figure6a.png}
 \includegraphics{images/Figure6b.png}
 \caption{Minh họa cách thức hoạt động của thuật toán trên ví dụ
-từ \textbf{Hình 2} và \textbf{Bảng 3}.}
+từ \autoref{fig:2} và \autoref{table:1}.}
 \label{fig:6_ab}
 \end{figure}
 
-\textbf{Khởi tạo:} Danh sách ABSPT được khởi tạo với hai phần tử: -
-\(\overline{\cal B}^{2.57}\): ứng với nút \((1, 0)\) - TDSP bắt đầu từ
-\((1, 0)\) đến đỉnh \(4\) tại thời điểm \(t_0 = 2.57\). -
-\(\overline{\cal B}^{5}\): như đã đề cập ở trên.
+
+\textbf{Khởi tạo:} Danh sách ABSPT được khởi tạo với hai phần tử:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\overline{\mathcal B}^{2.57}\): ứng với nút \((1, 0)\) - TDSP bắt đầu từ
+  \((1, 0)\) đến đỉnh \(4\) tại thời điểm \(t_0 = 2.57\).
+\item
+  \(\overline{\mathcal B}^{5}\): như đã đề cập ở trên.
+\end{itemize}
 
 Các giá trị \(LB=1.25\) và \(UB=2.10\) đã được tính toán ở trên.
 
@@ -436,14 +451,14 @@ Các giá trị \(LB=1.25\) và \(UB=2.10\) đã được tính toán ở trên.
   Tìm thấy điểm dừng mới \((j, \tau) = (1, 1)\) giữa hai \textbf{ABSPT}.
 \item
   Tìm thấy TDSP \(((1, 1), (2, 1.66), (4, 3.0826))\), đi đến đỉnh \(4\)
-  tại thời gian \(3.08\) nên tạo ra \(\overline{\cal B}^{3.08}\) và thêm
+  tại thời gian \(3.08\) nên tạo ra \(\overline{\mathcal B}^{3.08}\) và thêm
   vào danh sách (Hình 6(b), có 3 ABSPT).
 \item
   Cập nhật cận trên và cận dưới: \(UB^{3.08} = 2.08\) và
   \(LB^{3.08} = 1.45\).
 \item
   Tính lại và cập nhật cận dưới cho
-  \(\overline{\cal B}^{2.57} : LB^{2.57} = 1.89.\)
+  \(\overline{\mathcal B}^{2.57} : LB^{2.57} = 1.89.\)
 \end{enumerate}
 
 Hiện tại thì \(LB=1.45\) và \(UB = 2.08\). Vì \(LB<UB\) nên tiếp tục
@@ -455,22 +470,22 @@ lặp.
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Thêm ABSPT \(\overline{\cal B}^{3.89}\) và
-  \(\overline{\cal B}^{3.63}\) tương ứng với \((1, 2)\) và \((2, 2)\).
+  Thêm ABSPT \(\overline{\mathcal B}^{3.89}\) và
+  \(\overline{\mathcal B}^{3.63}\) tương ứng với \((1, 2)\) và \((2, 2)\).
   Cái thứ hai cũng là ABSPT thứ ba trong danh sách tại Iteration 4.
 \item
   Cập nhật cận dưới hiện tại: \(LB = 1.71\) (từ
-  \(\overline{\cal B}^{3.08}\)).
+  \(\overline{\mathcal B}^{3.08}\)).
 \item
   Do không có điểm dừng giữa \textbf{ABSPT} thứ \(2\) và thứ \(3\), cập
-  nhật cận dưới của \(\overline{\cal B}^{3.08}\) bằng cận trên:
+  nhật cận dưới của \(\overline{\mathcal B}^{3.08}\) bằng cận trên:
   \(LB^{3.08} \gets 2.08\).
 \item
   Cập nhật cận dưới hiện tại: \(LB = 1.89\) (từ
-  \(\overline{\cal B}^{3.63}\)). (Lặp 5)
+  \(\overline{\mathcal B}^{3.63}\)). (Lặp 5)
 \item
-  Cập nhật cận dưới của \(\overline{\cal B}^{3.63}\) và
-  \(\overline{\cal B}^{3.89}\) do không còn điểm dừng.
+  Cập nhật cận dưới của \(\overline{\mathcal B}^{3.63}\) và
+  \(\overline{\mathcal B}^{3.89}\) do không còn điểm dừng.
 \item
   Kiểm tra: \(UB = LB = 1.90\). Thuật toán dừng.
 \end{enumerate}

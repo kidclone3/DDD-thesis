@@ -1,13 +1,5 @@
 \documentclass[../main.tex]{subfiles}
 
-\usepackage[at]{easylist}
-\usepackage{amsthm}
-\newtheorem{theorem}{Theorem}
-\newtheorem{corollary}{Corollary}
-\newtheorem{lemma}{Lemma}
-\newtheorem{definition}{Definition}
-\newtheorem{proposition}{Proposition}
-
 % DOCUMENT
 
 \begin{document}
@@ -16,12 +8,12 @@
 
 Thuật toán cho MTTP được xây dựng dựa trên ý tưởng của thuật toán cho
 MDP. Một mạng TEN duy nhất được tạo ra từ các ABSPT trong danh sách
-\(L\) từ \textbf{Thuật toán 1}. Mạng TEN bao gồm các cung có thời gian
+\(L\) từ \autoref{algo:1}. Mạng TEN bao gồm các cung có thời gian
 liên tiếp \(((1, t), (1, t^+)), t<t^+\); mô hình hóa việc chờ đợi tại
 nguồn đến thời gian thích hợp mới xuất phát và chờ đợi tại đích sau khi
 kết thúc hành trình. UTT cho các cung này được đặt là 0. Cận dưới được
 cập nhật theo mỗi lần lặp là giá trị cận dưới của đường đi từ nút
-\((1,0)\) đến nút \((n, T)\). Thuật toán 1 đã tận dụng được các quan sát
+\((1,0)\) đến nút \((n, T)\). \autoref{algo:1} đã tận dụng được các quan sát
 sau:
 
 \begin{enumerate}
@@ -52,8 +44,9 @@ thể phải chờ đợi ở một đỉnh khác ngoài đỉnh nguồn. Hệ q
 Ta có kết luận: nếu chỉ dùng ABSPT thì không đủ để mô tả giải cho MTTP.
 
 Vì vậy nên phải xây dựng một cấu trúc mới: một TEN mới được tạo ra từ
-hợp của các FSPT và BSPT từ một đỉnh khác nguồn và đích. \#\# Nền tảng
-lý thuyết
+hợp của các FSPT và BSPT từ một đỉnh khác nguồn và đích. 
+
+\section{Nền tảng lý thuyết}\label{nux1ec1n-tux1ea3ng-luxfd-thuyux1ebft}
 
 Bất kì đường đi khả thi nào cho bài toán MTTP cũng bao gồm các khoảng
 thời gian di chuyển và chờ đợi, như minh họa trong Hình 7. Thực tế, bất
@@ -63,12 +56,14 @@ kỳ đường đi nào cũng tương ứng với một danh sách các đườn
 \begin{figure}
 \centering
 \includegraphics{images/Figure7.png}
-\caption{Figure 7: Illustration of a timed path with 3 periods of
+\caption{Illustration of a timed path with 3 periods of
 waiting in green and 3 travel subpaths in red, in the TEN for a network
 consisting only of the arcs (1, 2), (2, 3), (3, 4) and (4, 5).}
+\label{fig:7}
 \end{figure}
 
 \begin{definition}
+\label{def:duong-di}
 Trong một đường đi nhất định, một đoạn
 đường con tạo thành từ tối đa các nút con liên tiếp. Giả sử dãy nút đó
 là \((i_1, t_1),...,(i_k, t_k)\), thỏa mãn hai điều kiện: 1.
@@ -80,12 +75,11 @@ và 2. \(t_k > t_{k-1} + c_{i_{k-1}, i_k}(t_k-1)\) (phải đợi tại nút
 \(\tau = t_{k−1} + c_{i_{k−1},i_k}(t_{k−1})\)
 \end{definition}
 
-Xét một ví dụ: Cho một dãy đường đi như sau:
-\(((1,0);(2,6.9);(3,7.9);(4,8.1);(5,8.5))\) với \(\tau_{12} = 1\) ,
+Xét ví dụ, cho một dãy đường đi như sau:
+\[((1,0);(2,6.9);(3,7.9);(4,8.1);(5,8.5))\] với \(\tau_{12} = 1\) ,
 \(\tau_{23} = 0.2\), \(\tau_{34} = 0.2\) và \(\tau_{45} = 0.4\). Theo
-định nghĩa, có ba đường con như sau: \(\{(1, 0); (2, 1)\}\),
-\(\{(2, 6.9); (3, 7.1)\}\) và \(\{(3, 7.9); (4, 8.1); (5, 8.5)\}\). Hình
-7 minh hoạ cho ví dụ trên: Mạng TEN với
+\autoref{def:duong-di}, có ba đường con như sau: \(\{(1, 0); (2, 1)\}\),
+\(\{(2, 6.9); (3, 7.1)\}\) và \(\{(3, 7.9); (4, 8.1); (5, 8.5)\}\). \autoref{fig:7} minh hoạ cho ví dụ trên: Mạng TEN với
 \(D = (\{1, 2, 3, 4, 5\}, \{(1, 2), (2, 3), (3, 4), (4, 5)\})\). Đường
 đi hiển thị bằng màu đỏ và xanh lá cây. Ba đoạn đường con của nó được tô
 màu đỏ.
@@ -111,12 +105,13 @@ màu đỏ.
   gian chờ đợi xen giữa chúng.
 \end{itemize}
 
-Ví dụ: Hình dung một người lái xe đi trên đường. Khi đi trên đường cao
+Ví dụ: hình dung một người lái xe đi trên đường. Khi đi trên đường cao
 tốc (đoạn đường con), người lái xe không cần dừng lại. Tuy nhiên, khi
 đến ngã tư (điểm dừng), người lái xe phải dừng lại và chờ đèn giao
 thông.
 
 \begin{lemma}
+\label{lem:toi-uu}
 Cho một đường đi tối ưu
 \(P\) của bài toán \(MTTP\) trên mạng \(D\) với hàm thời gian di chuyển
 \(c\) và khoảng thời gian \([0,T]\). Xét một~\textbf{đường đi con}~\(S\)
@@ -135,8 +130,9 @@ con~ngay sau S trong P (nếu có). Lưu ý rằng \(\tau^− = 0\) nếu \(i = 
 \end{proof}
 
 \begin{proposition}
+\label{prp:mttp-toi-uu}
 Với bất kỳ bài toán MTTP nào, đều có
-một~\textbf{đường đi tối ưu}~sao cho mỗi~\textbf{đường đi con}~của nó đi
+một~\textbf{đường đi tối ưu}~sao cho mỗi~\textbf{đường con}~của nó đi
 qua ít nhất một nút tại điểm dừng của hàm thời gian di chuyển.
 \end{proposition}
 
@@ -173,6 +169,7 @@ Chưa xong.
 \begin{proof} \end{proof}
 
 \begin{corollary}
+\label{col:mttp}
 Cho một \textbf{MTTP} có tập các đỉnh
 \(\{1,...,n\}\) với khung thời gian \([0,T]\), \textbf{bất kỳ}~đường
 đi~ngắn nhất nào từ \((1,0)\) đến \((n,T)\) trong \textbf{TENL} đều
@@ -182,6 +179,7 @@ tương ứng là một nghiệm của bài toán \textbf{MTTP}.
 \begin{proof} \end{proof}
 
 \begin{proposition}
+\label{prp:dpt-mttp}
 Độ phức tạp cho \textbf{MTTP} trên đồ thị
 có hướng \((N,A)\) với \(n = |N|\) đỉnh và \(K^{nodes}\) điểm dừng là
 \[ (\mathcal{K}^{nodes} ×SSP(n,|A|)+ASPP(K^{nodes}n,K^{nodes}n)), \]
@@ -203,6 +201,7 @@ con được nối với nhau bằng cung chờ đợi; mỗi đường đi con 
 là đi qua một điểm gãy và thời gian chờ đợi luôn dương (\(>0\)).
 
 \begin{definition}
+\label{def:duong-di-con}
 Một đường đi con qua điểm
 dừng \((i, t)\), là một đường đi không chờ đợi nối một TDSP kết thúc tại
 \((i, t)\) với một TDSP khác xuất phát từ \((i, t)\). Thuật ngữ
@@ -220,6 +219,7 @@ là \(mangrove\). Lưu ý toán tử hợp (\(\cup\)) cũng được dùng để
 TEN dưới dạng hợp của hai TEN.
 
 \begin{definition}
+\label{def:mangrove}
 Một \(mangrove\) cho điểm dừng \((i, t)\), ký
 hiệu là \(\cal M ^{i,t}\), là một TEN được tạo bằng cách lấy hợp của
 \(\cal F^{i,t}\) và \(\cal B ^{i,t}\), hay
@@ -300,11 +300,11 @@ với các UTT liên quan trên mỗi cung, và được định nghĩa là mộ
 các \(mangrove\) và \(mangrove\) hoàn chỉnh có các điểm dừng thuộc tập
 \(\bigcup _{i\in N} L^i\) như sau:
 
-Các nút và Các cung: Tất cả các nút và cung trong \(mangrove\) được giải
+\underline{Các nút và các cung:} Tất cả các nút và cung trong \(mangrove\) được giải
 quyết và \(mangrove\) hoàn chỉnh đều được đưa vào \(\mathcal D_{LB}\)
 cùng với các UTT của chúng.
 
-Cung chờ: Các cung chờ được đưa vào để kết nối \(mangrove\) (hoàn
+\underline{Cung chờ:} Các cung chờ được đưa vào để kết nối \(mangrove\) (hoàn
 chỉnh)\footnote{Mangrove hoặc mangrove hoàn chỉnh đã được giải quyết.}
 đại diện cho một đường con đến một mangrove (hoàn chỉnh) khác có thể đại
 diện cho đường con kế tiếp. Có nghĩa là sẽ xem xét bất kỳ đường con
@@ -391,7 +391,7 @@ Các trường hợp có thể xảy ra như sau:
 \label{fig:10}
 \end{figure}
 
-Các nút và cung ảo: Thêm một nút bắt đầu ảo và một nút kết thúc ảo vào
+\underline{Các nút và cung ảo:} Thêm một nút bắt đầu ảo và một nút kết thúc ảo vào
 \(\mathcal D_{LB}\). Thêm các cung nối nút bắt đầu ảo với các nút có
 dạng \((1,t)\) với \(t\geq 0\) và các nút có dạng \((n,t)\) với
 \(t\leq T\) nối với nút kết thúc ảo. Tất cả các cung thêm vào đều có UTT
@@ -399,7 +399,7 @@ bằng \(0\).
 
 Đường đi có UTT nhỏ nhất trong \(\mathcal D_{LB}\) được xây dựng như
 trên, tính từ nút bắt đầu ảo đến nút kết thúc ảo, giá trị UTT sẽ là cận
-dưới cho bài toán MTTP. Điều này được giải thích như sau:
+dưới cho bài toán MTTP. Điều này được giải thích dưới đây.
 
 Xét một nghiệm tối ưu trong MTTP, gồm hai đoạn con:
 
