@@ -68,7 +68,7 @@ liệu}\label{tuxf3m-tux1eaft-cho-mux1ed7i-kiux1ec3u-dux1eef-liux1ec7u}
   Để đảm bảo luôn có ít nhất một đường đi khả thi, mọi cung giữa các
   đỉnh liên tiếp vẫn được giữ lại.
 \item
-  Mật độ mạng: khoảng 0.25.
+  Mật độ mạng: khoảng \(0.25\).
 \end{itemize}
 
 \textbf{Kiểu 3:}
@@ -81,7 +81,7 @@ liệu}\label{tuxf3m-tux1eaft-cho-mux1ed7i-kiux1ec3u-dux1eef-liux1ec7u}
   \begin{itemize}
   \tightlist
   \item
-    Ví dụ: đỉnh 1 sẽ nối với đỉnh 2, 3 và 4.
+    Ví dụ: đỉnh $1$ sẽ nối với đỉnh $2$, $3$ và $4$.
   \end{itemize}
 \item
   Mật độ mạng: khoảng \(3/n\).
@@ -111,7 +111,7 @@ loại. Hàm thời gian di chuyển được tạo ra như sau: với mỗi cun
 \((i,j)\), sử dụng nội suy tuyến tính từng khúc của một hàm \(f\) (mô tả
 chi tiết ở dưới) với các điểm là số nguyên.
 
-\textbf{Loại 1:} \(f\) là đa thức bậc 4:
+\textbf{Loại 1:} \(f\) là đa thức bậc $4$:
 
 \begin{multline}
    f\big([0, \frac{T}{4}, \frac{T}{2}, \frac{3T}{4}, T]\big) \\
@@ -124,7 +124,7 @@ chi tiết ở dưới) với các điểm là số nguyên.
     \end{multline}
     Với \(B_{i, j}, U_{i, j} \sim U[0, 1]\).
 
-\textbf{Loại 2:} \(f\) là đa thức bậc 6:
+\textbf{Loại 2:} \(f\) là đa thức bậc $6$:
 \begin{multline}
     f\big([0, \frac{T}{6}, \frac{T}{3}, \frac{T}{2}, \frac{2T}{3}, \frac{5T}{6}, T]\big) \\
     = 
@@ -154,7 +154,7 @@ Hàm \textbf{Loại 1} được lấy ý tưởng từ \cite{figliozzi2012time} 
 việc chia 5 khoảng thời gian bằng nhau, mỗi khoảng có tốc độ di chuyển
 không đổi. Tốc độ di chuyển cơ sở (lấy ngẫu nhiên) được nhân với các hệ
 số lần lượt là \(1.6, 1.0, 1.05, 1.0\) và \(1.6\) tại các thời điểm
-\(0, 1/4T, 1/2T, 3/4T\) và \(T\) tương ứng. Sau đó sử dụng nội suy đa
+\(0, \frac 1 4 T, \frac 1 2 T, \frac 3 4 T\) và \(T\) tương ứng. Sau đó sử dụng nội suy đa
 thức qua các điểm này để tạo nên hàm liên tục. Cuối cùng chuyển chúng về
 dạng hàm tuyến tính từng khúc bằng cách nội suy tuyến tính từng khúc của
 đa thức trên tại các điểm nguyên.
@@ -230,7 +230,7 @@ BP ứng viên tồn tại. Trong kịch bản \textbf{(M)}, thêm một BP vào
 \(mangrove\) hoàn chỉnh được dùng bởi đường đi UTT, nếu BP ứng viên
 tương ứng tồn tại.
 
-\textbf{Đánh giá hiệu năng của lựa chọn BP:}
+\textbf{Đánh giá hiệu năng của việc lựa chọn BP:}
 
 Đầu tiên, với bài toán MDP, kết quả được biểu diễn ở \autoref{fig:12} bằng biểu
 đồ hộp với các tỉ số: thời gian chạy, số lần lặp và số BP được giải
@@ -267,12 +267,34 @@ chí hiệu năng (thời gian chạy, số lần lặp và số BP được gi�
 Tiếp theo, ta đánh giá tác động của cách chọn BP và số BP được xử lý
 trong mỗi lần lặp khi giải bài toán MTTP.
 
+% \begin{figure}
+% \centering
+% \includegraphics{images/Figure13.png}
+% \caption{So sách các cách chọn với 80 mẫu của bài toán MTTP cho
+% \(n=20, T=50\)}
+% \label{fig:13}
+% \end{figure}
 \begin{figure}
-\centering
-\includegraphics{images/Figure13.png}
-\caption{So sách các cách chọn với 80 mẫu của bài toán MTTP cho
-\(n=20, T=50\)}
-\label{fig:13}
+  \begin{subfigure}{width=0.5\textwidth}
+    \centering
+    \includegraphics{edited-images/Figure13a.png}
+    \caption{Thời gian chạy}
+    \label{fig:13a}
+  \end{subfigure}
+  \begin{subfigure}{width=0.5\textwidth}
+    \centering
+    \includegraphics{edited-images/Figure13b.png}
+    \caption{Số lần lặp}
+    \label{fig:13b}
+  \end{subfigure}
+  \begin{subfigure}{width=0.5\textwidth}
+    \centering
+    \includegraphics{edited-images/Figure13c.png}
+    \caption{Số BP được giải quyết}
+    \label{fig:13c}
+  \end{subfigure}
+  \caption{So sánh các cách chọn với 80 mẫu của bài toán MTTP cho \(n=20, T=50\)}
+  \label{fig:13}
 \end{figure}
 
 Hình 13 là biểu đồ hộp của các tỷ số: thời gian chạy, số lần lặp và số
@@ -294,7 +316,7 @@ Trong phần này tôi sẽ so sánh hiệu năng của thuật toán DDD với 
 toán liệt kê BP, với kịch bản chọn là \(MIN\). Trong bài toán MTTP sử
 dụng việc khám phá nhiều BP cho mỗi lần lặp.
 
-Bảng 1 trình bày kết quả chạy trung bình với 10 mẫu được sinh ngẫu
+\autoref{table:mdp1} trình bày kết quả chạy trung bình với 10 mẫu được sinh ngẫu
 nhiên, với mạng lưới có kích thước khác nhau (\(n=20,30,50\) và
 \(T=50\)) với 4 loại hàm thời gian di chuyển cho bài toán MDP.
 
@@ -302,10 +324,11 @@ nhiên, với mạng lưới có kích thước khác nhau (\(n=20,30,50\) và
 \centering
 \includegraphics{images/Table1.png}
 \caption{Table 1}
+\label{table:mdp1}
 \end{figure}
 
-Trong bảng có các cột với ý nghĩa như sau: Số BP khám phá được trung
-bình bởi phương pháp DDD, số BP khám phá được bằng phương pháp liệt kê
+Trong bảng có các cột với ý nghĩa như sau: Trung
+bình số BP khám phá được bởi phương pháp DDD, số BP khám phá được bằng phương pháp liệt kê
 (tổng số BP của mẫu), tỉ lệ phần trăm số BP được khám phá. Thêm vào đó
 còn có thời gian chạy (đơn vị giây) của phương pháp DDD, thời gian chạy
 của phương pháp liệt kê, tỉ lệ phần trăm thời gian chạy của DDD với
@@ -325,7 +348,7 @@ bởi loại hàm thời gian di chuyển, nhưng phụ thuộc vào mật độ
 (số nút và cung). Ta cũng có thể thấy rằng khi kích cỡ mẫu tăng lên thì
 lợi ích của phương pháp DDD càng rõ rệt.
 
-Bảng 2 trình bày kết quả chạy trung bình với 10 mẫu được sinh ngẫu
+\autoref{table:mttp1} trình bày kết quả chạy trung bình với 10 mẫu được sinh ngẫu
 nhiên, với mạng lưới có kích thước khác nhau (\(n=20,30\) và \(T=50\))
 với 4 loại hàm thời gian di chuyển cho bài toán MTTP.
 
@@ -333,6 +356,7 @@ với 4 loại hàm thời gian di chuyển cho bài toán MTTP.
 \centering
 \includegraphics{images/Table2.png}
 \caption{Table 2}
+\label{table:mttp1}
 \end{figure}
 
 Ở bài toán này tôi đã loại bỏ hàm thời gian di chuyển loại \(3\) vì thời

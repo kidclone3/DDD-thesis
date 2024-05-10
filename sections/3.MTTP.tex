@@ -544,7 +544,7 @@ bài toán MTTP theo hai bước như sau:
 
 
 \begin{itemize}
-  \item[B1.] Khởi tạo: 
+  \item[\textbf{B1.}] Khởi tạo: 
 \end{itemize}  
 \begin{easylist}[itemize]
     @ Xây dựng hai mạng: 
@@ -554,7 +554,7 @@ bài toán MTTP theo hai bước như sau:
 \end{easylist}
 
 \begin{itemize}  
-\item[B2.] Lặp lại bước này cho đến khi 2 cận bằng nhau: 
+\item[\textbf{B2.}] Lặp lại bước này cho đến khi 2 cận bằng nhau: 
 \end{itemize}
 \begin{easylist}[itemize]
     @ Nếu hai cận chưa bằng nhau: 
@@ -568,7 +568,7 @@ bài toán MTTP theo hai bước như sau:
     @ Tiếp tục tạo các \(\mathcal D_{LB}\) và \(\mathcal D_{UB}\) dựa trên \(L^i\) đã cập nhật, sau đó tính toán lại các cận trên và dưới.
 \end{easylist}
 
-Hiệu năng của thuật toán này mấu chốt nằm ở hai vấn đề như sau:
+Hiệu năng của thuật toán này mấu chốt nằm ở hai vấn đề sau:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -581,16 +581,10 @@ Hiệu năng của thuật toán này mấu chốt nằm ở hai vấn đề nh�
   điểm dừng có chung một đỉnh để đưa vào danh sách của đỉnh đó.
 \end{enumerate}
 
-Chi tiết về vấn đề này sẽ được đề cập ở phần 2 chương 4. Ở phần này, hàm
-xử lý việc chọn này sẽ không đi vào chi tiết (để đơn giản hoá mã giả).
-
-\begin{itemize}
-\tightlist
-\item
-  \(FindBP(P, \{L^i\}_{i\in N})\): Hàm này xác định tập các điểm dừng
-  mới để thêm vào danh sách \(L^i\), dựa trên đường đi có UTT nhỏ nhất
-  \(P\) tìm được từ \(\mathcal {D}_{LB}\). 
-\end{itemize}
+Chi tiết về vấn đề này sẽ được đề cập ở \autoref{kux1ecbch-bux1ea3n-vuxe0-cuxe0i-ux111ux1eb7t}. 
+Ở đây sẽ không đi vào chi tiết (để đơn giản hoá cho mã giả). Hàm \(FindBP(P, \{L^i\}_{i\in N})\) được dùng để xác định tập các BP
+mới thêm vào danh sách \(L^i\), dựa trên đường đi có UTT nhỏ nhất
+\(P\) tìm được từ \(\mathcal{D}_{LB}\). 
 
 \section{Mã giả}
 

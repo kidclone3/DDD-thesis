@@ -11,36 +11,103 @@ thuật toán DDD cho bài toán MDP trên bộ dữ liệu thực tế từ m�
 Street Map. \autoref{fig:14} mô tả bản đồ khu vực và biểu diễn mạng lưới tương
 ứng.
 
+% \begin{figure}
+% \centering
+% \includegraphics{images/Figure14.png}
+% \caption{Figure14}
+% \label{fig:14}
+% \end{figure}
+
 \begin{figure}
-\centering
-\includegraphics{images/Figure14.png}
-\caption{Figure14}
-\label{fig:14}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics{edited-images/Figure14a.jpg}
+        \caption{Bản đồ khu vực}
+        \label{fig:14a}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics{edited-images/Figure14b.jpg}
+        \caption{Mạng lưới đường bộ}
+        \label{fig:14b}
+    \end{subfigure}
+    \caption{Bản đồ và mạng lưới đường bộ khu vực Trung tâm và phía Bắc Atlanta}
+    \label{fig:14}
 \end{figure}
 
 Dữ liệu về thời gian di chuyển được thu thập từ nhiều nguồn khác nhau
 (hệ thống định vị, dữ liệu di động). Dữ liệu được thu thập và tổng hợp
 để tạo thành các hàm thời gian di chuyển tuyến tính từng khúc với các BP
 cách nhau 15 phút trong 24 giờ. Nhờ vậy mỗi cung có tổng cộng 192 điểm
-dữ liệu (Marshall 2019). \autoref{fig:15} là ví dụ về các hàm thời gian di chuyển
+dữ liệu. \autoref{fig:15} là ví dụ về các hàm thời gian di chuyển
 này.
 
+% \begin{figure}
+% \centering
+% \includegraphics{images/Figure15.png}
+% \caption{Figure15}
+% \label{fig:15}
+% \end{figure}
+
 \begin{figure}
-\centering
-\includegraphics{images/Figure15.png}
-\caption{Figure15}
-\label{fig:15}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics{edited-images/Figure15a.jpg}
+        \caption{Peachtree St.}
+        \label{fig:15a}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics{edited-images/Figure15b.jpg}
+        \caption{Ponce de Leon Ave. NE}
+        \label{fig:15b}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics{edited-images/Figure15c.jpg}
+        \caption{Bắc Ave. NE}
+        \label{fig:15c}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics{edited-images/Figure15d.jpg}
+        \caption{Trung tâm khu vực I-75/85}
+        \label{fig:15d}
+    \end{subfigure}
+    \caption{Hàm thời gian di chuyển các khu vực ở Atlanta}
+    \label{fig:15}
 \end{figure}
+
 
 Để minh hoạ sự khác biệt giữa đường đi tối thiểu thời gian thực hiện,
 đến đích sớm nhất và khởi hành muộn nhất từ nguồn đến đích trong khoảng
 thời gian cụ thể, tôi chọn điểm nguồn ở Bắc Atlanta, đích đến ở Trung
 tâm Atlanta và khung thời gian là \([9:30, 13:00]\).
 
-\includegraphics{images/Figure16.png} Đường đi tối thiểu thời gian thực
-hiện (Hình 16(b)) xuất phát lúc \(10:37\) sáng và chỉ mất \(45.8\) phút,
+% \includegraphics{images/Figure16.png} 
+
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics{edited-images/Figure16a.jpg}
+        \caption{Đến đích sớm nhất / khởi hành muộn nhất}
+        \label{fig:16a}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics{edited-images/Figure16b.jpg}
+        \caption{Thời gian thực hiện tối thiểu}
+        \label{fig:16b}
+    \end{subfigure}
+    \caption{Đường đi từ Bắc Atlanta đến Trung tâm Atlanta}
+    \label{fig:16}
+\end{figure}
+
+
+Đường đi tối thiểu thời gian thực
+hiện (\autoref{fig:16b}) xuất phát lúc \(10:37\) sáng và chỉ mất \(45.8\) phút,
 trong khi đường đi đến đích sớm nhất mất \(47.5\) phút còn đường đi xuất
-phát muộn nhất mất \(47.8\) phút (Hình 16(a)). Nguyên nhân cho sự khác
+phát muộn nhất mất \(47.8\) phút (\autoref{fig:16a}). Nguyên nhân cho sự khác
 biệt này nằm ở việc đường đi tối thiểu thời gian khởi hành vào lúc vắng
 xe (giữa giờ cao điểm sáng và trưa) và đi theo tuyến đường lớn nhất (cao
 tốc \(I-75\) và \(I-75/85\)). Hai đường đi còn lại đi đường tránh cao
