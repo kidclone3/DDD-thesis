@@ -1,2 +1,5 @@
 .tmp/*
 */.tmp/*
+main.*
+!main.tex
+!main.pdf
