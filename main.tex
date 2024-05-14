@@ -1,6 +1,6 @@
-% \PassOptionsToPackage{unicode}{hyperref}
-% \PassOptionsToPackage{hyphens}{url}
-% \PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
 \documentclass[fontsize=14pt,DIV=15pt,twoside=false]{scrbook}
 % Fix old font command bugs
 \DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
@@ -23,15 +23,20 @@
 \usepackage{amsthm} % For theorem, definition, etc.
 \usepackage[at]{easylist}
 \usepackage{amsthm}
-\newtheorem{theorem}{Theorem} 
-\newtheorem{corollary}{Corollary}
-\newtheorem{lemma}{Lemma}
-\newtheorem{definition}{Definition}
-\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Định lý} 
+\newtheorem{corollary}{Hệ quả}
+\newtheorem{lemma}{Bổ đề}
+\newtheorem{definition}{Định nghĩa}
+\newtheorem{proposition}{Mệnh đề}
 
 % For Vietnamese name of auto-references
 \def\algorithmautorefname{Thuật toán}
 \def\sectionautorefname{Chương}
+\def\definitionautorefname{Định nghĩa}
+\def\propositionautorefname{Mệnh đề}
+\def\lemmaautorefname{Bổ đề}
+\def\corollaryautorefname{Hệ quả}
+\def\theoremautorefname{Định lý}
 
 % To mark the word and create a label for it
 \makeatletter
@@ -46,12 +51,23 @@
 \renewcommand{\tableautorefname}{Bảng}
 }
 
+\usepackage[%
+    font={small,sf},
+    labelfont=bf,
+    format=hang,    
+    format=plain,
+    margin=0pt,
+    width=0.8\textwidth,
+]{caption}
 \usepackage{subcaption} % For subfigure
 
 % vnthesis mới đã có phần package pseudocode.
 % Nằm trong init.
 % PSEUDO-CODE
 \usepackage{algorithm}
+\makeatletter
+\renewcommand{\ALG@name}{Thuật toán} % Algorithm -> Thuật toán
+\makeatother
 \usepackage[noEnd=false,indLines=true]{algpseudocodex}
 
 \newcommand{\And}{\textbf{and~}}
@@ -68,11 +84,18 @@
 \renewcommand{\Return}{\State \textbf{return~}}
 % END PSEUDO-CODE.
 
+\usepackage{tabularx} % For dynamic table
+\usepackage{multirow} % For multirow in table
+% \usepackage{booktabs} % Better looking table % Duplicate import.
 \usepackage{parcolumns} % For parallel text
+\usepackage{lscape} % For landscape page
+
 \usepackage{lscape} % For landscape page
 
 % For include other files
 \usepackage{subfiles} % Best loaded last in the preamble
+
+\usepackage{makecell} % Change the thickness of the line in table
 
 \usepackage{iftex}
 
@@ -82,9 +105,11 @@
 \usepackage[vietnamese]{babel}
 
 % Biblo
-\usepackage[style=numeric]{biblatex}
+\usepackage[style=numeric,maxbibnames=99]{biblatex}
 \addbibresource{refs.bib}
 \usepackage{csquotes} % biblatex recommended
+
+\usepackage{parcolumns} % For parallel text
 
 \usepackage{fontspec}
 \usepackage{pifont}
@@ -218,23 +243,6 @@ có yếu tố thời gian},
 {\subparagraph}{1em}{}
 
 \usepackage{footnotebackref}
-
-%begin tables-vrules.lua
-\usepackage{longtable,booktabs,array, multirow}
-\usepackage{calc} % for calculating minipage widths
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
-\setlength{\aboverulesep}{0pt}
-\setlength{\belowrulesep}{0pt}
-\renewcommand{\arraystretch}{1.3}
-%end tables-vrules.lua
-
 
 %begin tables-vrules.lua
 \usepackage{longtable,booktabs,array}
@@ -500,9 +508,12 @@ Bùi Khánh Duy
 \subfile{sections/4.Computational}%
 \subfile{sections/5.CaseStudy}%
 
+\chapter*{Kết luận}\label{kux1ebft-luux1eadn}
+\addcontentsline{toc}{chapter}{Kết luận}
+
+
 \printbibliography
 \subfile{sections/6.Appendix}%
-
 
 \backmatter
 \end{document}
