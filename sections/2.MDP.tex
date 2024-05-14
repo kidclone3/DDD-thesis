@@ -12,8 +12,8 @@ thay đổi nhỏ và chứng minh lại tính đúng đắn.
 \section{Ví dụ}\label{vuxed-dux1ee5}
 
 Xét mạng ở \autoref{fig:2} với các hàm thời gian di chuyển được biểu diễn ở \autoref{fig:4}. 
-Khung thời gian là \([0, 5]\). Hầu hết các cung có điểm dừng là số
-nguyên. Ngoại lệ là cung \((3, 4)\) chỉ có điểm dừng tại \(0, 1, 2\) và
+Khung thời gian là \([0, 5]\). Hầu hết các cung có số BP là số
+nguyên. Ngoại lệ là cung \((3, 4)\) chỉ có BP tại \(0, 1, 2\) và
 \(5\). \textbf{Phụ lục 8} cung cấp chi tiết về các hàm thời gian di
 chuyển và hàm đảo chiều của chúng.
 
@@ -242,7 +242,7 @@ mà thuật toán sẽ dừng lại sau hữu hạn các lần lặp.
 Bây giờ sẽ là phần trình bày cách sử dụng các BP trong hàm thời
 gian di chuyển để xây dựng thuật toán.
 
-\section{Điểm dừng}\label{ux111iux1ec3m-dux1eebng}
+\section{Điểm dừng (BP)}\label{ux111iux1ec3m-dux1eebng}
 
 Đầu tiên, khởi tạo các ABSPT chứa ít nhất một nút \((i, t)\) là BP. 
 Cụ thể: \((1, 0)\) nằm trong ABSPT thứ nhất và \((n, T)\) nằm
@@ -257,7 +257,7 @@ Có các trường hợp sau đây sẽ xảy ra:
 \begin{itemize}
 \tightlist
 \item[\textbf{TH1:}]
-  \(\exists (i, j) \in A\ |\ \tau_i:t_i < \tau_i < t_i^+\) với điểm dừng
+  \(\exists (i, j) \in A\ |\ \tau_i:t_i < \tau_i < t_i^+\) với BP
   \(\tau_i\). \\ 
   Lúc này, ta nói điểm \((i, \tau_i)\) nằm giữa hai ABSPT.
   Xây dựng ABSPT mới như sau:
@@ -278,7 +278,7 @@ Có các trường hợp sau đây sẽ xảy ra:
   \end{enumerate}
 \item[\textbf{TH2:}]
   \(\nexists (i, j)\in A\ |\ \tau_i: t_i < \tau_i < t_i^+\), không có
-  điểm dừng nằm giữa hai ABSPT. \\
+  BP nằm giữa hai ABSPT. \\
   Lúc này, ta có thể kết luận trạng thái
   ABSPT được giải quyết và không có ABSPT mới được thêm vào. 
 \end{itemize}
@@ -336,7 +336,7 @@ Tổng quan thuật toán như sau:
 \end{enumerate}
 
 Vì \autoref{algo:1} thực chất là một họ các thuật toán nên không đề cập đến
-phương án chọn điểm dừng khi có nhiều lựa chọn. \autoref{kux1ecbch-bux1ea3n-vuxe0-cuxe0i-ux111ux1eb7t} sẽ đề cập đến
+phương án chọn BP khi có nhiều lựa chọn. \autoref{kux1ecbch-bux1ea3n-vuxe0-cuxe0i-ux111ux1eb7t} sẽ đề cập đến
 các cách chọn được sử dụng.
 
 \section{Mã giả}\label{muxe3-giux1ea3}
@@ -415,9 +415,9 @@ Các giá trị \(LB=1.25\) và \(UB=2.10\) đã được tính toán ở trên.
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Xác định điểm dừng \(\tau = 1 \in [0, 2.90]\) của cung \((1, 2)\).
+  Xác định BP \(\tau = 1 \in [0, 2.90]\) của cung \((1, 2)\).
 \item
-  Tìm thấy điểm dừng mới \((j, \tau) = (1, 1)\) giữa hai \textbf{ABSPT}.
+  Tìm thấy BP mới \((j, \tau) = (1, 1)\) giữa hai \textbf{ABSPT}.
 \item
   Tìm thấy TDSP \(((1, 1), (2, 1.66), (4, 3.0826))\), đi đến đỉnh \(4\)
   tại thời gian \(3.08\) nên tạo ra \(\overline{\mathcal B}^{3.08}\) và thêm
@@ -446,7 +446,7 @@ lặp.
   Cập nhật cận dưới hiện tại: \(LB = 1.71\) (từ
   \(\overline{\mathcal B}^{3.08}\)).
 \item
-  Do không có điểm dừng giữa \textbf{ABSPT} thứ \(2\) và thứ \(3\), cập
+  Do không có BP giữa \textbf{ABSPT} thứ \(2\) và thứ \(3\), cập
   nhật cận dưới của \(\overline{\mathcal B}^{3.08}\) bằng cận trên:
   \(LB^{3.08} \gets 2.08\).
 \item
@@ -454,7 +454,7 @@ lặp.
   \(\overline{\mathcal B}^{3.63}\)). (Lặp 5)
 \item
   Cập nhật cận dưới của \(\overline{\mathcal B}^{3.63}\) và
-  \(\overline{\mathcal B}^{3.89}\) do không còn điểm dừng.
+  \(\overline{\mathcal B}^{3.89}\) do không còn BP.
 \item
   Kiểm tra: \(UB = LB = 1.90\). Thuật toán dừng.
 \end{enumerate}

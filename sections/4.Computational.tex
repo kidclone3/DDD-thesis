@@ -187,14 +187,14 @@ cứu là một cấu trúc dữ liệu hiệu quả cho việc tính toán trư
 \section{Kịch bản và cài
 đặt}\label{kux1ecbch-bux1ea3n-vuxe0-cuxe0i-ux111ux1eb7t}
 
-Phần này sẽ bàn về ảnh hưởng của việc chọn điểm dừng đến hiệu năng của
+Phần này sẽ bàn về ảnh hưởng của việc chọn BP đến hiệu năng của
 thuật toán.
 
 Với bài toán MDP, giả sử cận dưới đang là \(LB^t\) và \(t^+\) là thời
 gian đến đỉnh \(n\) của ABSPT ngay sau \(\overline{\mathcal{B}}^t\). Kí
 hiệu cho nút trong \(\overline{\mathcal{B}}^t\) là \((i,t_i)\) và trong
 \(\overline{\mathcal{B}}^{t^+}\) là \((i, t_i^+)\). Chọn cung \((i,j)\)
-sao cho mỗi cung thuộc \(\overline{\mathcal{B}}^{t}\) có điểm dừng trong
+sao cho mỗi cung thuộc \(\overline{\mathcal{B}}^{t}\) có BP trong
 khoảng thời gian \((t_i, t_i^+)\) và có chỉ số nhỏ nhất (khi xét các
 đỉnh từ \(1\) đến \(n\)). Dưới đây là ba cách chọn điểm gãy cho
 \(c_{i,j}(t)\) với \(t\in (t_i, t_i^+)\):
@@ -205,27 +205,27 @@ khoảng thời gian \((t_i, t_i^+)\) và có chỉ số nhỏ nhất (khi xét 
 \item
   Chọn một điểm bất kì (\(RAND\))
 \item
-  Chọn điểm trung vị (trong tập các điểm dừng sắp xếp theo thời gian)
+  Chọn điểm trung vị (trong tập các BP sắp xếp theo thời gian)
   (\(MED\))
 \item
   Chọn điểm có giá trị \(c_{i, j}(t)\) nhỏ nhất với
   \(t\in (t_i, t_i^+)\) (\(MIN\)).
 \end{enumerate}
 
-Với bài toán MTTP, ta so sánh hai kịch bản chọn điểm dừng để thêm vào
+Với bài toán MTTP, ta so sánh hai kịch bản chọn BP để thêm vào
 danh sách \(L^i\) ở mỗi lần lặp như sau:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Thêm một điểm dừng (S):} Thêm một điểm dừng cho một trong các
+  \textbf{Thêm một BP (S):} Thêm một BP cho một trong các
   đường con ở mỗi lần lặp.
 \item
-  \textbf{Thêm nhiều điểm dừng (M):} Thêm một điểm dừng cho mọi đường
+  \textbf{Thêm nhiều BP (M):} Thêm một BP cho mọi đường
   con ở mỗi lần lặp.
 \end{itemize}
 
-Quy tắc chọn điểm dừng như sau: Để chọn điểm cần thêm vào, ta xác định
+Quy tắc chọn BP như sau: Để chọn điểm cần thêm vào, ta xác định
 một chuỗi các \(mangrove\) hoàn chỉnh được sử dụng bởi đường đi UTT kí
 hiệu \(P_{LB}\). Mỗi \(mangrove\) hoàn chỉnh được tạo ra từ một BP, giả
 sử đó là điểm \((i,t)\). Khi đó, nếu \((i,t^+)\) là điểm ngay sau

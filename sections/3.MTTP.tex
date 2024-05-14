@@ -114,7 +114,7 @@ Ba đoạn đường con của nó được tô màu đỏ.
 
 Ví dụ: hình dung một người lái xe đi trên đường. Khi đi trên đường cao
 tốc (đoạn đường con), người lái xe không cần dừng lại. Tuy nhiên, khi
-đến ngã tư (điểm dừng), người lái xe phải dừng lại và chờ đèn giao
+đến ngã tư (BP), người lái xe phải dừng lại và chờ đèn giao
 thông.
 
 \begin{lemma}
@@ -140,7 +140,7 @@ con~ngay sau S trong P (nếu có). Lưu ý rằng \(\tau^− = 0\) nếu \(i = 
 \label{prp:mttp-toi-uu}
 Với bất kỳ bài toán MTTP nào, đều có
 một~\textbf{đường đi tối ưu}~sao cho mỗi~\textbf{đường con}~của nó đi
-qua ít nhất một nút tại điểm dừng của hàm thời gian di chuyển.
+qua ít nhất một nút tại BP của hàm thời gian di chuyển.
 \end{proposition}
 
 \begin{proof}
@@ -155,7 +155,7 @@ việc xây dựng mạng thời gian có độ dài của cung, gọi tắt là
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Đối với mỗi~\textbf{điểm dừng}~\((i, t)\), giải hai bài toán con
+  Đối với mỗi~\textbf{BP}~\((i, t)\), giải hai bài toán con
   \textbf{TDSPP}: \(i-FSPT\) (kí hiệu \(\mathcal F^{i,t}\)) và \(i-BSPT\)
   (kí hiệu \(\mathcal B^{i,t}\)). Tạo ra TEN từ hợp của
   \(\mathcal F^{i,t}\) và \(\mathcal B^{i,t}\) với mọi \textbf{điểm
@@ -186,7 +186,7 @@ tương ứng là một nghiệm của bài toán \textbf{MTTP}.
 \begin{proposition}
 \label{prp:dpt-mttp}
 Độ phức tạp cho \textbf{MTTP} trên đồ thị
-có hướng \((N,A)\) với \(n = |N|\) đỉnh và \(K^{nodes}\) điểm dừng là
+có hướng \((N,A)\) với \(n = |N|\) đỉnh và \(K^{nodes}\) BP là
 \[ (\mathcal{K}^{nodes} ×SSP(n,|A|)+ASPP(K^{nodes}n,K^{nodes}n)), \]
 trong đó \(SPP(\alpha,\beta)\) là độ phức tạp của việc giải bài toán
 \textbf{đường đi} ngắn nhất tĩnh trên đồ thị có hướng với \(\alpha\) nút
@@ -199,7 +199,7 @@ một đồ thị có hướng phi chu trình.
 \section{Công thức chi tiết}\label{cong-thuc2}
 
 Trước khi đi vào chi tiết, hãy nhắc lại sự khác nhau của bài toán MDP và
-MTTP: MDP sử dụng ABSPT để giảm số điểm dừng cần xử lý; trong khi MTTP
+MTTP: MDP sử dụng ABSPT để giảm số BP cần xử lý; trong khi MTTP
 có cách tiếp cận khác. Theo Proposition 3.3, cấu trúc của ABSPT không
 phù hợp với MTTP. Một nghiệm tối ưu cho MTTP là một chuỗi các đường đi
 con được nối với nhau bằng cung chờ đợi; mỗi đường đi con được giả định
@@ -210,27 +210,27 @@ là đi qua một điểm gãy và thời gian chờ đợi luôn dương (\(>0\
 Một đường đi con qua điểm
 dừng \((i, t)\), là một đường đi không chờ đợi nối một TDSP kết thúc tại
 \((i, t)\) với một TDSP khác xuất phát từ \((i, t)\). Thuật ngữ
-\textbf{đường đi con} sẽ không chỉ định điểm dừng, trong khi
-\textbf{đường đi con \(i\)} được dùng để chỉ điểm dừng tại đỉnh \(i\)
+\textbf{đường đi con} sẽ không chỉ định BP, trong khi
+\textbf{đường đi con \(i\)} được dùng để chỉ BP tại đỉnh \(i\)
 vào thời điểm không xác định.
 \end{definition}
 
 Qua định nghĩa, luôn tồn tại một số~nghiệm~tối ưu cho MTTP mà
 mỗi~\textbf{đường đi con}~của nó nằm trong một \textbf{TEN} được hình
-thành bởi hợp FSPT và BSPT tại một~\textbf{điểm dừng}~xác định. Do đó,
+thành bởi hợp FSPT và BSPT tại một~\textbf{BP}~xác định. Do đó,
 thay vì dùng ABSPT, cấu trúc phù hợp hơn sử dụng để giải cho MTTP là hợp
-của \(i-FSPT\) và \(i-BSPT\) cho cùng một điểm dừng tại đỉnh \(i\), gọi
+của \(i-FSPT\) và \(i-BSPT\) cho cùng một BP tại đỉnh \(i\), gọi
 là \(mangrove\). Lưu ý toán tử hợp (\(\cup\)) cũng được dùng để tạo một
 TEN dưới dạng hợp của hai TEN.
 
 \begin{definition}
 \label{def:mangrove}
-Một \(mangrove\) cho điểm dừng \((i, t)\), ký
+Một \(mangrove\) cho BP \((i, t)\), ký
 hiệu là \(\mathcal M ^{i,t}\), là một TEN được tạo bằng cách lấy hợp của
 \(\mathcal F^{i,t}\) và \(\mathcal B ^{i,t}\), hay
 \(\mathcal M ^{i,t} = \mathcal F ^{i,t} \cup \mathcal B ^{i,t}\). Tôi gọi bất kì
 \(mangrove\) nào như vậy là~\(i-mangrove\)~và sử dụng
-\((i, t)-mangrove\) nếu chúng tôi muốn chỉ định cho điểm dừng
+\((i, t)-mangrove\) nếu chúng tôi muốn chỉ định cho BP
 \((i, t)\).
 \end{definition}
 
@@ -251,24 +251,24 @@ chúng. Đối với điểm gãy \((i, t)\) đã cho, cây AFSPT (kí hiệu
 các cung \(((j, t'), (k, t''))\) chưa tồn tại, sao cho
 \(\forall (j, k) \in A\) thì cả \((j,t')\) và \((k,t'')\) đều nằm trong
 \(FSPT.\) Tương tự ta có định nghĩa của ABSPT như đã đề cập ở chương về
-MDP. \(Mangrove\) hoàn chỉnh cho điểm dừng \((i, t)\), kí hiệu
+MDP. \(Mangrove\) hoàn chỉnh cho BP \((i, t)\), kí hiệu
 (\(\overline{\mathcal M}^{i,t}\)) và là một TEN được tạo ra từ hợp của
 \(\mathcal{\overline{F}}^{i,t}\) và \(\mathcal{\overline{B}}^{i,t}\).
 
 Thuật toán được thực hiện bằng cách duy trì một tập các TEN, mỗi TEN là
-một \(mangrove\) hoặc \(mangrove\) hoàn chỉnh cho một số điểm dừng. Mỗi
+một \(mangrove\) hoặc \(mangrove\) hoàn chỉnh cho một số BP. Mỗi
 tập TEN con có chung đỉnh này được sắp xếp theo thời gian của các điểm
 dừng. Với mỗi đỉnh \(i\) tương ứng có một danh sách \(L^i\) chứa các
-điểm dừng \((i, t)\) sắp xếp theo thời gian. Với mỗi \((i, t)\) được
+BP \((i, t)\) sắp xếp theo thời gian. Với mỗi \((i, t)\) được
 thêm vào \(L^i\) thì sẽ tính toán \(M^{i, t}\) và
-\(\overline{\mathcal M}^{i,t}\). Với mỗi điểm dừng liên tiếp trong \(L^i\),
+\(\overline{\mathcal M}^{i,t}\). Với mỗi BP liên tiếp trong \(L^i\),
 ví dụ như \((i,t)\) và \((i,t^+)\) với \(t^+ > t\), ta tiến hành như
 sau:
 
 \begin{itemize}
 \tightlist
 \item[i.]
-  Trường hợp giữa \(t\) và \(t^+\) không có điểm dừng: \\
+  Trường hợp giữa \(t\) và \(t^+\) không có BP: \\
   Ta nói
   \(mangrove\) cho \((i, t)\) đã được giải quyết. Đặt UTT thành thời
   gian di chuyển thực tế:
@@ -287,11 +287,11 @@ sau:
   tổng UTT không lớn hơn thời gian di chuyển của đường đi đó.
 \end{itemize}
 
-Để đảm bảo rằng \(L^i\) luôn chứa các điểm dừng \emph{đủ sớm} với mọi
+Để đảm bảo rằng \(L^i\) luôn chứa các BP \emph{đủ sớm} với mọi
 đỉnh \(i\), bất kì đường con nào cũng được biểu diễn bởi một đường đi
 trong \(mangrove\) hoặc \(mangrove\) hoàn chỉnh với \(UTT\) là cận dưới
 của thời gian di chuyển. Không mất tính tổng quát, thuật toán khởi tạo
-\(L^i\) với điểm dừng \((i, 0)\) cho mỗi \(i\). (Trong thực nghiệm, việc
+\(L^i\) với BP \((i, 0)\) cho mỗi \(i\). (Trong thực nghiệm, việc
 dùng \((i, t)\) với \(t\) là thời điểm ngay sau \(s\) nếu \((i, s)\)
 thuộc \(\mathcal F^{1,0}\) sẽ hiệu quả hơn). Theo cách tương tự, tôi thêm
 \((i, T)\) vào \(L^i\) và coi \((i, T)-mangrove\) được giải quyết và UTT
@@ -302,7 +302,7 @@ cung chờ đợi tại một nút nằm giữa các đường con.
 
 Nhắc lại, thuật toán sẽ duy trì một TEN có kí hiệu \(\mathcal D_{LB}\),
 với các UTT liên quan trên mỗi cung, và được định nghĩa là một hàm của
-các \(mangrove\) và \(mangrove\) hoàn chỉnh có các điểm dừng thuộc tập
+các \(mangrove\) và \(mangrove\) hoàn chỉnh có các BP thuộc tập
 \(\bigcup _{i\in N} L^i\) như sau:
 
 \underline{Các nút và các cung:} Tất cả các nút và cung trong \(mangrove\) được giải
@@ -365,7 +365,7 @@ Các trường hợp có thể xảy ra như sau:
   \(s = t = 0\), trong khi bất kì nút nào trong \(\mathcal B^{k,0}\) đều có
   thời gian âm ngoại trừ ở \(k\) và tôi đã khởi tại \(L^k\) với
   \((k,0)\) nằm trong. Ngoài ra, nếu \(t'<T\), lấy \(r^+\) sao cho
-  \((j,r^+)\) nằm trong BSPT cho \(mangrove\) có điểm dừng tiếp theo
+  \((j,r^+)\) nằm trong BSPT cho \(mangrove\) có BP tiếp theo
   trong \(L^k\) sau \((k, t')\). Lưu ý \(r^+ \geq s\). Xét hai trường
   hợp phụ sau:
 
@@ -385,7 +385,7 @@ Các trường hợp có thể xảy ra như sau:
     đường con \(i\) kết thúc tại \(j\) ở thời điểm \(r\in [s,s^+)\),
     đường con \(k\) bắt đầu tại \(j\) ở thời điểm \(\tau \in [s, s^+)\),
     và đường con \(k\) bắt đầu tại \(j\) ở thời điểm \(\tau' > \tau\),
-    sử dụng điểm dừng tiếp theo tại \(k\) sau \(t'\). Vì \(r^+ \geq s\)
+    sử dụng BP tiếp theo tại \(k\) sau \(t'\). Vì \(r^+ \geq s\)
     nên gọi \(((j,s),(j,r^+))\) là \textbf{cung chờ tiến.}
   \item
     \(Mangrove\) cho \((k, t')\) chưa được giải quyết: \\
@@ -579,12 +579,12 @@ bài toán MTTP theo hai bước như sau:
 \begin{easylist}[itemize]
     @ Nếu hai cận chưa bằng nhau: 
         @@ Xét đường đi có UTT nhỏ nhất trong \(\mathcal D_{LB}\) và \(mangrove\) hoàn chỉnh đã được dùng. 
-        @@ Ít nhất một trong các \((i,t)-mangrove\) đã được dùng có điểm dừng \((i,t)\) chưa được giải quyết, nếu không thì cận trên và cận dưới đã bằng nhau. 
-        @@ Thuật toán chọn ra một tập bao gồm một hay nhiều điểm dừng chưa giải quyết như vậy.
-        @@ Đối với mỗi điểm dừng (giả sử là \((i,t)\)) trong tập đã chọn: 
-            @@@ Chọn một số điểm dừng (một hoặc nhiều) giữa \((i,t)\) và điểm tiếp theo trong \(L^i\), 
-            @@@ Thêm các điểm dừng đã chọn vào \(L^i\), 
-            @@@ Nếu có bất kì nút nào trong \(L^i\) ngay sau điểm dừng \((i,s)\) cũng thuộc \(L^i\), ta coi \((i,s)\) đã được giải quyết. 
+        @@ Ít nhất một trong các \((i,t)-mangrove\) đã được dùng có BP \((i,t)\) chưa được giải quyết, nếu không thì cận trên và cận dưới đã bằng nhau. 
+        @@ Thuật toán chọn ra một tập bao gồm một hay nhiều BP chưa giải quyết như vậy.
+        @@ Đối với mỗi BP (giả sử là \((i,t)\)) trong tập đã chọn: 
+            @@@ Chọn một vài BP (một hoặc nhiều) giữa \((i,t)\) và điểm tiếp theo trong \(L^i\), 
+            @@@ Thêm các BP đã chọn vào \(L^i\), 
+            @@@ Nếu có bất kì nút nào ngay sau BP \((i,s)\) trong \(L^i\), ta coi \((i,s)\) đã được giải quyết. 
     @ Tiếp tục tạo các \(\mathcal D_{LB}\) và \(\mathcal D_{UB}\) dựa trên \(L^i\) đã cập nhật, sau đó tính toán lại các cận trên và dưới.
 \end{easylist}
 
@@ -594,11 +594,11 @@ Hiệu năng của thuật toán này mấu chốt nằm ở hai vấn đề sau
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Tập điểm dừng chưa giải quyết:}~Trong mỗi lần lặp, thuật toán
-  cần chọn một tập các điểm dừng~chưa được giải quyết,
+  \textbf{Tập BP chưa giải quyết:}~Trong mỗi lần lặp, thuật toán
+  cần chọn một tập các BP~chưa được giải quyết,
 \item
-  \textbf{Tập điểm dừng cho cùng đỉnh:} Trong mỗi lần lặp, cần chọn tập
-  điểm dừng có chung một đỉnh để đưa vào danh sách của đỉnh đó.
+  \textbf{Tập BP cho cùng đỉnh:} Trong mỗi lần lặp, cần chọn tập
+  BP có chung một đỉnh để đưa vào danh sách của đỉnh đó.
 \end{enumerate}
 
 Chi tiết về vấn đề này sẽ được đề cập ở \autoref{kux1ecbch-bux1ea3n-vuxe0-cuxe0i-ux111ux1eb7t}. 
