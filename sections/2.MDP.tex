@@ -6,98 +6,64 @@
 \chapter{Giải bài toán MDP}\label{giux1ea3i-buxe0i-touxe1n-mdp}
 
 Để dễ trình bày, bài luận sẽ chỉ tập trung vào trường hợp thuộc tính
-\emph{FIFO n}gặt. Với trường hợp \emph{FIFO} không ngặt, chỉ cần vài sự
-thay đổi nhỏ và chứng minh lại tính đúng đắn là có thể áp dụng.
+\emph{FIFO ngặt}. Với trường hợp \emph{FIFO không ngặt}, ta chỉ cần thêm vài sự
+thay đổi nhỏ và chứng minh lại tính đúng đắn.
 
 \section{Ví dụ}\label{vuxed-dux1ee5}
 
-Xét mạng ở hình 2 với các hàm thời gian di chuyển được biểu diễn ở hình
-4. Khung thời gian là \([0, 5]\). Hầu hết các cung có điểm dừng là số
+Xét mạng ở \autoref{fig:2} với các hàm thời gian di chuyển được biểu diễn ở \autoref{fig:4}. 
+Khung thời gian là \([0, 5]\). Hầu hết các cung có điểm dừng là số
 nguyên. Ngoại lệ là cung \((3, 4)\) chỉ có điểm dừng tại \(0, 1, 2\) và
 \(5\). \textbf{Phụ lục 8} cung cấp chi tiết về các hàm thời gian di
 chuyển và hàm đảo chiều của chúng.
 
 
 
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics{images/Figure2.png}
-\caption{Mạng \(D\); Bảng 3: Bảng Thời gian di chuyển với mỗi
-điểm điểm dừng.}
-\label{fig:2}
+\begin{minipage}[b]{0.45\textwidth}
+  \centering
+  \includegraphics{edited-images/Figure2.jpg}
+  \caption{Mạng \(D\)}
+  \label{fig:2}
+\end{minipage}
+\begin{minipage}[b]{0.45\textwidth}
+  \centering
+  \begin{small}
+      \caption{Bảng Thời gian di chuyển với mỗi BP.}
+      \label{table:1}
+      \begin{tabular}{|c||ccccc|}
+      \toprule
+      \multirow{2}{*}{BP} & \multicolumn{5}{c|}{Cung di chuyển}                                                                                       \\ \cmidrule{2-6} 
+                          & \multicolumn{1}{c|}{(1,2)} & \multicolumn{1}{c|}{(1,3)} & \multicolumn{1}{c|}{(2,3)} & \multicolumn{1}{c|}{(2,4)} & (3,4) \\ \midrule
+      0                   & \multicolumn{1}{c|}{1.34}  & \multicolumn{1}{c|}{2.85}  & \multicolumn{1}{c|}{1.99}  & \multicolumn{1}{c|}{1.29}  & 0.61  \\ \midrule
+      1                   & \multicolumn{1}{c|}{0.66}  & \multicolumn{1}{c|}{2.95}  & \multicolumn{1}{c|}{1.82}  & \multicolumn{1}{c|}{1.02}  & 0.73  \\ \midrule
+      2                   & \multicolumn{1}{c|}{0.14}  & \multicolumn{1}{c|}{3.00}  & \multicolumn{1}{c|}{1.51}  & \multicolumn{1}{c|}{1.63}  & 0.83  \\ \midrule
+      3                   & \multicolumn{1}{c|}{0.01}  & \multicolumn{1}{c|}{2.98}  & \multicolumn{1}{c|}{1.10}  & \multicolumn{1}{c|}{2.57}  & ---     \\ \midrule
+      4                   & \multicolumn{1}{c|}{0.35}  & \multicolumn{1}{c|}{2.90}  & \multicolumn{1}{c|}{0.67}  & \multicolumn{1}{c|}{3.00}  & ---     \\ \midrule
+      5                   & \multicolumn{1}{c|}{1.00}  & \multicolumn{1}{c|}{2.76}  & \multicolumn{1}{c|}{0.30}  & \multicolumn{1}{c|}{2.54}  & 1.00  \\ \bottomrule
+      \end{tabular}
+  \end{small}
+\end{minipage}
+
 \end{figure}
 
-\begin{longtable}[]{|
-  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep - 7\arrayrulewidth) * \real{0.1389}}|
-  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep - 7\arrayrulewidth) * \real{0.2639}}|
-  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep - 7\arrayrulewidth) * \real{0.1111}}|
-  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep - 7\arrayrulewidth) * \real{0.1111}}|
-  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep - 7\arrayrulewidth) * \real{0.1111}}|
-  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep - 7\arrayrulewidth) * \real{0.1111}}|}
-\caption{Bảng Thời gian di chuyển với mỗi BP.}\label{table:1}\tabularnewline
-\toprule\noalign{}
-\multirow{2}{=}{\begin{minipage}[b]{\linewidth}\smallskip
-\centering
-BP
-\end{minipage}} &
-\multicolumn{5}{>{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.7083} + 8\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
-\begin{minipage}[b]{\linewidth}\centering
-Cung di chuyển
-\end{minipage}} \\
-& \begin{minipage}[b]{\linewidth}\centering
-(1,2)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-(1,3)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-(2,3)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-(2,4)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-(3,4)
-\end{minipage} \\
-\midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\multirow{2}{=}{\begin{minipage}[b]{\linewidth}\centering
-BP
-\end{minipage}} &
-\multicolumn{5}{>{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.7083} + 8\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
-\begin{minipage}[b]{\linewidth}\centering
-Cung di chuyển
-\end{minipage}} \\
-& \begin{minipage}[b]{\linewidth}\centering
-(1,2)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-(1,3)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-(2,3)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-(2,4)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-(3,4)
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-0 & 1.34 & 2.85 & 1.99 & 1.29 & 0.61 \\
-\midrule
-1 & 0.66 & 2.95 & 1.82 & 1.02 & 0.73 \\
-\midrule
-2 & 0.14 & 3.00 & 1.51 & 1.63 & 0.83 \\
-\midrule
-3 & 0.01 & 2.98 & 1.10 & 2.57 & 0 \\
-\midrule
-4 & 0.35 & 2.90 & 0.67 & 3.00 & 0 \\
-\midrule
-5 & 1.00 & 2.76 & 0.30 & 2.54 & 1.00 \\
-\end{longtable}
 
 
-\begin{figure}
+
+\begin{figure}[H]
 \centering
-\includegraphics{images/Figure4.png}
-\caption{Hình 4: Biểu đồ đường cho Hàm thời gian di chuyển.}
+% \includegraphics{images/Figure4.png}
+\subcaptionbox{Cung \((1,2)\)\label{fig:4a}}{\includegraphics[width=.32\textwidth]{edited-images/Figure4a.jpg}}
+\subcaptionbox{Cung \((1,3)\)\label{fig:4b}}{\includegraphics[width=.32\textwidth]{edited-images/Figure4b.jpg}}
+\subcaptionbox{Cung \((2,3)\)\label{fig:4c}}{\includegraphics[width=.32\textwidth]{edited-images/Figure4c.jpg}}
+
+\subcaptionbox{Cung \((2,4)\)\label{fig:4d}}{\includegraphics[width=.32\textwidth]{edited-images/Figure4d.jpg}}
+\subcaptionbox{Cung \((3,4)\)\label{fig:4e}}{\includegraphics[width=.32\textwidth]{edited-images/Figure4e.jpg}}
+
+\caption{Biểu đồ đường cho Hàm thời gian di chuyển.}
+\label{fig:4}
+
 \end{figure}
 
 
@@ -136,7 +102,7 @@ với một vài điều chỉnh đơn giản. BSPT cho đỉnh \(4\) tại th�
   làm tròn thời gian đến 2 chữ số thập phân} và các cung
 \((1, 2), (2, 4), (3, 4)\) được xác định bởi các nút theo thời gian.
 
-\begin{figure}
+\begin{figure}[H]
 
 \centering
 \includegraphics{images/Figure5.png}
@@ -290,8 +256,7 @@ Có các trường hợp sau đây sẽ xảy ra:
 
 \begin{itemize}
 \tightlist
-\item
-  \textbf{Trường hợp 1:}
+\item[\textbf{TH1:}]
   \(\exists (i, j) \in A\ |\ \tau_i:t_i < \tau_i < t_i^+\) với điểm dừng
   \(\tau_i\). \\ 
   Lúc này, ta nói điểm \((i, \tau_i)\) nằm giữa hai ABSPT.
@@ -311,8 +276,7 @@ Có các trường hợp sau đây sẽ xảy ra:
     giữa hai ABSPT có thời gian kết thúc lần lượt là \(t_n\) và
     \(t_n^+\).
   \end{enumerate}
-\item
-  \textbf{Trường hợp 2:}
+\item[\textbf{TH2:}]
   \(\nexists (i, j)\in A\ |\ \tau_i: t_i < \tau_i < t_i^+\), không có
   điểm dừng nằm giữa hai ABSPT. \\
   Lúc này, ta có thể kết luận trạng thái
@@ -377,7 +341,7 @@ các cách chọn được sử dụng.
 
 \section{Mã giả}\label{muxe3-giux1ea3}
 
-\begin{algorithm}
+\begin{algorithm}[H]
 
 \caption{Dynamic Discretization Discovery (DDD) Algorithm for the MDP}
 \label{algo:1}
@@ -413,17 +377,22 @@ các cách chọn được sử dụng.
 
 \section{Minh hoạ thuật toán}\label{minh-houx1ea1-thuux1eadt-touxe1n}
 
-
-
-
-
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics{images/Figure6a.png}
-\includegraphics{images/Figure6b.png}
+% \includegraphics{images/Figure6a.png}
+% \includegraphics{images/Figure6b.png}
+\subcaptionbox{Lần lặp 1\label{fig:6_a}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6a.jpg}}
+\subcaptionbox{Lần lặp 2\label{fig:6_b}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6b.jpg}}
+\subcaptionbox{Lần lặp 3\label{fig:6_c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6c.jpg}}
+\subcaptionbox{Lần lặp 4\label{fig:6_d}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6d.jpg}}
+\subcaptionbox{Lần lặp 5\label{fig:6_e}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6e.jpg}}
+\subcaptionbox{Lần lặp 6\label{fig:6_f}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6f.jpg}}
+\subcaptionbox{Lần lặp 7\label{fig:6_g}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6g.jpg}}
+\subcaptionbox{Chú thích\label{fig:6_h}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6h.jpg}}
+
 \caption{Minh họa cách thức hoạt động của thuật toán trên ví dụ
 từ \autoref{fig:2} và \autoref{table:1}.}
-\label{fig:6_ab}
+\label{fig:6}
 \end{figure}
 
 
