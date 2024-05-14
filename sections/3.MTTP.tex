@@ -134,6 +134,7 @@ con~ngay sau S trong P (nếu có). Lưu ý rằng \(\tau^− = 0\) nếu \(i = 
 \end{lemma}
 
 \begin{proof}
+Dựa trên $P, S, i, j, t_i, t_j, \tau^-$ và $\tau^+$ được định nghĩa ở trên, tôi sẽ gọi phiên bản MDP thông qua phiên bản MD $i\to j$ có đỉnh nguồn $i$, đích $j$ trong khung thời gian $[\tau^-, \tau^+]$. Lưu ý rằng $S$ là một nghiệm khả thi cho $i \to j$ MD với tổng thời gian di chuyển là $t_j - t_i$ và cũng là thời gian thực hiện, vì $S$ là một đường con và không chờ đợi. Do đó tổng thời gian di chuyển của \(S\) lớn hơn hoặc bằng giá trị tối ưu cho phiên bản MD \(i\to j\). Giả sử \(S\) không là tối ưu cho phiên bản MD \(i \to j\). Tổng thời gian di chuyển của nó phải lớn hơn giá trị tối ưu cho MD \(i \to j\). Do đó \(S\) có thể được thay thế khỏi chuỗi các đường đi không chờ đợi của \(P\) bằng bất kỳ nghiệm nào khác cho phiên bản MD \(i \to j\). Hệ quả là chuỗi mới này phải tạo ra một đường đi khả thi cho MTTP và bắt buộc nhỏ hơn tổng thời gian di chuyển của \(P\), mâu thuẫn với giả thiết \(P\) là đường đi tối ưu.
 \end{proof}
 
 \begin{proposition}
@@ -144,6 +145,9 @@ qua ít nhất một nút tại BP của hàm thời gian di chuyển.
 \end{proposition}
 
 \begin{proof}
+
+  Giả sử \(P\) là một đường đi tối ưu cho một phiên bản MTTP có một đường con \(S\), không chứa nút tại BP của hàm thời gian di chuyển. Theo \autoref{lem:toi-uu}, \(S\) là nghiệm tối ưu cho phiên bản MDP trên cùng một mạng nhưng xuất phát từ đỉnh \(i\), kết thúc tại \(j\) và khung thời gian \([\tau^−,\tau^+]\) với các giá trị \(i, j, \tau^-, \tau^+\) được định nghĩa như trong mô tả của bổ đề. Theo \cite{foschini2011complexity}, luôn có một nghiệm tối ưu khác cho phiên bản MDP, gọi là \(S'\) chứa ít nhất một BP, hoặc xuất phát từ \(i\) tại \(\tau^-\) hoặc kết thúc ở \(j\) tại \(\tau^+\). Vì cả \(S\) và \(S'\) đều không chờ đợi, tổng thời gian di chuyển bằng thời gian thực hiện, và cả hai đều bằng nhau vì là nghiệm tối ưu cho phiên bản MDP đó. Bằng việc thay thế \(S\) bởi \(S'\) trong chuỗi các đường đi không chờ đợi của \(P\), ta thu được đường đi \(P'\) mới. Rõ ràng rằng \(P'\) cũng là nghiệm tối ưu cho bài toán MTTP, có tổng thời gian di chuyển bằng \(P\), và thêm một số đường con không đi qua BP. (Trong trường hợp \(S'\) xuất phát tại thời điểm \(\tau^-\) và \((i, \tau^-)\) không là BP, đường con ngay trước \(S\) không còn tối đa: giờ nó mở rộng thành \(S'\), dẫn đến có ít hơn một đường con trong \(P'\) so với \(P\). Trong trường hợp \(S'\) kết thúc tại thời điểm \(\tau^+\) và \((j, \tau^+)\) không là BP tương ứng: S' không là đường con của \(P'\)  nhưng mở rộng thành đường con ngay sau \(S\).)
+
 \end{proof}
 
 \begin{definition}
@@ -181,20 +185,60 @@ Cho một \textbf{MTTP} có tập các đỉnh
 tương ứng là một nghiệm của bài toán \textbf{MTTP}.
 \end{corollary}
 
-\begin{proof} \end{proof}
+\begin{proof} 
+
+Giả sử \(P\) là một nghiệm tối ưu cho phiên bản MTTP đã cho, với đặc tính là 
+mỗi đường con chứa một BP. Theo \autoref{prp:mttp-toi-uu}, đường đi luôn tồn tại.
+Giả sử \(P\) xuất phát tại \((1,t_1)\) và kết thúc tại \((n,t_n)\). 
+Không khó để thấy rằng chuỗi các đường con tương ứng với \(P\) tạo ra 
+một đường đi trong TEN từ \((1, t_1)\) đến \((n, t_n)\) có độ dài Bằng 
+tổng thời gian di chuyển của \(P\): nửa sau của mỗi đường con (từ BP 
+đến cuối) là một phần của FSPT cho BP đó, và nửa trước (từ đầu đến BP) 
+là một phần của BSPT cho BP đó. Do đó mỗi đường con là một đường đi 
+trong TEN và tổng độ dài cung của TEN trên toàn bộ đường con của \(P\)
+chính xác bằng tổng thời gian di chuyển.
+Hơn nữa, các đường con rõ ràng có thể được nối thông qua các 
+cung chờ đợi trong TEN: nối với \((n, T)\) từ điểm cuối của đường con sau cùng và từ \((1, 0)\) đến điểm bắt đầu của đường con đầu tiên, tạo thành một đường đi liền mạch (và duy nhất) trong TEN từ \((1, 0)\) đến \((n, T)\) trong khi không làm tăng thêm độ dài. Tôi gọi đó là đường đi \(P^{TEN}\).
+
+Hiển nhiên là bất kỳ đường đi theo thời gian nào trong TEN từ \((1, 0) \) đến \((n ,T)\) đều có độ dài bằng tổng độ dài các cung trong cùng đường đi khi mà tất cả các cung chờ đợi được loại bỏ, và các thành phần liên thông tạo thành một chuỗi các đường đi không chờ đợi, trong đó đường đi tướng ứng xuất phát từ nút \(1\) không sớm hơn thời gian \(0\), kết thúc tại \(n\) không trễ hơn thời gian \(T\) và có tổng thời gian di chuyển bằng tổng độ dài của chúng. Do đó, mọi đường đi trong TEN từ \((1, 0)\) đến \((n, T)\) đều có độ dài bằng tổng thời gian di chuyển của một đường đi khả thi nào đó cho phiên bản MTTP.
+Kết quả được chứng minh.
+\end{proof}
+
+\autoref{col:mttp} cung cấp một phương pháp để giải bài toán MTTP
+tương tự như phương pháp của \cite{foschini2011complexity}. Điểm khác biệt
+là tìm đường đi ngắn nhất trong toàn bộ mạng TEN mà không thể phân tách thành
+các bài toán con riêng biệt cho từng BP. Vì mỗi TEN có \(\mathcal{O}(K^{nodes}n)\) nút 
+và \(\mathcal{O}(K^{nodes}n)\) cung cho bài toán MTTP có \(n\) đỉnh và \(K^{nodes}\) BP,
+kích cỡ của mạng phụ thuộc vào số BP trong đó. \\
+Cụ thể độ phức tạp được tính dưới đây:
 
 \begin{proposition}
 \label{prp:dpt-mttp}
 Độ phức tạp cho \textbf{MTTP} trên đồ thị
 có hướng \((N,A)\) với \(n = |N|\) đỉnh và \(K^{nodes}\) BP là
-\[ (\mathcal{K}^{nodes} ×SSP(n,|A|)+ASPP(K^{nodes}n,K^{nodes}n)), \]
+\[ \mathcal{O}(K^{nodes} ×SSP(n,|A|)+ASPP(K^{nodes}\times n,K^{nodes}\times n)), \]
 trong đó \(SPP(\alpha,\beta)\) là độ phức tạp của việc giải bài toán
 \textbf{đường đi} ngắn nhất tĩnh trên đồ thị có hướng với \(\alpha\) nút
 và \(\beta\) cung, và \(ASPP(\alpha,\beta)\) cũng tương tự nhưng đối với
 một đồ thị có hướng phi chu trình.
 \end{proposition}
 
-\begin{proof} \end{proof}
+\begin{proof} 
+Với mỗi nút, FSPT vào BSPT có thể tạo ra tối đa hai bản sao cho mỗi BP, dẫn
+đến tối đa \(2\times K^{nodes}\) bản sao và tối đa \(2\times K^{nodes}\)
+cung chờ. Như vậy tối đa có tổng cộng \(2\times K^{nodes}\times n\) nút
+và \(2\times K^{nodes}\times n\) cung chờ trong TEN. Mỗi BP tạo ra một
+FSPT có tối đa \(n\) cung, và tạo ra một BSPT cũng có tối đa \(n\) cung.
+Vì vậy, FSPT và BSPT cộng lại chỉ có không quá \(2n\) cung trên mỗi BP,
+tổng cộng là \(2n\times K^{nodes}\) cung. Thêm các cung chờ đợi, dẫn đến
+tổng không quá \(4n\times K^{nodes}\) cung. Việc tính các FSPT và BSPT
+cho mỗi điểm ngắt cần
+\(\mathcal{O}(2\times K^{nodes}\times SSP(n, |A|))\) phép tính, và vì
+TENL không có chu trình (tất cả các cung đều hướng về phía trước theo
+thời gian) , tìm đường đi ngắn nhất trong TENL cần
+\(\mathcal{O}(ASPP(2\times K^{nodes}\times n, 4\times K^{nodes}\times n))\)
+phép tính.
+\end{proof}
 
 \section{Công thức chi tiết}\label{cong-thuc2}
 
