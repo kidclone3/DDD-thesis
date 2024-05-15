@@ -7,3 +7,6 @@
     rm -rf `biber --cache`
     ``` 
     and re-run the `biber` command.
+
+
+2. I use this web [Latex_table_web](https://www.tablesgenerator.com/latex_tables) to generate Latex tables from csv.
