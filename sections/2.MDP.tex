@@ -3,7 +3,7 @@
 
 \begin{document}
 
-\chapter{Giải bài toán MDP}\label{giux1ea3i-buxe0i-touxe1n-mdp}
+\chapter{Bài toán MDP}\label{giux1ea3i-buxe0i-touxe1n-mdp}
 
 Để dễ trình bày, bài luận sẽ chỉ tập trung vào trường hợp thuộc tính
 \emph{FIFO ngặt}. Với trường hợp \emph{FIFO không ngặt}, ta chỉ cần thêm vài sự
@@ -14,8 +14,8 @@ thay đổi nhỏ và chứng minh lại tính đúng đắn.
 Xét mạng ở \autoref{fig:2} với các hàm thời gian di chuyển được biểu diễn ở \autoref{fig:4}. 
 Khung thời gian là \([0, 5]\). Hầu hết các cung có số BP là số
 nguyên. Ngoại lệ là cung \((3, 4)\) chỉ có BP tại \(0, 1, 2\) và
-\(5\). \textbf{Phụ lục 8} cung cấp chi tiết về các hàm thời gian di
-chuyển và hàm đảo chiều của chúng.
+\(5\). \autoref{appendix-arc4} cung cấp chi tiết về các hàm thời gian di
+chuyển và các hàm ngược của chúng.
 
 
 
@@ -30,7 +30,7 @@ chuyển và hàm đảo chiều của chúng.
 \begin{minipage}[b]{0.45\textwidth}
   \centering
   \begin{small}
-      \caption{Bảng Thời gian di chuyển với mỗi BP.}
+      \caption{Bảng Thời gian di chuyển với mỗi BP}
       \label{table:1}
       \begin{tabular}{|c||ccccc|}
       \toprule
@@ -73,9 +73,9 @@ Cho thời điểm \(t\) bất kì thuộc khoảng \([0, T]\) biểu diễn th�
 đi đến đỉnh \(n\), ta có thể xây dựng BSPT tương ứng. BSPT là một Mạng
 thời gian-không gian (\textbf{TEN}) được kí hiệu là \(B^t\), có gốc là
 \((n, t)\). Cây này được định nghĩa bởi tập hợp các nút\footnote{để phân
-  biệt mạng với đồ thị, sử dụng các từ nút thay cho đỉnh.} \((i, t_i)\)
+  biệt mạng với đồ thị, sử dụng từ \emph{nút} thay cho \emph{đỉnh}.} \((i, t_i)\)
 với \(i \in N\) và \(t_i \in (-\infty, T]\), tập hợp các cung\footnote{để
-  phân biệt mạng với đồ thị, sử dụng các từ cung thay cho cạnh.}
+  phân biệt mạng với đồ thị, sử dụng từ \emph{cung} thay cho \emph{cạnh}.}
 \(((i, t_i), (j, t_j))\) thỏa mãn các điều kiện sau: 
 
 \begin{itemize}

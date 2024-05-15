@@ -7,15 +7,14 @@
 \chapter{Giới thiệu}\label{introduce}
 
 
-Bài toán tìm đường đi có thời gian đến nhỏ nhất (MATP). Phương pháp đầu
+Thuộc họ các bài toán tìm đường đi có thời gian đến nhỏ nhất (MATP), phương pháp đầu
 tiên được phát triển để giải quyết vấn đề này dựa trên thuật toán
 Bellman-Ford (\cite{bellman1958routing}, \cite{ford2010flows}) và được mô tả bởi
-\cite{cooke1966shortest}. Tổng quan về các phương pháp khác cho biến thể
+\cite{cooke1966shortest}. Tổng quan về các phương pháp giải khác cho biến thể
 này được đề cập bởi \cite{dean2004shortest}.
 
-MDP được nghiên cứu trong bối cảnh mạng lưới giao thông (\cite{demiryurek2011online}), thậm chí trong phân tích mạng xã hội (\cite{gunturi2012information}).
-MTTP đặc biệt quan trọng trong việc tính toán giảm khí thải trong môi
-trường đô thị, vì khí thải của một xe hơi trên tuyến đường có thể xấp xỉ
+Bài toán tìm đường đi thời gian tối thiểu (MDP) được nghiên cứu trong bối cảnh mạng lưới giao thông (\cite{demiryurek2011online}), thậm chí trong phân tích mạng xã hội (\cite{gunturi2012information}).
+Bài toán tìm đường đi ngắn nhất theo thời gian thực hiện (MTTP) đặc biệt quan trọng trong việc tính toán giảm khí thải trong môi trường đô thị, vì khí thải của một xe hơi trên tuyến đường có thể xấp xỉ
 theo tỉ lệ với thời gian di chuyển trên tuyến đường đó; phạm vi tốc độ
 giới hạn trong đô thị (công thức khi thải được đề cập ở \cite{jabali2012analysis} với bài toán định tuyến phương tiện phụ thuộc thời gian).
 
@@ -49,30 +48,38 @@ nút gốc \(s\) đến nút \(v\) chính là đường đi ngắn nhất.
 
 \section{Mô tả bài toán}\label{problem-description}
 
-Cho một đồ thị có hướng \(D = (N, A)\), trong đó: \(N = {1, 2, ..., n}\)
+Cho một đồ thị có hướng 
+\[
+  D = (N, A)
+\] 
+trong đó: \(N = {1, 2, ..., n}\)
 là tập đỉnh và \(A \subseteq N \times N\) là tập cạnh; khung thời gian
 \([0, T]\) và các hàm thời gian di chuyển tuyến tính từng khúc
 \(c_{i,j}(t) > 0\) với \(t \in [0, T]\) thỏa mãn tính chất FIFO cho mọi
 cạnh \((i, j) \in A\).\\
-Tính chất FIFO, trong hàm tuyến tính, có nghĩa là
-\textbf{độ dốc của các khúc ít nhất phải là \(-1\).} Không mất tính tổng
+Tính chất FIFO, trong hàm tuyến tính, nghĩa là
+\textbf{độ dốc của các khúc lớn hơn hoặc bằng \(-1\).} 
+
+Không mất tính tổng
 quát, ta luôn đi từ đỉnh nguồn \(1\) và kết thúc ở đỉnh đích
 \(n\).
 
 Đường đi
-\(P=((i_1^P, t_1^P), (i_2^P, t_2^P), \dots, (i_{m(P)}^P, t_{m(P)}^P))\)
-là một dãy gồm \(m(P)\) cặp đỉnh - thời gian, trong đó dãy các đỉnh
+\[
+  P=((i_1^P, t_1^P), (i_2^P, t_2^P), \dots, (i_{m(P)}^P, t_{m(P)}^P))
+\]
+là một dãy gồm \(m(P)\) nút (cặp đỉnh - thời gian), trong đó dãy các đỉnh
 \((i_1^P, i_2^P, \dots, i_{m(P)}^P)\) tạo thành đường đi trong đồ thị
-\(D\) từ \(i_1^P\) đến \(i_{m(P)}^P\), và mỗi nút trong dãy \(i_k^P\)
+\(D\) từ \(i_1^P\) đến \(i_{m(P)}^P\), và mỗi nút\footnote{Tuy đỉnh và nút có nghĩa tương đồng, nhưng ở đây sẽ quy ước \emph{đỉnh} là một số, \emph{nút} là cặp (đỉnh, thời gian)} trong dãy \(i_k^P\)
 tương ứng với thời gian \(t_k^P\), đại diện cho thời gian bắt đầu di
 chuyển trên cạnh \((i_k^P, i_{k+1}^P)\) với \(k=1, \dots m(P)-1\). Riêng
 đỉnh \(i_k^P\) với \(k=m(P)\) biểu diễn thời gian đến đích. Do đó dãy
-các cặp cần thoả mãn tính chất:
+các nút cần thoả mãn tính chất:
 \[t_{k+1}^P \ge t_k^P + c_{i_k^P, i_{k+1}^P}(t_k^P)\] với
-\(k=1, \dots m(P)-1\). Nếu
-\(t_{k}^P \ge t_{k-1}^P + c_{i_{k-1}^P, i_{k}^P}(t_{k-1}^P)\) với bất kì
-\(k \ge 2\), (hoặc nếu \(t_1^P > 0\)), thì ta nói rằng đỉnh \(i_k^P\)
-cần phải đợi.\\ 
+\(k=1, \dots m(P)-1\). \\
+Nếu
+\(t_{k}^P \ge t_{k-1}^P + c_{i_{k-1}^P, i_{k}^P}(t_{k-1}^P)\) với \(k \ge 2\) bất kì, (hoặc nếu \(t_1^P > 0\)), thì ta nói rằng đỉnh \(i_k^P\)
+cần phải \textbf{đợi}.\\ 
 Nếu \(t_{k}^P = t_{k-1}^P + c_{i_{k-1}^P, i_{k}^P}(t_{k-1}^P)\) với mọi
 \(k \ge 2\) thì ta nói rằng \(P\) không có chờ đợi (waiting-free). \\
 Nếu \(P\) bắt đầu tại đỉnh \(i_1^P = 1\) với \(t_1^P\ge0\) và kết thúc tại
@@ -102,7 +109,7 @@ hơn.
 
 Để minh họa ba hàm mục tiêu này, hãy xem xét đồ thị (a) và các hàm thời
 gian di chuyển (b,c,d) trong \autoref{fig:1}, với \(n = 3\) và khung thời gian
-cho trước là \([0, 4]\).
+là \([0, 4]\).
 
 \begin{itemize}
 \tightlist

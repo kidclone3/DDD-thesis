@@ -105,7 +105,11 @@
 \usepackage[vietnamese]{babel}
 
 % Biblo
-\usepackage[style=numeric,maxbibnames=99]{biblatex}
+\usepackage[
+    style=chem-angew,
+    sorting=nyt,
+    maxbibnames=99
+    ]{biblatex}
 \addbibresource{refs.bib}
 \usepackage{csquotes} % biblatex recommended
 
@@ -198,10 +202,12 @@ có yếu tố thời gian},
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\includegraphics[height=1cm,keepaspectratio]{logo/page-header-logo.png}} \fancyhead[R]{\small\leftmark} \fancyfoot[C]{\thepage}
+% \fancyhead[L]{\includegraphics[height=1cm,keepaspectratio]{logo/page-header-logo.png}} 
+\fancyhead[R]{\small\leftmark} \fancyfoot[C]{\thepage}
 \fancypagestyle{plain}{%
 \fancyhf{}
-\fancyhead[L]{\includegraphics[height=1cm,keepaspectratio]{logo/page-header-logo.png}} \fancyhead[R]{\small\leftmark} \fancyfoot[C]{\thepage}
+% \fancyhead[L]{\includegraphics[height=1cm,keepaspectratio]{logo/page-header-logo.png}} 
+\fancyhead[R]{\small\leftmark} \fancyfoot[C]{\thepage}
 }
 
 \usepackage{titlesec}
@@ -273,7 +279,7 @@ có yếu tố thời gian},
 
 \NewEnviron{sign}{
 \hfill\begin{tabular}{c}
-{\it Hà Nội, ngày 24 tháng 4 năm 2024}
+{\it Hà Nội, ngày 19 tháng 5 năm 2024}
 \\ \BODY
 \\ \\[1cm]
 {\bf Bùi Khánh Duy}\\
@@ -365,7 +371,7 @@ rectangle
 \fontsize{13}{16}\selectfont\textbf{Khoa Toán - Cơ - Tin học} \\
 \fontsize{8}{16}\Pisymbol{dingbat}{69} \hspace{1.4cm}  \Huge\usym{1F56E} \hspace{1cm} \fontsize{8}{16}\Pisymbol{dingbat}{70}\\
 \vspace*{1.5cm}
-\includegraphics[height=3cm,keepaspectratio]{"logo/logo.jpg"}\\
+% \includegraphics[height=3cm,keepaspectratio]{"logo/logo.jpg"}\\
 \vspace*{1.5cm}
 \fontsize{18}{1}\selectfont \textbf{Phương pháp rời rạc động giải các
 bài toán \\ tìm đường đi có yếu tố thời gian} \\
@@ -415,8 +421,9 @@ Bùi Khánh Duy \\ \\[0.25em]
 bài toán \\ tìm đường đi có yếu tố thời gian} }
 \\\vspace{5cm}
 
-{\fontsize{14}{1}\selectfont Khóa luận tốt nghiệp}  \\
+{\fontsize{14}{1}\selectfont Khóa luận tốt nghiệp đại học hệ chính quy}  \\
 {\fontsize{14}{1}\selectfont Ngành: Khoa học máy tính và thông tin}  \\
+{\fontsize{14}{1}\selectfont (Chương trình đào tạo chuẩn)}  \\
 
 \vfill
 \centering
@@ -428,8 +435,8 @@ bài toán \\ tìm đường đi có yếu tố thời gian} }
 \begin{centerboxed}
 \centering
 \vspace*{3mm}
-{\fontsize{13}{1}\selectfont Đại học Quốc gia Hà Nội \\
-Trường Đại học Khoa học Tự nhiên \\
+{\fontsize{13}{1}\selectfont ĐẠI HỌC QUỐC GIA HÀ NỘI \\
+TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN \\
 \textbf{Khoa Toán - Cơ - Tin học}
 }\\
 \vspace{3.5cm}
@@ -445,8 +452,9 @@ Bùi Khánh Duy \\ \\[0.25em]
 bài toán \\ tìm đường đi có yếu tố thời gian} }
 \\\vspace{5cm}
 
-{\fontsize{14}{1}\selectfont Khóa luận tốt nghiệp}  \\
+{\fontsize{14}{1}\selectfont Khóa luận tốt nghiệp đại học hệ chính quy}  \\
 {\fontsize{14}{1}\selectfont Ngành: Khoa học máy tính và thông tin}  \\
+{\fontsize{14}{1}\selectfont (Chương trình đào tạo chuẩn)}  \\
 
 \vspace{2cm}
 {\fontsize{14}{1}\selectfont \textbf{
@@ -485,19 +493,37 @@ tocpagenumberformat=\usekomafont{chapter}
 
 \mainmatter
 \pagestyle{fancy}
-\chapter*{Lời mở đầu}\label{lux1eddi-mux1edf-ux111ux1ea7u}
-\addcontentsline{toc}{chapter}{Lời mở đầu}
 
-\markboth{Lời mở đầu}{Lời mở đầu}
+\chapter*{Lời cảm ơn}\label{cam-on}
+\addcontentsline{toc}{chapter}{Lời cảm ơn}
 
-Tui xin tự cảm ơn tui vì lười gõ latex mà lại chăm ngồi code latex để đẻ
-ra con này
+\markboth{Lời cảm ơn}{Lời cảm ơn}
+Bốn năm học vừa qua là những năm tháng sinh viên đẹp đẽ và đáng nhớ.
+Trong thời gian này, em đã được học hỏi và trải nghiệm nhiều điều mới mẻ, đồng thời không tránh khỏi những khó khăn và thách thức. Em xin bày tỏ lòng biết ơn sâu sắc đến các bạn bè, người thân và gia đình đã luôn ở bên cạnh, hỗ trợ và giúp đỡ em trong suốt quãng thời gian qua. Các thầy cô ở khoa Toán - Cơ - Tin học, trường Đại học Khoa học Tự nhiên, ĐHQG Hà Nội đã tạo điều kiện tốt nhất trong quá trình học tập và phát triển. Khóa luận "\textbf{Phương pháp rời rạc động giải các bài toán tìm đường đi có yếu tố thời gian}" của em đã không thể hoàn thành mà không có sự hướng dẫn, giúp đỡ tận tình của thầy \textbf{TS. Vũ Đức Minh}. Em xin chân thành cảm ơn thầy đã dành thời gian, kiến thức và tâm huyết để hướng dẫn, chỉ bảo em tận tình trong quá trình thực hiện khóa luận này. Cuối cùng, em xin chân thành cảm ơn tất cả mọi người đã giúp đỡ em trong suốt thời gian qua.
+
+Mặc dù đã có nhiều cố gắng hoàn thiện nhưng do hạn chế ở kĩ năng và kinh nghiệm của bản thân nên sẽ không tránh khỏi những thiếu sót còn tồn đọng. Em rất mong nhận được sự góp ý, chỉ bảo từ quý thầy cô và các bạn để khóa luận của em trở nên hoàn thiện hơn.
+
+\emph{Em xin chân thành cảm ơn!}
+
 
 \begin{sign}
 
-Bùi Khánh Duy
+    % Bùi Khánh Duy
+    
+    \end{sign}
 
-\end{sign}
+\chapter*{Mở đầu}\label{lux1eddi-mux1edf-ux111ux1ea7u}
+\addcontentsline{toc}{chapter}{Mở đầu}
+
+\markboth{Mở đầu}{Mở đầu}
+
+\textbf{Tìm đường đi ngắn nhất trong mạng} vốn là một trong những bài toán tối ưu cơ bản. Tuy nhiên những biến thể  của nó vẫn luôn hấp dẫn và có ý nghĩa thực tiễn cao. Các ứng dụng của bài toán này rất đa dạng, từ việc tìm đường đi cho mô hình mạng lưới giao thông đến các bài toán vận tải. 
+
+Bài luận sẽ tập trung vào một biến thể đặc biệt của bài toán, với việc thời gian di chuyển trên một cung (trọng số của cung) trong mạng phụ thuộc vào \textbf{thời gian bắt đầu} di chuyển trên cung đó. Điều này có ý nghĩa thực tiễn, khi không phải lúc nào việc đến đích càng sớm càng tốt cũng mục tiêu duy nhất. Các mục tiêu khác nhau như giảm thiểu sự chênh lệch giữa thời gian đến đích và thời gian xuất phát, hay giảm thiểu tổng thời gian di chuyển theo đường đi từ nguồn đến đích đều là những đáng để xem xét.
+    
+Bài luận sẽ giới thiệu về thuật toán khám phá rời rạc động (DDD) để xử lý các bài toán tìm đường đi ngắn nhất phụ thuộc vào thời gian với các hàm thời gian di chuyển tuyến tính từng khúc. Thuật toán hoạt động trên các mạng thời gian (TEN) trong đó chi phí của cung sẽ đại diện bởi các cận dưới về thời gian di chuyển trong khoảng thời gian tiếp theo. Một đường đi ngắn nhất trong mạng TEN này tạo ra cận dưới cho giá trị của nghiệm tối ưu và cận trên có thể tính toán cùng lúc với cận dưới. Thuật toán liên tục tinh chỉnh sự rời rạc bằng cách khai thác các điểm dừng (BP) của các hàm thời gian di chuyển, loại bỏ các khoảng thời gian, cải thiện cận dưới và cận trên cho đến khi, trong một số lần lặp hữu hạn, cả hai cận hội tụ (thu được nghiệm tối ưu). Các thử nghiệm cho thấy chỉ có một phần nhỏ các BP cần được khám phá, và tỷ lệ này giảm đi khi độ dài của khung thời gian và kích thước của mạng tăng lên, làm cho các thuật toán vô cùng hiệu quả và có khả năng mở rộng cao.
+
+% Thêm phần bảng viết tắt.
 
 \toc
 
