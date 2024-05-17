@@ -338,67 +338,86 @@ mang lại lợi ích đáng kể. Khá bất ngờ khi kịch bản (\(RAND\),
 \section{Những lợi ích của
 DDD}\label{nhux1eefng-lux1ee3i-uxedch-cux1ee7a-ddd}
 
-Trong phần này tôi sẽ so sánh hiệu năng của thuật toán DDD với các thuật
+Trong phần này khóa luận sẽ so sánh hiệu năng của thuật toán DDD với các thuật
 toán liệt kê BP, với kịch bản chọn là \(MIN\). Trong bài toán MTTP sử
-dụng việc khám phá nhiều BP cho mỗi lần lặp.
+dụng việc khám phá nhiều BP (\textbf{M}) cho mỗi lần lặp.
 
-\autoref{table:mdp1} trình bày kết quả chạy trung bình với 10 mẫu được sinh ngẫu
-nhiên, với mạng lưới có kích thước khác nhau (\(n=20,30,50\) và
-\(T=50\)) với 4 loại hàm thời gian di chuyển cho bài toán MDP.
+Phương pháp DDD sẽ được so sánh với phương pháp liệt kê BP. Liệt kê là phương pháp sử dụng 
+toàn bộ các BP có trong dữ liệu 
 
-\begin{figure}
-\centering
-\includegraphics{images/Table1.png}
-\caption{Kết quả của MDP}
-\label{table:mdp1}
-\end{figure}
+\autoref{table:mdp-result} trình bày kết quả chạy của bài toán MDP với trung bình 10 mẫu được sinh ngẫu
+nhiên, có kích thước mạng khác nhau (\(n=30,50\) và khung thời gian
+\(T=40\)) cùng các loại hàm thời gian di chuyển khác nhau.
 
-\begin{table}[]
-  \caption{Kết quả của MDP với \(n=[30, 50]\) và \(T=20\)}
+% \begin{figure}
+% \centering
+% \includegraphics{images/Table1.png}
+% \caption{Kết quả của MDP}
+% \label{table:mdp1}
+% \end{figure}
+
+\begin{table}[h]
+  \caption{Kết quả của MDP với \(n=[30, 50]\) và \(T=40\)}
   \label{table:mdp-result}
   \resizebox{\textwidth}{!}{
-    \begin{tabular}{|p{0.5cm}|p{1cm}|p{1cm}||p{2cm}|p{1.5cm}|p{2cm}|p{2cm}|p{2.5cm}|p{2.5cm}|p{1.5cm}|p{1cm}|}
+    \begin{tabular}{|p{0.5cm}|p{1cm}|p{1cm}||p{1.5cm}|p{1.5cm}|p{1.3cm}||p{1.5cm}|p{2.5cm}|p{2.5cm}|p{1.3cm}|p{1.3cm}|}
     % \begin{tabular}{SSS|SSSSSSS}
     % \hline
     % \Xhline{2pt}
     \toprule
     n  & g-type & t-type & Avg. BP         & Total BP & \% BP            & Avg. Arcs          & Avg. Time DDD (ms)    & Avg. Time Enum (ms) &  \% Time         & Iters \\ \midrule
-    30 & 1     & 1     & 32.60           & 553      & 5.90             & 5.10               & 38.10                 & 348                    & 10.95         & 398        \\ 
-    30 & 1     & 2     & 32.60           & 553      & 5.90             & 5.10               & 40.30                 & 378.90                 & 10.64         & 393        \\ 
-    30 & 2     & 1     & 36.80           & 553      & 6.65             & 9                  & 22.50                 & 212.80                 & 10.57         & 470        \\ 
-    30 & 2     & 2     & 38.80           & 553      & 7.02             & 9                  & 23.30                 & 231.60                 & 10.06         & 487        \\ 
-    30 & 3     & 1     & 29.90           & 553      & 5.41             & 6.80               & 28.40                 & 296.40                 & 9.58          & 351        \\ 
-    30 & 3     & 2     & 32.60           & 553      & 5.90             & 6.70               & 30.90                 & 321.90                 & 9.60          & 389        \\ \midrule
-    50 & 1     & 1     & 36.90           & 933      & 3.95             & 7.50               & 81.40                 & 1112.70                & 7.32          & 440        \\ 
-    50 & 1     & 2     & 49.20           & 933      & 5.27             & 7.50               & 109.10                & 1192.70                & 9.15          & 584        \\ 
-    50 & 2     & 1     & 47.60           & 933      & 5.10             & 13                 & 52.80                 & 622.40                 & 8.48          & 590        \\ 
-    50 & 2     & 2     & 46.60           & 933      & 4.99             & 13                 & 52.10                 & 686.30                 & 7.59          & 562        \\ 
-    50 & 3     & 1     & 47              & 933      & 5.04             & 9                  & 88.60                 & 903.30                 & 9.81          & 589        \\ 
-    50 & 3     & 2     & 41.20           & 933      & 4.42             & 8.90               & 75                    & 965.60                 & 7.77          & 478        \\ \bottomrule
+    \multirow{2}{*}{30} & \multirow{2}{*}{1} & 1     & 35.2            & 1133     & 3.1             & 5.1               & 49.7                  & 774.7                  & 6.4          & 445        \\
+                    &                    & 2     & 44.8            & 1133     & 4.0             & 5.1               & 66.5                  & 856.2                  & 7.8          & 528        \\ \midrule
+\multirow{2}{*}{30} & \multirow{2}{*}{2} & 1     & 46.5            & 1133     & 4.1             & 9                 & 32.8                  & 474.9                  & 6.9          & 584        \\
+                    &                    & 2     & 46.5            & 1133     & 4.1             & 9                 & 34.2                  & 515.4                  & 6.6          & 596        \\ \midrule
+\multirow{2}{*}{30} & \multirow{2}{*}{3} & 1     & 34.2            & 1133     & 3.0             & 6.7               & 33.7                  & 621.1                  & 5.4          & 415        \\
+                    &                    & 2     & 45.6            & 1133     & 4.0             & 6.7               & 45.7                  & 667.4                  & 6.8          & 548        \\ \midrule
+\multirow{2}{*}{50} & \multirow{2}{*}{1} & 1     & 45.5            & 1913     & 2.4             & 7.6               & 115.6                 & 2375.9                 & 4.9          & 567        \\
+                    &                    & 2     & 52.7            & 1913     & 2.8             & 7.5               & 126.8                 & 2496.5                 & 5.1          & 657        \\ \midrule
+\multirow{2}{*}{50} & \multirow{2}{*}{2} & 1     & 53.7            & 1913     & 2.8             & 13                & 63.7                  & 1352.1                 & 4.7          & 671        \\
+                    &                    & 2     & 56.2            & 1913     & 2.9             & 13                & 68.7                  & 1461.1                 & 4.7          & 690        \\ \midrule
+\multirow{2}{*}{50} & \multirow{2}{*}{3} & 1     & 58.9            & 1913     & 3.1             & 9                 & 116.9                 & 1934.2                 & 6.0          & 752        \\
+                    &                    & 2     & 49.2            & 1913     & 2.6             & 8.9               & 98.4                  & 2043.5                 & 4.8          & 601         \\ \bottomrule
   \end{tabular}
   }
 \end{table}
 
-Trong bảng có các cột với ý nghĩa như sau: Trung
-bình số BP khám phá được bởi phương pháp DDD, số BP khám phá được bằng phương pháp liệt kê
-(tổng số BP của mẫu), tỉ lệ phần trăm số BP được khám phá. Thêm vào đó
-còn có thời gian chạy (đơn vị giây) của phương pháp DDD, thời gian chạy
-của phương pháp liệt kê, tỉ lệ phần trăm thời gian chạy của DDD với
-phương pháp liệt kê, và số lượng cung trung bình trong nghiệm tối ưu.
+Các cột trong bảng có ý nghĩa như sau: 
+\begin{itemize}
+  \item \textbf{n}: số lượng đỉnh trong mạng lưới.
+  \item \textbf{g-type}: loại mạng lưới, có ba loại 1,2,3.
+  \item \textbf{t-type}: loại hàm thời gian di chuyển, có hai loại 1 và 2.
+  \item \textbf{Avg. BP}: số BP khám phá được trung bình bằng phương pháp DDD.
+  \item \textbf{Total BP}: tổng số BP trong mẫu (phương pháp liệt kê).
+  \item \textbf{\% BP}: tỉ lệ phần trăm số BP được khám phá.
+  \item \textbf{Avg. Arcs}: số lượng cung trung bình trong nghiệm tối ưu.
+  \item \textbf{Avg. Time DDD}: thời gian chạy trung bình của phương pháp DDD (đơn vị ms).
+  \item \textbf{Avg. Time Enum}: thời gian chạy trung bình của phương pháp liệt kê (đơn vị ms).
+  \item \textbf{\% Time}: tỉ lệ phần trăm thời gian chạy của DDD với phương pháp liệt kê.
+  \item \textbf{Iters}: số lần lặp trung bình của phương pháp DDD.
+\end{itemize}
+% Trung
+% bình số BP khám phá được bởi phương pháp DDD, số BP khám phá được bằng phương pháp liệt kê
+% (tổng số BP của mẫu), tỉ lệ phần trăm số BP được khám phá. Thêm vào đó
+% còn có thời gian chạy (đơn vị giây) của phương pháp DDD, thời gian chạy
+% của phương pháp liệt kê, tỉ lệ phần trăm thời gian chạy của DDD với
+% phương pháp liệt kê, và số lượng cung trung bình trong nghiệm tối ưu.
 Lưu ý rằng tổng sô BP có thể có trong các mẫu này là
 \(|N − 1| \times (T − 1) + 2\), khác với công thức
 \(|A| \times (T − 1) + 2\) của \cite{foschini2011complexity}. Vì đối
 với các cung có cùng hai đỉnh đầu cuối, ta chỉ cần xử lý một lần.
 
 Kết quả cho thấy phương pháp DDD chỉ cần khám phá một phần nhỏ (từ
-\(3.2\%\) đến \(14.8\%\)) tổng số BP. Điều này cho thấy phương pháp này
+\(2.4\%\) đến \(4.1\%\)) tổng số BP. Điều này cho thấy phương pháp này
 hoạt động hiệu quả, chỉ tập trung vào các BP tiềm năng thay vì toàn bộ.
-Tuy nhiên như đã đề cập từ trước, hàm thời gian di chuyển loại 3 gây ra
-nhiều thách thức nhất: nhiều BP cần khám phá hơn tương ứng với thời gian
-chạy lâu hơn. Không ngoài dự đoán, phương pháp liệt kê ít bị tác động
-bởi loại hàm thời gian di chuyển, nhưng phụ thuộc vào mật độ mạng lưới
-(số nút và cung). Ta cũng có thể thấy rằng khi kích cỡ mẫu tăng lên thì
-lợi ích của phương pháp DDD càng rõ rệt.
+% Tuy nhiên như đã đề cập từ trước, hàm thời gian di chuyển loại 3 gây ra
+% nhiều thách thức nhất: nhiều BP cần khám phá hơn tương ứng với thời gian
+% chạy lâu hơn. Không ngoài dự đoán, phương pháp liệt kê ít bị tác động
+% bởi loại hàm thời gian di chuyển, nhưng phụ thuộc vào mật độ mạng lưới
+% (số nút và cung). 
+Ta cũng có thể thấy rằng khi kích cỡ mẫu tăng lên thì
+lợi ích của phương pháp DDD càng rõ rệt, như ở các mẫu \(n=50\) thì phần trăm BP được khám phá
+giảm nhiều hơn so với ở các mẫu \(n=30\).
 
 \autoref{table:mttp1} trình bày kết quả chạy trung bình với 10 mẫu được sinh ngẫu
 nhiên, với mạng lưới có kích thước khác nhau (\(n=20,30\) và \(T=50\))
@@ -412,26 +431,26 @@ với 4 loại hàm thời gian di chuyển cho bài toán MTTP.
 \end{figure}
 
 \begin{table}[]
-  \caption{Kết quả của MTTP với \(n=[30, 50]\) và \(T=20\)}
+  \caption{Kết quả của MTTP với \(n=[30, 50]\) và \(T=40\)}
   \label{table:mttp-small}
   % \begin{tabular}{|lllllllllllllll|}
   % reduce size of this table
   \resizebox{\textwidth}{\textwidth}{
-  \begin{tabular}{|p{0.5cm}|p{1cm}|p{1cm}||*{11}{p{1.5cm}|}}
+    \begin{tabular}{|p{0.5cm}|p{1cm}|p{1cm}||*{3}{p{1.3cm}|}|*{8}{p{1.5cm}|}}
     \toprule
     n  & g-type & t-type & Avg. BP & Total BP & \% BP & Add. Time (ms) & SP. Time (ms) & Avg. Arcs & Avg. Sub-paths & Avg. DDD Time & Avg. Enum Time & \% Time & Iters \\ \midrule
-    30 & 1      & 1      & 151     & 553      & 27.3  & 166.5          & 407.4         & 5.1       & 3.8            & 667           & 657.8          & 101.4   & 74    \\
-    30 & 1      & 2      & 153.3   & 553      & 27.7  & 170.7          & 384.3         & 5.1       & 4.1            & 652.6         & 668            & 97.7    & 61    \\
-    30 & 2      & 1      & 248.7   & 553      & 45.0  & 196            & 1588.5        & 9         & 4.7            & 1875.8        & 574            & 326.8   & 141   \\
-    30 & 2      & 2      & 265.3   & 553      & 48.0  & 200.1          & 1578.8        & 9         & 5.5            & 1873.9        & 668.3          & 280.4   & 132   \\
-    30 & 3      & 1      & 177.3   & 553      & 32.1  & 151.6          & 606.3         & 6.7       & 3.8            & 869.8         & 588.8          & 147.7   & 92    \\
-    30 & 3      & 2      & 188.8   & 553      & 34.1  & 161            & 600.1         & 6.9       & 4.5            & 882.7         & 658.9          & 134.0   & 84    \\ \midrule
-    50 & 1      & 1      & 258.2   & 933      & 27.7  & 706.3          & 3422.4        & 7.6       & 3.9            & 4274.2        & 2455.7         & 174.1   & 119   \\
-    50 & 1      & 2      & 257.2   & 933      & 27.6  & 679.8          & 2911.9        & 7.5       & 4.9            & 3733.4        & 2692.5         & 138.7   & 101   \\
-    50 & 2      & 1      & 364.4   & 933      & 39.1  & 579.8          & 8966.2        & 13        & 4.6            & 9727.5        & 2379.8         & 408.8   & 197   \\
-    50 & 2      & 2      & 406.8   & 933      & 43.6  & 694            & 10473         & 13        & 5.9            & 11354.8       & 2593.8         & 437.8   & 201   \\
-    50 & 3      & 1      & 277.2   & 933      & 29.7  & 713.7          & 5101.4        & 8.7       & 4.6            & 5942.2        & 2385.2         & 249.1   & 138   \\
-    50 & 3      & 2      & 304     & 933      & 32.6  & 794.9          & 5930.3        & 8.6       & 4.9            & 6864.9        & 2623.6         & 261.7   & 137 \\ \bottomrule
+    \multirow{2}{*}{30} & \multirow{2}{*}{1} & 1     & 244.5           & 1133     & 21.6            & 344.6             & 610.8            & 5.1               & 3.4                   & 1084.6                & 1398                   & 77.6         & 71         \\ %\cline{3-14} 
+    &                    & 2     & 258.3           & 1133     & 22.8            & 381.1             & 627.8            & 5.1               & 4.6                   & 1147.5                & 1512.7                 & 75.9         & 61         \\ \midrule
+\multirow{2}{*}{30} & \multirow{2}{*}{2} & 1     & 416.6           & 1133     & 36.8            & 346.5             & 2640.6           & 9                 & 4.6                   & 3181.1                & 1381.4                 & 230.3        & 126        \\ %\cline{3-14} 
+    &                    & 2     & 448.4           & 1133     & 39.6            & 390.6             & 2568.2           & 9                 & 6                     & 3150.6                & 1505.4                 & 209.3        & 117        \\ \midrule
+\multirow{2}{*}{30} & \multirow{2}{*}{3} & 1     & 301.9           & 1133     & 26.6            & 276.3             & 864.4            & 6.7               & 3.6                   & 1336.5                & 1199.8                 & 111.4        & 89         \\ %\cline{3-14} 
+    &                    & 2     & 313.1           & 1133     & 27.6            & 289.8             & 843.8            & 6.9               & 4.7                   & 1337.2                & 1317                   & 101.5        & 75         \\ \midrule
+\multirow{2}{*}{50} & \multirow{2}{*}{1} & 1     & 415.7           & 1913     & 21.7            & 1311.8            & 5164             & 7.6               & 4.1                   & 6679.6                & 5964.5                 & 112.0        & 112        \\ %\cline{3-14} 
+    &                    & 2     & 421.7           & 1913     & 22.0            & 1302.7            & 4505.6           & 7.5               & 5.5                   & 6023.8                & 6060.9                 & 99.4         & 96         \\ \midrule
+\multirow{2}{*}{50} & \multirow{2}{*}{2} & 1     & 581.6           & 1913     & 30.4            & 1026.1            & 11977.6          & 13                & 4.6                   & 13286.6               & 5466.2                 & 243.1        & 169        \\ %\cline{3-14} 
+    &                    & 2     & 582.3           & 1913     & 30.4            & 999.1             & 9932.3           & 13                & 6.7                   & 11221.7               & 5625.9                 & 199.5        & 147        \\ \midrule
+\multirow{2}{*}{50} & \multirow{2}{*}{3} & 1     & 430.7           & 1913     & 22.5            & 1112.6            & 5818.8           & 8.7               & 4.4                   & 7135.1                & 5450.4                 & 130.9        & 121        \\ %\cline{3-14} 
+    &                    & 2     & 456.6           & 1913     & 23.9            & 1184.7            & 5644.7           & 8.7               & 5.1                   & 7037.1                & 5557                   & 126.6        & 112        \\ \bottomrule
   \end{tabular}}
 \end{table}
 
