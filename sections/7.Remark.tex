@@ -1,0 +1,37 @@
+\documentclass[../main.tex]{subfiles}
+
+% DOCUMENT
+
+\begin{document}
+
+\chapter{Kết luận}\label{kux1ebft-luux1eadn}
+
+Khoá luận đã trình bày các thuật toán khám phá rời rạc động cho bài toán tìm đường đi ngắn nhất phụ thuộc thời gian, trong đó thời gian di chuyển trên cung là hàm tuyến tính từng khúc của thời gian khởi hành trên cung đó. 
+
+Các thuật toán này tận dụng các BP của mỗi hàm tuyến tính và giá trị trước đó theo tổng số điểm ngắt cho việc giải bài toán thời gian tối thiểu. Tuy nhiên, thuật toán chỉ nghiên cứu một phần nhỏ các BP của hàm thời gian di chuyển để tìm kiếm đường đi tối ưu và chứng minh tính tối ưu của nó. Hai bài toán chúng tôi nghiên cứu là bài toán tìm đường đi có thời gian tối thiểu (MDP), tức là giảm thiểu thời gian từ nguồn đến đích, và bài toán tìm đường đi có thời gian di chuyển tối thiểu (MTTP), tức là giảm thiểu tổng thời gian di chuyển từ nguồn đến đích. 
+
+Trong bài toán MDP chỉ cho phép việc chờ đợi ở nút nguồn, còn bài toán MTTP cho phép chờ đợi ở tất cả các nút ngoại trừ đích. Nhưng cả hai đều không có chi phí hoặc ràng buộc liên quan đến việc chờ đợi. 
+
+Kết quả của khóa luận đã cho thấy các thuật toán này có thể giải quyết bài toán với độ chính xác cao và hiệu quả, với thời gian chạy tương đối nhanh. Tuy nhiên có hai hạn chế chính. Thứ nhất, thuật toán đã bỏ qua các chi phí chờ đợi ở các nút, điều này làm giảm tính thực tế của bài toán. Thứ hai là các dữ liệu 
+
+% Phần cài đặt và thử nghiệm trên các mạng thời gian (TEN) được thực hiện bằng ngôn ngữ C++ có các kết quả thử nghiệm được trình bày trong \autoref{nhux1eefng-lux1ee3i-uxedch-cux1ee7a-ddd} và \autoref{appendix-mdp-mttp}. 
+% Lập trình hướng đối tượng được sử dụng để chia nhỏ các thành phần khác nhau như Mạng thời gian, Đồ thị, các công cụ nhập xuất dữ liệu. 
+% Việc này giúp các thành phần không bị phụ thuộc vào nhau và dễ dàng hơn trong việc phát hiện cũng như sửa lỗi. 
+% Tuy nhiên quá trình cài đặt và thực hiện ban đầu gặp nhiều khó khăn khi phải quy các đối tượng về một chuẩn chung. 
+% Thuật toán tìm đường đi ngắn nhất được cài đặt bằng Dijkstra kết hợp với \emph{priority queue}. 
+% Đây là phương pháp chính xác và hiệu quả để giải quyết bài toán này. 
+% Tuy nhiên với dữ liệu càng lớn thì thuật toán này tốn nhiều thời gian và không còn quá hiệu quả. 
+% Các thử nghiệm với bộ dữ liệu \(n = 10000\) mất gần 10 phút để chạy. Hiện các thuật toán khác như A* có thể  tăng tốc độ chương trình, nhưng đánh đổi là làm giảm tính chính xác và đang chưa có những thử nghiệm với phương án này.
+
+Flag tối ưu (-O2) và thư viện Boost được sử dụng để tăng tốc độ chạy. Kết quả thử nghiệm cho thấy hiệu suất tăng từ 300\% đến 500\% so với khi không tối ưu. 
+
+Dựa vào những điều đã kết luận ở trên, đây là những hướng phát triển cho tương lai:
+
+\begin{itemize}
+    \item Thêm các ràng buộc về việc chờ đợi ở các nút trong mạng thời gian.
+    \item Tìm hiểu và cài đặt các thuật toán tìm đường đi ngắn nhất khác như A*.
+    \item Sử dụng với các bộ dữ liệu thực tế lớn hơn để kiểm tra hiệu suất của thuật toán.
+\end{itemize}
+
+
+\end{document}
