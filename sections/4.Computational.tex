@@ -16,7 +16,7 @@
 dụng dữ liệu được sinh ngẫu nhiên để chạy. Thuật toán được cài đặt và
 chạy bằng ngôn ngữ C++17, trên máy tính để bản với hệ điều hành Fedora
 39, CPU Intel i7-8700 (12) @ 4.600GHz và 128GB RAM. Việc chạy được thực hiện
-với các flag tối ưu hoá \texttt{-O2} và thư viện Boost 1.73.0
+với các flag tối ưu hóa \texttt{-O2} và thư viện Boost 1.73.0
 
 
 
@@ -24,65 +24,63 @@ với các flag tối ưu hoá \texttt{-O2} và thư viện Boost 1.73.0
 
 Dữ liệu được chuẩn bị cho việc chạy các thuật toán. Có 4 kiểu dữ liệu
 tương ứng với 4 kiểu mạng \(D=(N,A)\) và tập các đỉnh
-\(N =\{1,2,\dots, n\}\);
+\(N =\{1,2,\dots, n\}\);\\
+\textbf{Kiểu 1:} \(A = \{(i, j) \in N \times N | i < j \}\);
 
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Kiểu 1:} \(A = \{(i, j) \in N \times N | i < j \}\);
-\item
-  \textbf{Kiểu 2:}
+  \begin{itemize}
+    \tightlist
+    \item
+      Mỗi cặp đỉnh bất kỳ đều được nối với nhau bằng một cung.
+    \item
+      Mật độ của mạng: \(0.5\) (mỗi đỉnh kết nối đến tất cả các đỉnh khác).
+    \end{itemize}
+\textbf{Kiểu 2:}
   \(A = \{(i, i+1) | i = 1, \dots, n-1\} \cup \{(i, j) \in N \times N | i < j + 1 \text{ và } U_{i, j} < 0.5\}\)
   với mỗi \((i, j)\), giá trị \(U_{i, j}\) được lấy độc lập từ phân phối
   chuẩn \([0, 1]\) hay \(U_{i, j} \sim U[0,1]\)
-\item
-  \textbf{Kiểu 3:} \(A = \{(i, j) \in N \times N | i < j < i + 4 \}\);
+
+  \begin{itemize}
+    \tightlist
+    \item
+      Bao gồm nửa số cung có trong \textbf{Kiểu 1},
+    \item
+      Để đảm bảo luôn có ít nhất một đường đi khả thi, mọi cung giữa các
+      đỉnh liên tiếp vẫn được giữ lại.
+    \item
+      Mật độ mạng: khoảng \(0.25\).
+    \end{itemize}
+\textbf{Kiểu 3:} \(A = \{(i, j) \in N \times N | i < j < i + 4 \}\);
+
+  \begin{itemize}
+    \tightlist
+    \item
+      Mỗi đỉnh được nối với ba đỉnh tiếp theo theo số thứ tự.
+    
+      \begin{itemize}
+      \tightlist
+      \item
+        Ví dụ: đỉnh $1$ sẽ nối với đỉnh $2$, $3$ và $4$.
+      \end{itemize}
+    \item
+      Mật độ mạng: khoảng \(3/n\).
+    \end{itemize}
 % \item
 %   \textbf{Kiểu 4:}
 %   \(A = \{(i, j+1) | i = 1, \dots, n-1\} \cup \{(i, j) \in N \times N | i < j +1 \text{ và } U_{i, j} < 1/ |j-i|\}\)
 %   với \(U_{i, j} \sim U[0,1]\) cho mỗi \((i, j)\).
-\end{itemize}
 
-\subsection{Tóm tắt cho mỗi kiểu mạng}\label{tom-tat-moi-kieu-mang}
 
-\textbf{Kiểu 1:}
+% \textbf{Kiểu 1:}
 
-\begin{itemize}
-\tightlist
-\item
-  Mỗi cặp đỉnh bất kì đều được nối với nhau bằng một cung.
-\item
-  Mật độ của mạng: \(0.5\) (mỗi đỉnh kết nối đến tất cả các đỉnh khác).
-\end{itemize}
 
-\textbf{Kiểu 2:}
 
-\begin{itemize}
-\tightlist
-\item
-  Bao gồm nửa số cung có trong Kiểu 1,
-\item
-  Để đảm bảo luôn có ít nhất một đường đi khả thi, mọi cung giữa các
-  đỉnh liên tiếp vẫn được giữ lại.
-\item
-  Mật độ mạng: khoảng \(0.25\).
-\end{itemize}
+% \textbf{Kiểu 2:}
 
-\textbf{Kiểu 3:}
 
-\begin{itemize}
-\tightlist
-\item
-  Mỗi đỉnh được nối với ba đỉnh tiếp theo theo số thứ tự.
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Ví dụ: đỉnh $1$ sẽ nối với đỉnh $2$, $3$ và $4$.
-  \end{itemize}
-\item
-  Mật độ mạng: khoảng \(3/n\).
-\end{itemize}
+% \textbf{Kiểu 3:}
+
+
 
 % \textbf{Kiểu 4:}
 
@@ -100,11 +98,11 @@ tương ứng với 4 kiểu mạng \(D=(N,A)\) và tập các đỉnh
 %   Mật độ mạng: khoảng \(\log n!/(n^2)\).
 % \end{itemize}
 
-\section{Hàm thời gian}\label{huxe0m-thux1eddi-gian}
+\section{Hàm vận tốc}\label{huxe0m-thux1eddi-gian}
 
-Để đánh giá mức độ ảnh hưởng của hàm thời gian di chuyển đến hiệu năng
+Để đánh giá mức độ ảnh hưởng của hàm vận tốc đến hiệu năng
 của thuật toán, có ba loại hàm được sử dụng. \autoref{fig:11} minh họa cho mỗi
-loại. Hàm thời gian di chuyển được tạo ra như sau: với mỗi cung
+loại. Hàm vận tốc được tạo ra như sau: với mỗi cung
 \((i,j)\), sử dụng nội suy tuyến tính từng khúc của một hàm \(f\) (mô tả
 chi tiết ở dưới) với các điểm là số nguyên.
 
@@ -152,12 +150,11 @@ Với \(B_{i, j}, U_{i, j} \sim U[0, 1]\).
 
   % \subcaptionbox{Loại 3\label{fig:11c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure11c.jpg}}
 
-  \caption{Biểu diễn hai loại hàm thời gian di chuyển}
+  \caption{Biểu diễn hai loại hàm vận tốc}
   \label{fig:11}
 \end{figure}
 
-\subsection{Nguồn gốc của các hàm thời
-gian}\label{nguux1ed3n-gux1ed1c-cux1ee7a-cuxe1c-huxe0m-thux1eddi-gian}
+\subsection{Nguồn gốc}\label{nguux1ed3n-gux1ed1c-cux1ee7a-cuxe1c-huxe0m-thux1eddi-gian}
 
 Hàm \textbf{Loại 1} được lấy ý tưởng từ \cite{figliozzi2012time} về
 việc chia 5 khoảng thời gian bằng nhau, mỗi khoảng có tốc độ di chuyển
@@ -203,47 +200,48 @@ khoảng thời gian \((t_i, t_i^+)\) và có chỉ số nhỏ nhất (khi xét 
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Chọn một điểm bất kì (\(RAND\))
+  Chọn điểm có giá trị \(c_{i, j}(t)\) nhỏ nhất với
+  \(t\in (t_i, t_i^+)\) (\(MIN\)).
 \item
   Chọn điểm trung vị (trong tập các BP sắp xếp theo thời gian)
   (\(MED\))
 \item
-  Chọn điểm có giá trị \(c_{i, j}(t)\) nhỏ nhất với
-  \(t\in (t_i, t_i^+)\) (\(MIN\)).
+  Chọn một điểm bất kì (\(RAND\))
 \end{enumerate}
 
-Với bài toán MTTP, ta so sánh hai kịch bản chọn BP để thêm vào
-danh sách \(L^i\) ở mỗi lần lặp như sau:
+% Với bài toán MTTP, ta so sánh hai kịch bản chọn BP để thêm vào
+% danh sách \(L^i\) ở mỗi lần lặp như sau:
 
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Thêm một BP (S):} Thêm một BP cho một trong các
-  đường con ở mỗi lần lặp.
-\item
-  \textbf{Thêm nhiều BP (M):} Thêm một BP cho mọi đường
-  con ở mỗi lần lặp.
-\end{itemize}
+% \begin{itemize}
+% \tightlist
+% \item
+%   \textbf{Thêm một BP (S):} Thêm một BP cho một trong các
+%   đường con ở mỗi lần lặp.
+% \item
+%   \textbf{Thêm nhiều BP (M):} Thêm một BP cho mọi đường
+%   con ở mỗi lần lặp.
+% \end{itemize}
 
-Quy tắc chọn BP như sau: Để chọn điểm cần thêm vào, ta xác định
-một chuỗi các \(mangrove\) hoàn chỉnh được sử dụng bởi đường đi UTT kí
-hiệu \(P_{LB}\). Mỗi \(mangrove\) hoàn chỉnh được tạo ra từ một BP, giả
-sử đó là điểm \((i,t)\). Khi đó, nếu \((i,t^+)\) là điểm ngay sau
-\((i,t)\) trong \(L^i\) và có một BP chưa được giải quyết tại đỉnh \(i\)
-có thời gian giữa \(t\) và \(t^+\), thì điểm \((i,t^+)\) này sẽ xem xét
-để chọn. Tập hợp các điểm như vậy gọi là tập ứng viên. Cách chọn điểm từ
-tập ứng viên thuộc một trong ba cách ở trên (\(RAND, MED, MIN\)). Với
-kịch bản \textbf{(S)}, thêm một BP của đỉnh \(i\) cho \(i-mangrove\)
-hoàn chỉnh đầu tiên được dùng bởi đường đi UTT từ \(1\) đến \(n\), nếu
-BP ứng viên tồn tại. Trong kịch bản \textbf{(M)}, thêm một BP vào mỗi
-\(mangrove\) hoàn chỉnh được dùng bởi đường đi UTT, nếu BP ứng viên
-tương ứng tồn tại.
+% Quy tắc chọn BP như sau: Để chọn điểm cần thêm vào, ta xác định
+% một chuỗi các \(mangrove\) hoàn chỉnh được sử dụng bởi đường đi UTT kí
+% hiệu \(P_{LB}\). Mỗi \(mangrove\) hoàn chỉnh được tạo ra từ một BP, giả
+% sử đó là điểm \((i,t)\). Khi đó, nếu \((i,t^+)\) là điểm ngay sau
+% \((i,t)\) trong \(L^i\) và có một BP chưa được giải quyết tại đỉnh \(i\)
+% có thời gian giữa \(t\) và \(t^+\), thì điểm \((i,t^+)\) này sẽ xem xét
+% để chọn. Tập hợp các điểm như vậy gọi là tập ứng viên. Cách chọn điểm từ
+% tập ứng viên thuộc một trong ba cách ở trên (\(MIN, MED, RAND\)). 
+% Với
+% kịch bản \textbf{(S)}, thêm một BP của đỉnh \(i\) cho \(i-mangrove\)
+% hoàn chỉnh đầu tiên được dùng bởi đường đi UTT từ \(1\) đến \(n\), nếu
+% BP ứng viên tồn tại. Trong kịch bản \textbf{(M)}, thêm một BP vào mỗi
+% \(mangrove\) hoàn chỉnh được dùng bởi đường đi UTT, nếu BP ứng viên
+% tương ứng tồn tại.
 
 \textbf{Đánh giá hiệu năng của việc lựa chọn BP:}
 
-Đầu tiên, với bài toán MDP, kết quả được biểu diễn ở \autoref{fig:12} bằng biểu
+Với bài toán MDP, kết quả được biểu diễn ở \autoref{fig:12} bằng biểu
 đồ hộp với các tỉ số: thời gian chạy, số lần lặp và số BP được giải
-quyết cho cách chọn \(RAND\) và \(MIN\) khi so sánh với \(MED\).
+quyết cho cách chọn \(MIN\), \(MED\) và \(RAND\).
 
 % \begin{figure}
 % \centering
@@ -254,11 +252,11 @@ quyết cho cách chọn \(RAND\) và \(MIN\) khi so sánh với \(MED\).
 
 \begin{figure}
   \centering
-  \subcaptionbox{Thời gian chạy\label{fig:12a}}{\includegraphics[width=.45\textwidth]{edited-images/Figure12a.jpg}}
-  \subcaptionbox{Số lần lặp\label{fig:12b}}{\includegraphics[width=.45\textwidth]{edited-images/Figure12b.jpg}}\\
+  \subcaptionbox{Thời gian chạy\label{fig:12a}}{\includegraphics[width=.45\textwidth]{boxplot/Figure_1.png}}
+  \subcaptionbox{Số lần lặp\label{fig:12b}}{\includegraphics[width=.45\textwidth]{boxplot/Figure_2.png}}\\
 
-  \subcaptionbox{Số BP được giải quyết\label{fig:12c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure12c.jpg}}
-  \caption{So sánh các cách chọn với 120 mẫu của bài toán MDP cho \(n=20, T=50\)}
+  \subcaptionbox{Số BP được giải quyết\label{fig:12c}}{\includegraphics[width=.45\textwidth]{boxplot/Figure_3.png}}
+  \caption{So sánh các cách chọn với 60 mẫu của bài toán MDP cho \(n=30, T=20\)}
   \label{fig:12}
 \end{figure}
 
@@ -270,20 +268,20 @@ quyết cho cách chọn \(RAND\) và \(MIN\) khi so sánh với \(MED\).
   \begin{itemize}
   \tightlist
   \item
-    Hình thoi màu xanh lá cây biểu thị giá trị trung bình.
+    Hình thoi màu xanh biển biểu thị giá trị trung bình.
   \item
     Đường ngang màu đỏ biểu thị giá trị trung vị.
   \end{itemize}
 \item
-  \textbf{Trục Y:}~thang đo logarit.
+  \textbf{Trục Y:}~thang đo.
 \end{itemize}
 
-Qua quan sát, cách chọn \(MIN\) cho kết quả tốt nhất trong cả ba tiêu
-chí hiệu năng (thời gian chạy, số lần lặp và số BP được giải quyết). Do
-đó, \(MIN\) là lựa chọn ưu tiên trong ba cách.
+Qua quan sát các yếu tố trung vị, trung bình và hộp, cách chọn \(MED\) cho kết quả tốt nhất trong cả ba tiêu
+chí hiệu năng (thời gian chạy, số lần lặp và số BP được giải quyết). 
+Do đó, \(MED\) là lựa chọn ưu tiên trong ba cách.
 
-Tiếp theo, ta đánh giá tác động của cách chọn BP và số BP được xử lý
-trong mỗi lần lặp khi giải bài toán MTTP.
+% Tiếp theo, ta đánh giá tác động của cách chọn BP và số BP được xử lý
+% trong mỗi lần lặp khi giải bài toán MTTP.
 
 % \begin{figure}
 % \centering
@@ -293,61 +291,59 @@ trong mỗi lần lặp khi giải bài toán MTTP.
 % \label{fig:13}
 % \end{figure}
 
-\begin{figure}
-  % \begin{subfigure}{.5\linewidth}
-  %   % \centering
-  %   \includegraphics{edited-images/Figure13a.jpg}
-  %   \caption{Thời gian chạy}
-  %   \label{fig:13a}
-  % \end{subfigure}
-  % \hfill
-  % \begin{subfigure}{.5\linewidth}
-  %   % \centering
-  %   \includegraphics{edited-images/Figure13b.jpg}
-  %   \caption{Số lần lặp}
-  %   \label{fig:13b}
-  % \end{subfigure}\\[1ex]
-  % \begin{subfigure}{\linewidth}
-  %   \centering
-  %   \includegraphics{edited-images/Figure13c.jpg}
-  %   \caption{Số BP được giải quyết}
-  %   \label{fig:13c}
-  % \end{subfigure}
+% \begin{figure}
+%   % \begin{subfigure}{.5\linewidth}
+%   %   % \centering
+%   %   \includegraphics{edited-images/Figure13a.jpg}
+%   %   \caption{Thời gian chạy}
+%   %   \label{fig:13a}
+%   % \end{subfigure}
+%   % \hfill
+%   % \begin{subfigure}{.5\linewidth}
+%   %   % \centering
+%   %   \includegraphics{edited-images/Figure13b.jpg}
+%   %   \caption{Số lần lặp}
+%   %   \label{fig:13b}
+%   % \end{subfigure}\\[1ex]
+%   % \begin{subfigure}{\linewidth}
+%   %   \centering
+%   %   \includegraphics{edited-images/Figure13c.jpg}
+%   %   \caption{Số BP được giải quyết}
+%   %   \label{fig:13c}
+%   % \end{subfigure}
 
-  \centering
-  \subcaptionbox{Thời gian chạy\label{fig:13a}}{\includegraphics[width=.45\textwidth]{edited-images/Figure13a.jpg}}
-  \subcaptionbox{Số lần lặp\label{fig:13b}}{\includegraphics[width=.45\textwidth]{edited-images/Figure13b.jpg}}\\
+%   \centering
+%   \subcaptionbox{Thời gian chạy\label{fig:13a}}{\includegraphics[width=.45\textwidth]{edited-images/Figure13a.jpg}}
+%   \subcaptionbox{Số lần lặp\label{fig:13b}}{\includegraphics[width=.45\textwidth]{edited-images/Figure13b.jpg}}\\
 
-  \subcaptionbox{Số BP được giải quyết\label{fig:13c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure13c.jpg}}
-  \caption{So sánh các cách chọn với 80 mẫu của bài toán MTTP cho \(n=20, T=50\)}
-  \label{fig:13}
-\end{figure}
+%   \subcaptionbox{Số BP được giải quyết\label{fig:13c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure13c.jpg}}
+%   \caption{So sánh các cách chọn với 80 mẫu của bài toán MTTP cho \(n=20, T=50\)}
+%   \label{fig:13}
+% \end{figure}
 
-\autoref{fig:13} là biểu đồ hộp của các tỷ số: thời gian chạy, số lần lặp và số
-BP được giải quyết cho các kịch bản: (\(RAND\), \textbf{S}), (\(RAND\),
-\textbf{M}), (\(MED\), \textbf{M}), (\(MIN\), \textbf{S}), (\(MIN\),
-\textbf{M}) khi so sánh với kịch bản (\(MED\), \textbf{S}). Chỉ các mẫu
-với hai hàm thời gian di chuyển được sử dụng vì thời gian chạy với hàm
-thứ ba trở đi là rất lớn (sẽ đề cập chi tiết sau). Qua quan sát, kịch
-bản (\(MIN\), \textbf{M}) là lựa chọn tốt nhất (theo cả ba tiêu chí).
-Thêm vào đó, việc giải quyết một BP cho các đường con trong một lần lặp
-mang lại lợi ích đáng kể. Khá bất ngờ khi kịch bản (\(RAND\),
-\textbf{S}) lại vượt trội cả (\(MED\), \textbf{S}) và (\(MED\),
-\textbf{M}) về thời gian chạy trung bình.
+% \autoref{fig:13} là biểu đồ hộp của các tỷ số: thời gian chạy, số lần lặp và số
+% BP được giải quyết cho các kịch bản: (\(RAND\), \textbf{S}), (\(RAND\),
+% \textbf{M}), (\(MED\), \textbf{M}), (\(MIN\), \textbf{S}), (\(MIN\),
+% \textbf{M}) khi so sánh với kịch bản (\(MED\), \textbf{S}). Chỉ các mẫu
+% với hai hàm vận tốc được sử dụng vì thời gian chạy với hàm
+% thứ ba trở đi là rất lớn (sẽ đề cập chi tiết sau). Qua quan sát, kịch
+% bản (\(MIN\), \textbf{M}) là lựa chọn tốt nhất (theo cả ba tiêu chí).
+% Thêm vào đó, việc giải quyết một BP cho các đường con trong một lần lặp
+% mang lại lợi ích đáng kể. Khá bất ngờ khi kịch bản (\(RAND\),
+% \textbf{S}) lại vượt trội cả (\(MED\), \textbf{S}) và (\(MED\),
+% \textbf{M}) về thời gian chạy trung bình.
 
 \section{Những lợi ích của
 DDD}\label{nhux1eefng-lux1ee3i-uxedch-cux1ee7a-ddd}
 
 Trong phần này khóa luận sẽ so sánh hiệu năng của thuật toán DDD với các thuật
-toán liệt kê BP, với kịch bản chọn là \(MIN\). Trong bài toán MTTP sử
-dụng việc khám phá nhiều BP (\textbf{M}) cho mỗi lần lặp.
+toán liệt kê BP, với kịch bản chọn là \(MED\).
 
-Phương pháp DDD sẽ được so sánh với phương pháp liệt kê BP. Liệt kê là phương pháp sử dụng 
-toàn bộ các BP có trong dữ liệu 
+Phương pháp DDD sẽ được so sánh với phương pháp vét cạn BP (sử dụng toàn bộ các BP có trong dữ liệu không có chọn lọc).
 
 \autoref{table:mdp-result} trình bày kết quả chạy của bài toán MDP với trung bình 10 mẫu được sinh ngẫu
 nhiên, có kích thước mạng khác nhau (\(n=30,50\) và khung thời gian
-\(T=40\)) cùng các loại hàm thời gian di chuyển khác nhau.
+\(T=40\)) cùng các loại hàm vận tốc khác nhau.
 
 % \begin{figure}
 % \centering
@@ -386,14 +382,14 @@ Các cột trong bảng có ý nghĩa như sau:
 \begin{itemize}
   \item \textbf{n}: số lượng đỉnh trong mạng lưới.
   \item \textbf{g-type}: loại mạng lưới, có ba loại 1,2,3.
-  \item \textbf{t-type}: loại hàm thời gian di chuyển, có hai loại 1 và 2.
+  \item \textbf{t-type}: loại hàm vận tốc, có hai loại 1 và 2.
   \item \textbf{Avg. BP}: số BP khám phá được trung bình bằng phương pháp DDD.
-  \item \textbf{Total BP}: tổng số BP trong mẫu (phương pháp liệt kê).
+  \item \textbf{Total BP}: tổng số BP trong mẫu (phương pháp vét cạn).
   \item \textbf{\% BP}: tỉ lệ phần trăm số BP được khám phá.
   \item \textbf{Avg. Arcs}: số lượng cung trung bình trong nghiệm tối ưu.
   \item \textbf{Avg. Time DDD}: thời gian chạy trung bình của phương pháp DDD (đơn vị ms).
-  \item \textbf{Avg. Time Enum}: thời gian chạy trung bình của phương pháp liệt kê (đơn vị ms).
-  \item \textbf{\% Time}: tỉ lệ phần trăm thời gian chạy của DDD với phương pháp liệt kê.
+  \item \textbf{Avg. Time Enum}: thời gian chạy trung bình của phương pháp vét cạn (đơn vị ms).
+  \item \textbf{\% Time}: tỉ lệ phần trăm thời gian chạy của DDD với phương pháp vét cạn.
   \item \textbf{Iters}: số lần lặp trung bình của phương pháp DDD.
 \end{itemize}
 % Trung
@@ -410,68 +406,68 @@ với các cung có cùng hai đỉnh đầu cuối, ta chỉ cần xử lý m�
 Kết quả cho thấy phương pháp DDD chỉ cần khám phá một phần nhỏ (từ
 \(2.4\%\) đến \(4.1\%\)) tổng số BP. Điều này cho thấy phương pháp này
 hoạt động hiệu quả, chỉ tập trung vào các BP tiềm năng thay vì toàn bộ.
-% Tuy nhiên như đã đề cập từ trước, hàm thời gian di chuyển loại 3 gây ra
+% Tuy nhiên như đã đề cập từ trước, hàm vận tốc loại 3 gây ra
 % nhiều thách thức nhất: nhiều BP cần khám phá hơn tương ứng với thời gian
 % chạy lâu hơn. Không ngoài dự đoán, phương pháp liệt kê ít bị tác động
-% bởi loại hàm thời gian di chuyển, nhưng phụ thuộc vào mật độ mạng lưới
+% bởi loại hàm vận tốc, nhưng phụ thuộc vào mật độ mạng lưới
 % (số nút và cung). 
 Ta cũng có thể thấy rằng khi kích cỡ mẫu tăng lên thì
 lợi ích của phương pháp DDD càng rõ rệt, như ở các mẫu \(n=50\) thì phần trăm BP được khám phá
 giảm nhiều hơn so với ở các mẫu \(n=30\). Các kết quả chạy với tập mẫu lớn hơn được
-trình bày ở \autoref{tab:mdp-res2}, với các giá trị \% BP và \% Time trung bình giảm dần khi mẫu
+trình bày ở \autoref{tab:mdp-res2}, với các giá trị \textbf{\% BP} và \textbf{\% Time} trung bình giảm dần khi mẫu
 càng lớn.
 
-\autoref{table:mttp1} trình bày kết quả chạy trung bình với 10 mẫu được sinh ngẫu
-nhiên, với mạng lưới có kích thước khác nhau (\(n=30, 50\) và \(T=40\))
-với 4 loại hàm thời gian di chuyển cho bài toán MTTP.
+% \autoref{table:mttp1} trình bày kết quả chạy trung bình với 10 mẫu được sinh ngẫu
+% nhiên, với mạng lưới có kích thước khác nhau (\(n=30, 50\) và \(T=40\))
+% với 4 loại hàm vận tốc cho bài toán MTTP.
 
-\begin{figure}
-\centering
-\includegraphics{images/Table2.png}
-\caption{Kết quả của MTTP}
-\label{table:mttp1}
-\end{figure}
+% \begin{figure}
+% \centering
+% \includegraphics{images/Table2.png}
+% \caption{Kết quả của MTTP}
+% \label{table:mttp1}
+% \end{figure}
 
-\begin{table}[]
-  \caption{Kết quả của MTTP với \(n=[30, 50]\) và \(T=40\)}
-  \label{table:mttp-small}
-  % \begin{tabular}{|lllllllllllllll|}
-  % reduce size of this table
-  \resizebox{\textwidth}{\textwidth}{
-    \begin{tabular}{|p{0.5cm}|p{1cm}|p{1cm}||*{3}{p{1.3cm}|}|*{8}{p{1.5cm}|}}
-    \toprule
-    n  & g-type & t-type & Avg. BP & Total BP & \% BP & Add. Time (ms) & SP. Time (ms) & Avg. Arcs & Avg. Sub-paths & Avg. DDD Time & Avg. Enum Time & \% Time & Iters \\ \midrule
-    \multirow{2}{*}{30} & \multirow{2}{*}{1} & 1     & 244.5           & 1133     & 21.6            & 344.6             & 610.8            & 5.1               & 3.4                   & 1084.6                & 1398                   & 77.6         & 71         \\ %\cline{3-14} 
-    &                    & 2     & 258.3           & 1133     & 22.8            & 381.1             & 627.8            & 5.1               & 4.6                   & 1147.5                & 1512.7                 & 75.9         & 61         \\ \midrule
-\multirow{2}{*}{30} & \multirow{2}{*}{2} & 1     & 416.6           & 1133     & 36.8            & 346.5             & 2640.6           & 9                 & 4.6                   & 3181.1                & 1381.4                 & 230.3        & 126        \\ %\cline{3-14} 
-    &                    & 2     & 448.4           & 1133     & 39.6            & 390.6             & 2568.2           & 9                 & 6                     & 3150.6                & 1505.4                 & 209.3        & 117        \\ \midrule
-\multirow{2}{*}{30} & \multirow{2}{*}{3} & 1     & 301.9           & 1133     & 26.6            & 276.3             & 864.4            & 6.7               & 3.6                   & 1336.5                & 1199.8                 & 111.4        & 89         \\ %\cline{3-14} 
-    &                    & 2     & 313.1           & 1133     & 27.6            & 289.8             & 843.8            & 6.9               & 4.7                   & 1337.2                & 1317                   & 101.5        & 75         \\ \midrule
-\multirow{2}{*}{50} & \multirow{2}{*}{1} & 1     & 415.7           & 1913     & 21.7            & 1311.8            & 5164             & 7.6               & 4.1                   & 6679.6                & 5964.5                 & 112.0        & 112        \\ %\cline{3-14} 
-    &                    & 2     & 421.7           & 1913     & 22.0            & 1302.7            & 4505.6           & 7.5               & 5.5                   & 6023.8                & 6060.9                 & 99.4         & 96         \\ \midrule
-\multirow{2}{*}{50} & \multirow{2}{*}{2} & 1     & 581.6           & 1913     & 30.4            & 1026.1            & 11977.6          & 13                & 4.6                   & 13286.6               & 5466.2                 & 243.1        & 169        \\ %\cline{3-14} 
-    &                    & 2     & 582.3           & 1913     & 30.4            & 999.1             & 9932.3           & 13                & 6.7                   & 11221.7               & 5625.9                 & 199.5        & 147        \\ \midrule
-\multirow{2}{*}{50} & \multirow{2}{*}{3} & 1     & 430.7           & 1913     & 22.5            & 1112.6            & 5818.8           & 8.7               & 4.4                   & 7135.1                & 5450.4                 & 130.9        & 121        \\ %\cline{3-14} 
-    &                    & 2     & 456.6           & 1913     & 23.9            & 1184.7            & 5644.7           & 8.7               & 5.1                   & 7037.1                & 5557                   & 126.6        & 112        \\ \bottomrule
-  \end{tabular}}
-\end{table}
+% \begin{table}[]
+%   \caption{Kết quả của MTTP với \(n=[30, 50]\) và \(T=40\)}
+%   \label{table:mttp-small}
+%   % \begin{tabular}{|lllllllllllllll|}
+%   % reduce size of this table
+%   \resizebox{\textwidth}{\textwidth}{
+%     \begin{tabular}{|p{0.5cm}|p{1cm}|p{1cm}||*{3}{p{1.3cm}|}|*{8}{p{1.5cm}|}}
+%     \toprule
+%     n  & g-type & t-type & Avg. BP & Total BP & \% BP & Add. Time (ms) & SP. Time (ms) & Avg. Arcs & Avg. Sub-paths & Avg. DDD Time & Avg. Enum Time & \% Time & Iters \\ \midrule
+%     \multirow{2}{*}{30} & \multirow{2}{*}{1} & 1     & 244.5           & 1133     & 21.6            & 344.6             & 610.8            & 5.1               & 3.4                   & 1084.6                & 1398                   & 77.6         & 71         \\ %\cline{3-14} 
+%     &                    & 2     & 258.3           & 1133     & 22.8            & 381.1             & 627.8            & 5.1               & 4.6                   & 1147.5                & 1512.7                 & 75.9         & 61         \\ \midrule
+% \multirow{2}{*}{30} & \multirow{2}{*}{2} & 1     & 416.6           & 1133     & 36.8            & 346.5             & 2640.6           & 9                 & 4.6                   & 3181.1                & 1381.4                 & 230.3        & 126        \\ %\cline{3-14} 
+%     &                    & 2     & 448.4           & 1133     & 39.6            & 390.6             & 2568.2           & 9                 & 6                     & 3150.6                & 1505.4                 & 209.3        & 117        \\ \midrule
+% \multirow{2}{*}{30} & \multirow{2}{*}{3} & 1     & 301.9           & 1133     & 26.6            & 276.3             & 864.4            & 6.7               & 3.6                   & 1336.5                & 1199.8                 & 111.4        & 89         \\ %\cline{3-14} 
+%     &                    & 2     & 313.1           & 1133     & 27.6            & 289.8             & 843.8            & 6.9               & 4.7                   & 1337.2                & 1317                   & 101.5        & 75         \\ \midrule
+% \multirow{2}{*}{50} & \multirow{2}{*}{1} & 1     & 415.7           & 1913     & 21.7            & 1311.8            & 5164             & 7.6               & 4.1                   & 6679.6                & 5964.5                 & 112.0        & 112        \\ %\cline{3-14} 
+%     &                    & 2     & 421.7           & 1913     & 22.0            & 1302.7            & 4505.6           & 7.5               & 5.5                   & 6023.8                & 6060.9                 & 99.4         & 96         \\ \midrule
+% \multirow{2}{*}{50} & \multirow{2}{*}{2} & 1     & 581.6           & 1913     & 30.4            & 1026.1            & 11977.6          & 13                & 4.6                   & 13286.6               & 5466.2                 & 243.1        & 169        \\ %\cline{3-14} 
+%     &                    & 2     & 582.3           & 1913     & 30.4            & 999.1             & 9932.3           & 13                & 6.7                   & 11221.7               & 5625.9                 & 199.5        & 147        \\ \midrule
+% \multirow{2}{*}{50} & \multirow{2}{*}{3} & 1     & 430.7           & 1913     & 22.5            & 1112.6            & 5818.8           & 8.7               & 4.4                   & 7135.1                & 5450.4                 & 130.9        & 121        \\ %\cline{3-14} 
+%     &                    & 2     & 456.6           & 1913     & 23.9            & 1184.7            & 5644.7           & 8.7               & 5.1                   & 7037.1                & 5557                   & 126.6        & 112        \\ \bottomrule
+%   \end{tabular}}
+% \end{table}
 
-Ở bài toán này tôi đã loại bỏ hàm thời gian di chuyển loại \(3\) vì thời
-gian chạy của nó quá lâu (ví dụ mạng kiểu \(2\) với \(n=20, T=50\) mất
-khoảng \(1\) tiếng để chạy). Một nguyên nhân khác là nghiệm tối ưu cho
-loại hàm này thường cần nhiều cung hơn (ví dụ giải mạng kiểu \(2\) với
-\(n=20, T=50\) trung bình cần 5 cung trong nghiệm tối ưu cho hàm loại
-\(1\) và \(2\), và khoảng \(17\) cung cho hàm loại \(3\)).
+% Ở bài toán này tôi đã loại bỏ hàm thời gian di chuyển loại \(3\) vì thời
+% gian chạy của nó quá lâu (ví dụ mạng kiểu \(2\) với \(n=20, T=50\) mất
+% khoảng \(1\) tiếng để chạy). Một nguyên nhân khác là nghiệm tối ưu cho
+% loại hàm này thường cần nhiều cung hơn (ví dụ giải mạng kiểu \(2\) với
+% \(n=20, T=50\) trung bình cần 5 cung trong nghiệm tối ưu cho hàm loại
+% \(1\) và \(2\), và khoảng \(17\) cung cho hàm loại \(3\)).
 
-Kết quả cho thấy phương pháp DDD vẫn chỉ cần khám phá một phần nhỏ (từ
-\(4.4\%\) đến \(24.0\%\)) trên tổng số BP. Điều này tiếp tục khẳng định
-độ hiệu quả của phương pháp này. Dựa vào thời gian chạy cũng có thể kết
-luận bài toán MTTP khó hơn bài toán MDP. Điều thú vị là với các mẫu
-thuộc mạng kiểu 3 cần thời gian chạy lâu hơn, và số cung trong nghiệm
-tối ưu cũng nhiều hơn (gần gấp 2 lần so với các mạng kiểu khác). Có một
-kết luận nữa là phương pháp liệt kê không bị ảnh hưởng bởi kiểu mạng và
-hàm thời gian di chuyển. Điều này có thể lý giải bằng việc số nút trong
-mạng TEN được sinh ra bằng với số nút trong bốn kiểu mạng gốc.
+% Kết quả cho thấy phương pháp DDD vẫn chỉ cần khám phá một phần nhỏ (từ
+% \(4.4\%\) đến \(24.0\%\)) trên tổng số BP. Điều này tiếp tục khẳng định
+% độ hiệu quả của phương pháp này. Dựa vào thời gian chạy cũng có thể kết
+% luận bài toán MTTP khó hơn bài toán MDP. Điều thú vị là với các mẫu
+% thuộc mạng kiểu 3 cần thời gian chạy lâu hơn, và số cung trong nghiệm
+% tối ưu cũng nhiều hơn (gần gấp 2 lần so với các mạng kiểu khác). Có một
+% kết luận nữa là phương pháp liệt kê không bị ảnh hưởng bởi kiểu mạng và
+% hàm vận tốc. Điều này có thể lý giải bằng việc số nút trong
+% mạng TEN được sinh ra bằng với số nút trong bốn kiểu mạng gốc.
 
 \subfile{5.CaseStudy.tex}%
 \backmatter

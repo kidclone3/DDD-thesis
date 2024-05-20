@@ -3,11 +3,11 @@
 
 \begin{document}
 
-\section{Case study}\label{case-study}
+\section{Trường hợp thực tế}\label{case-study}
 
-Ngoài việc thử nghiệm với các dữ liệu sinh ngẫu nhiên, tôi còn sử dụng
-thuật toán DDD cho bài toán MDP trên bộ dữ liệu thực tế từ mạng lưới
-đường bộ Atlanta. Mạng này bao gồm 306 nút và 618 cung, được lấy từ Open
+Ngoài việc thử nghiệm với các dữ liệu sinh ngẫu nhiên, thuật toán DDD cho bài toán MDP đã được thử  
+nghiệm trên bộ dữ liệu thực tế từ mạng lưới
+đường bộ Atlanta (\cite{he2022dynamic}). Mạng này bao gồm 306 nút và 618 cung, được lấy từ Open
 Street Map. \autoref{fig:14} mô tả bản đồ khu vực và biểu diễn mạng lưới tương
 ứng.
 
@@ -38,9 +38,9 @@ Street Map. \autoref{fig:14} mô tả bản đồ khu vực và biểu diễn m�
 
 Dữ liệu về thời gian di chuyển được thu thập từ nhiều nguồn khác nhau
 (hệ thống định vị, dữ liệu di động). Dữ liệu được thu thập và tổng hợp
-để tạo thành các hàm thời gian di chuyển tuyến tính từng khúc với các BP
+để tạo thành các hàm vận tốc tuyến tính từng khúc với các BP
 cách nhau 15 phút trong 24 giờ. Nhờ vậy mỗi cung có tổng cộng 192 điểm
-dữ liệu. \autoref{fig:15} là ví dụ về các hàm thời gian di chuyển
+dữ liệu. \autoref{fig:15} là ví dụ về các hàm vận tốc
 này.
 
 
@@ -50,14 +50,9 @@ thời gian cụ thể, tôi chọn điểm nguồn ở Bắc Atlanta, đích đ
 tâm Atlanta và khung thời gian là \([9:30, 13:00]\).
 
 
-Đường đi tối thiểu thời gian thực
-hiện (\autoref{fig:16b}) xuất phát lúc \(10:37\) sáng và chỉ mất \(45.8\) phút,
-trong khi đường đi đến đích sớm nhất mất \(47.5\) phút còn đường đi xuất
-phát muộn nhất mất \(47.8\) phút (\autoref{fig:16a}). Nguyên nhân cho sự khác
-biệt này nằm ở việc đường đi tối thiểu thời gian khởi hành vào lúc vắng
-xe (giữa giờ cao điểm sáng và trưa) và đi theo tuyến đường lớn nhất (cao
-tốc \(I-75\) và \(I-75/85\)). Hai đường đi còn lại đi đường tránh cao
-tốc, qua khu dân cư (đường Peachtree và đường Juniper) và phải đi đường vòng
+Đường đi đến đích sớm nhất mất \(47.5\) phút còn đường đi xuất
+phát muộn nhất mất \(47.8\) phút (\autoref{fig:16}). Hai đường đi này đi đường qua đường 
+tránh cao tốc, qua khu dân cư (đường Peachtree và đường Juniper) và phải đi đường vòng
 để tránh một chiều.
 
 Mặc dù sự khác biệt trong thử nghiệm này không quá lớn (do khu vực
@@ -98,7 +93,7 @@ vài giây thời gian chạy. Điều này cho thấy phương pháp này có t
         \caption{Trung tâm khu vực I-75/85}
         \label{fig:15d}
     \end{subfigure}
-    \caption{Hàm thời gian di chuyển các khu vực ở Atlanta}
+    \caption{Hàm vận tốc các khu vực ở Atlanta}
     \label{fig:15}
 \end{figure}
 
@@ -106,19 +101,19 @@ vài giây thời gian chạy. Điều này cho thấy phương pháp này có t
 
 \begin{figure}
     \centering
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics{edited-images/Figure16a.jpg}
-        \caption{Đến đích sớm nhất / khởi hành muộn nhất}
-        \label{fig:16a}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics{edited-images/Figure16b.jpg}
-        \caption{Thời gian thực hiện tối thiểu}
-        \label{fig:16b}
-    \end{subfigure}
-    \caption{Đường đi từ Bắc Atlanta đến Trung tâm Atlanta}
+    % \begin{subfigure}{0.45\textwidth}
+        % \centering
+    \includegraphics{edited-images/Figure16a.jpg}
+        % \caption{}
+        % \label{fig:16a}
+    % \end{subfigure}
+    % \begin{subfigure}{0.45\textwidth}
+    %     \centering
+    %     \includegraphics{edited-images/Figure16b.jpg}
+    %     \caption{Thời gian thực hiện tối thiểu}
+    %     \label{fig:16b}
+    % \end{subfigure}
+    \caption{Đường đi từ Bắc Atlanta đến Trung tâm Atlanta, đến đích sớm nhất / khởi hành muộn nhất}
     \label{fig:16}
 \end{figure}
 \backmatter

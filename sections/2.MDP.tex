@@ -5,17 +5,15 @@
 
 \chapter{Bài toán MDP}\label{giux1ea3i-buxe0i-touxe1n-mdp}
 
-Để dễ trình bày, bài luận sẽ chỉ tập trung vào trường hợp thuộc tính
-\emph{FIFO ngặt}. Với trường hợp \emph{FIFO không ngặt}, ta chỉ cần thêm vài sự
-thay đổi nhỏ và chứng minh lại tính đúng đắn.
+Khoá luận sẽ chỉ tập trung vào trường hợp mạng có thuộc tính
+\emph{FIFO ngặt}: với mọi cung trong mạng, không thể đi đến cuối một cung sớm hơn bằng cách khởi hành ở thời điểm sau đó.
 
 \section{Ví dụ}\label{vuxed-dux1ee5}
 
-Xét mạng ở \autoref{fig:2} với các hàm thời gian di chuyển được biểu diễn ở \autoref{fig:4}. 
+Xét mạng ở \autoref{fig:2} với các hàm vận tốc được biểu diễn ở \autoref{fig:4}. 
 Khung thời gian là \([0, 5]\). Hầu hết các cung có số BP là số
 nguyên. Ngoại lệ là cung \((3, 4)\) chỉ có BP tại \(0, 1, 2\) và
-\(5\). \autoref{appendix-arc4} cung cấp chi tiết về các hàm thời gian di
-chuyển và các hàm ngược của chúng.
+\(5\). \autoref{appendix-arc4} cung cấp chi tiết về các hàm vận tốc và các hàm \emph{đảo chiều} của ví dụ này.
 
 
 
@@ -61,7 +59,7 @@ chuyển và các hàm ngược của chúng.
 \subcaptionbox{Cung \((2,4)\)\label{fig:4d}}{\includegraphics[width=.32\textwidth]{edited-images/Figure4d.jpg}}
 \subcaptionbox{Cung \((3,4)\)\label{fig:4e}}{\includegraphics[width=.32\textwidth]{edited-images/Figure4e.jpg}}
 
-\caption{Biểu đồ đường cho Hàm thời gian di chuyển.}
+\caption{Biểu đồ đường cho Hàm vận tốc.}
 \label{fig:4}
 
 \end{figure}
@@ -69,7 +67,7 @@ chuyển và các hàm ngược của chúng.
 
 \section{Công thức chi tiết}\label{cong-thuc1}
 
-Cho thời điểm \(t\) bất kì thuộc khoảng \([0, T]\) biểu diễn thời gian
+Cho thời điểm \(t\) bất kỳ thuộc khoảng \([0, T]\) biểu diễn thời gian
 đi đến đỉnh \(n\), ta có thể xây dựng BSPT tương ứng. BSPT là một Mạng
 thời gian-không gian (\textbf{TEN}) được kí hiệu là \(B^t\), có gốc là
 \((n, t)\). Cây này được định nghĩa bởi tập hợp các nút\footnote{để phân
@@ -94,7 +92,7 @@ với \(i \in N\) và \(t_i \in (-\infty, T]\), tập hợp các cung\footnote{�
   ở \(n\).
 \end{itemize}
 
-\textbf{BSPT} được tìm ra
+\textbf{BSPT} được tính ra
 bằng cách giải bài toán \emph{TDSPP}, bằng cách áp dụng thuật toán SSSP
 với một vài điều chỉnh đơn giản. BSPT cho đỉnh \(4\) tại thời gian
 \(t=2.57\) được biểu diễn ở hình 5(b). Mạng TEN này bao gồm các nút
@@ -105,48 +103,66 @@ với một vài điều chỉnh đơn giản. BSPT cho đỉnh \(4\) tại th�
 \begin{figure}[H]
 
 \centering
-\includegraphics{images/Figure5.png}
+% \includegraphics{images/Figure5.png}
+\subcaptionbox{TDSP từ nút \((1,0)\)\label{fig:5a}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5a.jpg}}
+\subcaptionbox{BSPT từ nút \((4, 2.57)\)\label{fig:5b}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5b.jpg}}
+
+\subcaptionbox{ABSPT \(\overline{B}^{2.57}\)\label{fig:5c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5c.jpg}}
+\subcaptionbox{ABSPT \(\overline{B}^{2.57}\) với các UTT khi ghép với \(\mathcal{B}^5\)\label{fig:5d}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5d.jpg}}
 \caption{Quy trình tạo ABSPT ứng với
 đỉnh xuất phát (1,0)}
 \label{fig:5}
 \end{figure}
 
-Lưu ý khi xây dựng BSPT \(B^t\):
-
+\newpage
+Giải thích các hình trong \autoref{fig:5}: 
 \begin{itemize}
-\tightlist
-\item
-  tại một thời điểm \(t \in [0, T]\) \textbf{bất kỳ,}~có thể tồn tại một
+  \item \autoref{fig:5a}: đường đi TDSP từ đỉnh \((1, 0)\) đến \(n\) với thời gian là \(2.57\). 
+  Các nút thời gian màu xanh, giá trị hàm vận tốc màu đen.
+  \item \autoref{fig:5b}: BSPT tương ứng với đỉnh \((4, 2.57)\).
+  \item \autoref{fig:5c}: ABSPT \(\overline{B}^{2.57}\) tương ứng với đỉnh \((4, 2.57)\). 
+  Thời gian di chuyển thực tế có màu đỏ.
+  \item \autoref{fig:5d}: ABSPT \(\overline{B}^{2.57}\) với các UTT khi ghép với \(\mathcal{B}^5\) (có màu đen),
+  đường đi tối thiểu có màu xanh lá.
+\end{itemize}
+
+Một vài lưu ý khi xây dựng BSPT \(B^t\) như sau:
+
+\begin{easylist}[itemize]
+
+  @ Tại một thời điểm \(t \in [0, T]\) \textbf{bất kỳ,}~có thể tồn tại một
   số đỉnh \(i\) không thể đi đến đỉnh \(n\)~bất kể với thời gian nào
   \(> 0\).
-\item
-  \textbf{Trường hợp đơn giản:}~Nếu đỉnh đang xét \(i\) ở~thời gian
+  @ \textbf{Trường hợp đơn giản:}\\
+  Nếu đỉnh đang xét \(i\) ở~thời gian
   \(t = T\), ta có thể loại bỏ nút \(i\) khỏi mạng ngay từ bước xử lý
   trước.
-\item
-  \textbf{Trường hợp phức tạp:}~Để đơn giản hóa cho bước tiếp theo, ta
+  @ \textbf{Trường hợp phức tạp:}\\
+  Để đơn giản hóa cho bước tiếp theo, ta
   giả sử rằng \emph{BSPT} chứa một nút cho mọi đỉnh \(i \in N\). Để thực
-  hiện điều này, hàm thời gian di chuyển \(c_{i,j}(t)\) được mở rộng
+  hiện điều này, hàm vận tốc \(c_{i,j}(t)\) được mở rộng
   sang \(t < 0\) (âm): Với mọi cung \((i, j)\) trong mạng \(A\) và mọi
   thời điểm \(t < 0\), ta gán giá trị của \(c_{i,j}(t) = c_{i,j}(0)\).
   Do đó, các nút \((i, t_i)\) với \(t_i<0\) cũng có thể được thêm vào
   mạng \(B^t\).
-\end{itemize}
+\end{easylist}
 
 Thuật toán DDD được xây dựng dựa trên những đặc điểm sau của các BSPT: 
 \begin{itemize}
   \tightlist
   \item
-    \textbf{Tính chất FIFO:} Nếu hai nút \((i, s)\) trong \(B^t\) và
-    \((i, s’)\) trong \(B^{t’}\) với \(t’ > t\) thì \(s’ > s\), (Điều này
+    \textbf{Tính chất FIFO:}\\ 
+    Nếu hai nút \((i, s)\) trong \(B^t\) và
+    \((i, s')\) trong \(B^{t'}\) với \(t' > t\) thì \(s' > s\) (điều này
     có nghĩa là nếu một nút đến muộn hơn trong \(B^t\), nó cũng sẽ đến
-    càng muộn hơn trong \(B^{t’}\)).
+    càng muộn hơn trong \(B^{t'}\)).
   \item
-    \textbf{Đường đi theo thời gian tối thiểu:} Bất kỳ đường đi có thời
+    \textbf{Đường đi theo thời gian tối thiểu:} \\
+    Bất kỳ đường đi có thời
     gian tối thiểu nào từ đỉnh \(1\) đến \(n\), trong đó đến đỉnh \(n\)
     tại thời gian \(t\) hoặc muộn hơn, đều được biểu diễn thành một dãy
     các nút trong \(B^t\). Nghĩa là, với mỗi cặp \((i, s)\) trên đường đi
-    sẽ tồn tại một nút \((i, s’) \in B^t\) thỏa mãn \(s’ \le s\) (thời
+    sẽ tồn tại một nút \((i, s') \in B^t\) thỏa mãn \(s' \le s\) (thời
     gian đến tại \(s'\) không trễ hơn s). Lưu ý rằng dãy các nút này không
     nhất thiết phải theo các cung trong \(B^t\).
   \end{itemize}
@@ -168,7 +184,7 @@ Theo \autoref{def:abspt}, ta có:
   \textbf{ABSPT}. Hay nói cách khác, \(t_j - t_i \le c_{i,j}(t_i)\) với mọi
   \(((i, t_i), (j, t_j))\) trong \textbf{ABSPT}
 
-Hình 5(c) minh họa
+\autoref{fig:5c} minh họa
 cho ABSPT của \(B^t\) với \(t = 2.57\). Trong hình, \(c_{i,j}(t_i)\)
 được gạch chéo màu đỏ và thay thế bằng giá trị \(t_j - t_i\) trên tất cả
 các cung mới được thêm vào để tạo thành \textbf{ABSPT}. Các cung mới có
@@ -203,21 +219,21 @@ trong \(\overline{\mathcal B}^t\), thuật toán tính ra UTT khi ghép với
 \[    \underline c_{(i, s_i),(j, s_j)}=\min_\tau\{c_{ij}(\tau)|s_i\le\tau\le s_i^+\},\]
 trong đó \((i, s_i^+)\) là nút cho đỉnh \(i\) trong ABSPT kế tiếp. 
 
-Hình 5(d)
+\autoref{fig:5d}
 minh họa các giá trị \textbf{UTT} trong ví dụ với \(t = 2.57\) và
 \(t^+  = 5\) (các cung màu đen). Chúng được tính dựa trên đoạn thời gian
 tạo thành từ các nút trong \(\overline{\mathcal B}^{2.57}\) và
 \(\overline{\mathcal B}^{5}\). Ví dụ: UTT cho cung \(((1, 0),(2, 1.34))\) là
 \(\min c_{1, 2}(\tau) = 0.02\) với \(\tau \in [0, 2.90]\), và \(\tau\)
-nằm ở cuối của đoạn. Ngược lại, UTT cho cung \(((1, 0),(3, 1.76))\) là
+nằm ở cuối đoạn. Ngược lại, UTT cho cung \(((1, 0),(3, 1.76))\) là
 \(\min c_{1,3}(\tau) = 2.85\) với \(\tau \in [0, 4.05]\) và \(\tau\)
 nằm ở đầu đoạn.
 
 Đường đi có chứa UTT nhỏ nhất trong số các ABSPT là \textbf{cận dưới}
-của tất cả nghiệm khả thi. Ví dụ, trong hình 5(d), các nút thuộc
+của tất cả nghiệm khả thi. Ví dụ, trong \autoref{fig:5d}, các nút thuộc
 đường đi có \textbf{UTT} nhỏ nhất trong \(\overline{\mathcal B}^{2.57}\)
-được tô màu xanh. Nhãn của nút cuối là \(1.25\), nghĩa là không có đường
-dẫn hợp lệ nào đến nút cuối trong khung thời gian từ \(2.57\) đến \(5\)
+được tô màu xanh. Nhãn của nút đích là \(1.25\), nghĩa là không có đường
+dẫn hợp lệ nào khác đến nút đích trong khung thời gian từ \(2.57\) đến \(5\)
 có thời gian di chuyển nhỏ hơn \(1.25\), tương ứng với cận dưới là
 \(1.25\).
 
@@ -226,7 +242,7 @@ ABSPT của cận dưới hiện tại, ta có thể cải thiện (ít nhất l
 giảm) các giá trị UTT.
 
 Từ ABSPT ta luôn tìm được \textbf{cận trên} cho thời gian thực hiện.
-Theo định nghĩa, nếu \((1, t_1)\) và \((n, t_n)\) là hai nút đầu và cuối
+Theo định nghĩa, nếu \((1, t_1)\) và \((n, t_n)\) là hai nút nguồn và đích
 tương ứng, thì \(t_n - t_1\) sẽ là cận trên và thuật toán sẽ lưu lại cận
 trên tốt nhất. Trong ví dụ: \(\overline{\mathcal B}^{2.57}\) có thời gian
 thực hiện là \(2.57\) và \(\overline{\mathcal B}^{5}\) là \(2.10\). Từ đây
@@ -234,7 +250,7 @@ ta có cận dưới tốt nhất là \(1.25\) và cận trên tốt nhất là 
 
 Bằng việc áp dụng phương pháp tìm cận dưới và cận trên cùng với thêm các ABSPT mới ngay sau ABSPT cận dưới vào danh sách, thuật toán sẽ luôn hội tụ. 
 Thêm vào đó, \cite{foschini2011complexity} đã chỉ ra rằng luôn tồn tại một phương pháp tối ưu sử dụng
-các BP của hàm thời gian di chuyển. Từ đây ta có thể
+các BP của hàm vận tốc. Từ đây ta có thể
 tạo ra các ABSPT mới một cách nhanh chóng hơn
 đồng thời loại bỏ các khoảng thời gian phụ không cần thiết. Cũng vì vậy
 mà thuật toán sẽ dừng lại sau hữu hạn các lần lặp.
@@ -242,7 +258,7 @@ mà thuật toán sẽ dừng lại sau hữu hạn các lần lặp.
 Bây giờ sẽ là phần trình bày cách sử dụng các BP trong hàm thời
 gian di chuyển để xây dựng thuật toán.
 
-\section{Điểm dừng (BP)}\label{ux111iux1ec3m-dux1eebng}
+\section{Thời điểm dừng (BP)}\label{ux111iux1ec3m-dux1eebng}
 
 Đầu tiên, khởi tạo các ABSPT chứa ít nhất một nút \((i, t)\) là BP. 
 Cụ thể: \((1, 0)\) nằm trong ABSPT thứ nhất và \((n, T)\) nằm
@@ -257,8 +273,8 @@ Có các trường hợp sau đây sẽ xảy ra:
 \begin{itemize}
 \tightlist
 \item[\textbf{TH1:}]
-  \(\exists (i, j) \in A\ |\ \tau_i:t_i < \tau_i < t_i^+\) với BP
-  \(\tau_i\). \\ 
+  \(\exists (i, j) \in A\ |\ \tau_i:t_i < \tau_i < t_i^+\) với
+  \(\tau_i\) là BP. \\ 
   Lúc này, ta nói điểm \((i, \tau_i)\) nằm giữa hai ABSPT.
   Xây dựng ABSPT mới như sau:
 
@@ -271,8 +287,8 @@ Có các trường hợp sau đây sẽ xảy ra:
     Giả sử TDSP đi đến \(n\) tại thời điểm \(\tau_n\). Lúc này BSPT từ
     \(\tau_n\) là \(\mathcal B ^{\tau_n}\) phải có nút \((i, \tau_i)\). Các cung được coi là hoàn thành và \(\overline {\mathcal B} ^{\tau_n}\)
     là ABSPT tương ứng với nút \((i, \tau_i)\). Điều kiện \(t_n < \tau_n < t_n^+\) phải
-    thoả mãn (theo tính chất của việc
-    tạo danh sách các ABSPT). Lúc này ABSPT tương ứng với \((i, \tau_i)\) được chèn vào
+    thỏa mãn (theo tính chất của việc tạo danh sách các ABSPT). 
+    Lúc này ABSPT tương ứng với \((i, \tau_i)\) được chèn vào
     giữa hai ABSPT có thời gian kết thúc lần lượt là \(t_n\) và
     \(t_n^+\).
   \end{enumerate}
@@ -283,7 +299,7 @@ Có các trường hợp sau đây sẽ xảy ra:
   ABSPT được giải quyết và không có ABSPT mới được thêm vào. 
 \end{itemize}
 
-\section{Thuật toán 1}\label{thuux1eadt-touxe1n-1}
+\section{Thuật toán}\label{thuux1eadt-touxe1n-1}
 
 Tổng quan thuật toán như sau:
 
@@ -319,7 +335,7 @@ Tổng quan thuật toán như sau:
     \end{enumerate}
   \item
     Lưu lại các giá trị
-    \(LB^t \gets computeLB(\overline {\mathcal B} ^{t}), UB^t \gets computeUB(\overline {\mathcal B} ^{t})\)
+    \[LB^t \gets computeLB(\overline {\mathcal B} ^{t}), UB^t \gets computeUB(\overline {\mathcal B} ^{t})\]
   \end{enumerate}
 \item
   Đối với ABSPT cuối cùng trong danh sách: \(\overline {\mathcal B} ^{T}\):
@@ -339,10 +355,10 @@ Vì \autoref{algo:1} thực chất là một họ các thuật toán nên không
 phương án chọn BP khi có nhiều lựa chọn. \autoref{kux1ecbch-bux1ea3n-vuxe0-cuxe0i-ux111ux1eb7t} sẽ đề cập đến
 các cách chọn được sử dụng.
 
-\section{Mã giả}\label{muxe3-giux1ea3}
+\newpage
+\subsection{Mã giả}\label{muxe3-giux1ea3}
 
 \begin{algorithm}[H]
-
 \caption{Dynamic Discretization Discovery (DDD) Algorithm for the MDP}
 \label{algo:1}
 \begin{algorithmic}
@@ -375,7 +391,7 @@ các cách chọn được sử dụng.
   \end{algorithmic}
 \end{algorithm}
 
-\section{Minh họa thuật toán}\label{minh-houx1ea1-thuux1eadt-touxe1n}
+\subsection{Minh họa thuật toán}\label{minh-houx1ea1-thuux1eadt-touxe1n}
 
 \begin{figure}[h]
 \centering

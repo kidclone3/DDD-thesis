@@ -9,24 +9,25 @@
 
 Thuộc họ các bài toán tìm đường đi có thời gian đến nhỏ nhất (MATP), phương pháp đầu
 tiên được phát triển để giải quyết vấn đề này dựa trên thuật toán
-Bellman-Ford (\cite{bellman1958routing}, \cite{ford2010flows}) và được mô tả bởi
-\cite{cooke1966shortest}. Tổng quan về các phương pháp giải khác cho biến thể
-này được đề cập bởi \cite{dean2004shortest}.
+Bellman-Ford trong hai bài báo \cite{bellman1958routing}, \cite{ford2010flows} và được mô tả bởi
+bài \cite{cooke1966shortest} của tác giả Cooke và các cộng sự. Tổng quan về các phương pháp giải khác cho biến thể
+này được đề cập trong \cite{dean2004shortest} với lý thuyết về sử dụng mạng FIFO. Đây cũng là một thuộc tính quan trọng sẽ sử dụng trong bài luận.
 
 Bài toán tìm đường đi thời gian tối thiểu (MDP) được nghiên cứu trong bối cảnh mạng lưới giao thông (\cite{demiryurek2011online}), thậm chí trong phân tích mạng xã hội (\cite{gunturi2012information}).
-Bài toán tìm đường đi ngắn nhất theo thời gian thực hiện (MTTP) đặc biệt quan trọng trong việc tính toán giảm khí thải trong môi trường đô thị, vì khí thải của một xe hơi trên tuyến đường có thể xấp xỉ
-theo tỉ lệ với thời gian di chuyển trên tuyến đường đó; phạm vi tốc độ
-giới hạn trong đô thị (công thức khi thải được đề cập ở \cite{jabali2012analysis} với bài toán định tuyến phương tiện phụ thuộc thời gian).
+% Bài toán tìm đường đi ngắn nhất theo thời gian thực hiện (MTTP) đặc biệt quan trọng trong việc tính toán giảm khí thải trong môi trường đô thị, vì khí thải của một xe hơi trên tuyến đường có thể xấp xỉ
+% theo tỉ lệ với thời gian di chuyển trên tuyến đường đó; phạm vi tốc độ
+% giới hạn trong đô thị (công thức khi thải được đề cập ở \cite{jabali2012analysis} với bài toán định tuyến phương tiện phụ thuộc thời gian).
 
-Trong \cite{boland2017continuous} có giới thiệu thuật toán DDD để giải quyết bài
+Trong \cite{boland2017continuous} có giới thiệu thuật toán khám phá rời rạc động (DDD) để giải quyết bài
 toán tối thiểu hóa chi phí cho mạng dịch vụ theo thời gian liên tục,
 thông qua việc sử dụng các biểu thức quy hoạch nguyên trên mạng thời
 gian. Giải pháp ở đây là tìm ra các \textbf{thời điểm thích hợp nhất},
 cho chúng đi qua các hàm tính toán theo tuần tự nhất định để tạo ra mạng
-thời gian từng phần. Các mạng này được thiết kế để luôn giải được, cho
+thời gian từng phần (TEN). Các mạng này được thiết kế để luôn tồn tại nghiệm là đường đi, tìm
 ra một giới hạn kép (cận trên và dưới) cho giá trị tối ưu của thời gian
-liên tục. Sau khi tìm được tập thích hợp (số ít các thời điểm), mô hình
+liên tục. Sau khi tìm được tập thích hợp (số ít các thời điểm xác định), mô hình
 quy hoạch nguyên sẽ cho ra kết quả tối ưu.
+
 
 % Trong bài luận này, tôi trình bày và phân tích thuật toán tìm kiếm
 % rời rạc động cho bài toán MDP và bài toán MTTP khi thời gian di chuyển
@@ -41,10 +42,20 @@ quy hoạch nguyên sẽ cho ra kết quả tối ưu.
 % \textbf{Chuỗi} kết thúc khi độ dài của đường đi ngắn nhất trong mạng
 % thời gian từng phần hiện tại khớp với cận trên tốt nhất.
 
-Các định nghĩa sử dụng trong các phần sau: - \textbf{Cây đường đi ngắn
+Phần mô tả bài toán, phương pháp giải quyết và kết quả từ khu vực Atlanta của khoá luận 
+tham khảo từ bài báo \cite{he2022dynamic}.
+Để phục vụ cho các phần sau, dưới đây là một số định nghĩa được sử dụng: 
+\begin{itemize}
+  \item \textbf{Cây đường đi ngắn
 nhất (Shortest-path tree):} Cho đồ thị \(G=(V,E)\), một cây gốc \(s\)
 (\(s\in V\)) trong đó nút \(v\) (\(v\in V\)) thuộc cây thì đường đi từ
-nút gốc \(s\) đến nút \(v\) chính là đường đi ngắn nhất.
+nút gốc \(s\) đến nút \(v\) luôn là đường đi ngắn nhất.
+  \item \textbf{FIFO:} 
+  Được lấy từ mạng FIFO trong \cite{dean2004shortest}: 
+  đường đi từ \(s\) đến \(v\) là FIFO nếu với mọi cạnh \((u, v)\) trên đường đi, 
+  thời gian bắt đầu di chuyển từ \(u\) đến \(v\) không nhỏ hơn thời gian bắt đầu di chuyển 
+  từ \(s\) đến \(u\).
+\end{itemize}
 
 \section{Mô tả bài toán}\label{problem-description}
 
@@ -53,8 +64,8 @@ Cho một đồ thị có hướng
   D = (N, A)
 \] 
 trong đó: \(N = {1, 2, ..., n}\)
-là tập đỉnh và \(A \subseteq N \times N\) là tập cạnh; khung thời gian
-\([0, T]\) và các hàm thời gian di chuyển tuyến tính từng khúc
+là tập đỉnh, \(A \subseteq N \times N\) là tập cạnh; khung thời gian
+\([0, T]\) và các hàm vận tốc tuyến tính từng khúc
 \(c_{i,j}(t) > 0\) với \(t \in [0, T]\) thỏa mãn tính chất FIFO cho mọi
 cạnh \((i, j) \in A\).\\
 Tính chất FIFO, trong hàm tuyến tính, nghĩa là
@@ -62,9 +73,7 @@ Tính chất FIFO, trong hàm tuyến tính, nghĩa là
 
 Không mất tính tổng
 quát, ta luôn đi từ đỉnh nguồn \(1\) và kết thúc ở đỉnh đích
-\(n\).
-
-Đường đi
+\(n\). Đường đi
 \[
   P=((i_1^P, t_1^P), (i_2^P, t_2^P), \dots, (i_{m(P)}^P, t_{m(P)}^P))
 \]
@@ -74,11 +83,11 @@ là một dãy gồm \(m(P)\) nút (cặp đỉnh - thời gian), trong đó dã
 tương ứng với thời gian \(t_k^P\), đại diện cho thời gian bắt đầu di
 chuyển trên cạnh \((i_k^P, i_{k+1}^P)\) với \(k=1, \dots m(P)-1\). Riêng
 đỉnh \(i_k^P\) với \(k=m(P)\) biểu diễn thời gian đến đích. Do đó dãy
-các nút cần thoả mãn tính chất:
+các nút cần thỏa mãn tính chất:
 \[t_{k+1}^P \ge t_k^P + c_{i_k^P, i_{k+1}^P}(t_k^P)\] với
 \(k=1, \dots m(P)-1\). \\
 Nếu
-\(t_{k}^P \ge t_{k-1}^P + c_{i_{k-1}^P, i_{k}^P}(t_{k-1}^P)\) với \(k \ge 2\) bất kì, (hoặc nếu \(t_1^P > 0\)), thì ta nói rằng đỉnh \(i_k^P\)
+\(t_{k}^P \ge t_{k-1}^P + c_{i_{k-1}^P, i_{k}^P}(t_{k-1}^P)\) với \(k \ge 2\) bất kì (hoặc \(t_1^P > 0\) nếu \(k=1\)), thì ta nói rằng đỉnh \(i_k^P\)
 cần phải \textbf{đợi}.\\ 
 Nếu \(t_{k}^P = t_{k-1}^P + c_{i_{k-1}^P, i_{k}^P}(t_{k-1}^P)\) với mọi
 \(k \ge 2\) thì ta nói rằng \(P\) không có chờ đợi (waiting-free). \\
@@ -87,7 +96,7 @@ Nếu \(P\) bắt đầu tại đỉnh \(i_1^P = 1\) với \(t_1^P\ge0\) và k�
 đường đi khả thi. Ta kí hiệu \(\mathcal{P}\) biểu diễn tập hợp tất cả các
 đường đi khả thi như vậy.
 
-Ba hàm mục tiêu chính được quan tâm ở đây là:
+Hai hàm mục tiêu chính được quan tâm ở đây là:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -98,17 +107,17 @@ Ba hàm mục tiêu chính được quan tâm ở đây là:
 \item
   \textbf{Tối thiểu thời gian thực hiện (đi từ nguồn đến đích):}
   \[\min_{P\in \mathcal P}(t_{m(P)}^P-t_1^P)\]
-\item
-  \textbf{Tối thiểu tổng thời gian di chuyển trên các cạnh của đường đi
-  từ nguồn đến đích:}
-  \[\min_{P\in \mathcal P}\sum_{k=1}^{m(P)-1}c_{i_k^P, i_{k+1}^P}(t_k^P)\]
+% \item
+%   \textbf{Tối thiểu tổng thời gian di chuyển trên các cạnh của đường đi
+%   từ nguồn đến đích:}
+%   \[\min_{P\in \mathcal P}\sum_{k=1}^{m(P)-1}c_{i_k^P, i_{k+1}^P}(t_k^P)\]
 \end{enumerate}
 
-Trong phần còn lại của bài luận, tôi sẽ bỏ đi chữ \(P\) ở trên các đỉnh cùng một đường đi để thuận tiện cho ký hiệu và dễ nhìn
+Trong phần còn lại của bài luận, tôi sẽ bỏ đi phần chữ \(P\) ở trên các đỉnh cùng một đường đi để thuận tiện cho ký hiệu và dễ nhìn
 hơn.
 
-Để minh họa ba hàm mục tiêu này, hãy xem xét đồ thị (a) và các hàm thời
-gian di chuyển (b,c,d) trong \autoref{fig:1}, với \(n = 3\) và khung thời gian
+Để minh họa ba hàm mục tiêu này, hãy xem xét đồ thị \autoref{fig:1a} và các hàm vận tốc 
+\autoref{fig:1}(b,c,d), với \(n = 3\) và khung thời gian
 là \([0, 4]\).
 
 \begin{itemize}
@@ -125,17 +134,17 @@ là \([0, 4]\).
   \(t = 3\), đi qua cạnh \((2, 3)\) và đến đỉnh đích tại \(t = 4\), giá
   trị mục tiêu là \(2.5\). Vì không phải chờ đợi trên đường đi này nên
   tổng thời gian di chuyển cũng là \(2.5\).
-\item
-  Tuy nhiên, đường đi trên không cho ra tổng thời gian di chuyển trên
-  các cạnh là tối thiểu. Có nhiều nghiệm tối ưu cho bài toán này. Đối
-  với \(t_1 \in [0, 1]\) bất kỳ, đường đi \(((1, t_1), (2, 3), (3, 4))\)
-  có thời gian di chuyển tối thiểu: nó sẽ đi qua cạnh \((1, 2)\), bắt
-  đầu từ thời gian \(t_1\) và đến hết cạnh tại \(t_1 + 1 \in [1, 2]\),
-  sau đó chờ tại đỉnh \(2\) cho đến \(t = 3\) và đi qua cạnh \((2, 3)\)
-  tại \(t = 4\), mang lại giá trị mục tiêu là \(2\).
+% \item
+%   Tuy nhiên, đường đi trên không cho ra tổng thời gian di chuyển trên
+%   các cạnh là tối thiểu. Có nhiều nghiệm tối ưu cho bài toán này. Đối
+%   với \(t_1 \in [0, 1]\) bất kỳ, đường đi \(((1, t_1), (2, 3), (3, 4))\)
+%   có thời gian di chuyển tối thiểu: nó sẽ đi qua cạnh \((1, 2)\), bắt
+%   đầu từ thời gian \(t_1\) và đến hết cạnh tại \(t_1 + 1 \in [1, 2]\),
+%   sau đó chờ tại đỉnh \(2\) cho đến \(t = 3\) và đi qua cạnh \((2, 3)\)
+%   tại \(t = 4\), mang lại giá trị mục tiêu là \(2\).
 \end{itemize}
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 % \includegraphics{images/Figure1.png}
 \subcaptionbox{Mạng lưới \(1\)\label{fig:1a}}{\includegraphics[width=.45\textwidth]{edited-images/Figure1a.jpg}}
@@ -143,11 +152,11 @@ là \([0, 4]\).
 \subcaptionbox{Cung \((1, 3)\)\label{fig:1c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure1c.jpg}}
 \subcaptionbox{Cung \((2, 3)\)\label{fig:1d}}{\includegraphics[width=.45\textwidth]{edited-images/Figure1d.jpg}}
 
-\caption{Minh họa các hàm thời gian di chuyển}
+\caption{Minh họa các hàm vận tốc}
 \label{fig:1}
 \end{figure}
 
-Vì các hàm thời gian di chuyển có tính chất FIFO, khi giảm thời gian di
+Vì các hàm vận tốc có tính chất FIFO, khi giảm thời gian di
 chuyển đến đích hoặc thời gian thực hiện, đường đi tối ưu luôn thỏa mãn
 tính chất \(t_k + c_{i_k, i_{k+1}}(t_k) = t_{k+1}\) với
 \(k = 1, \dots, m(P)-1\). Như đã đề cập ở trên, nghiệm tối ưu sẽ không
@@ -157,12 +166,20 @@ xuất hiện chờ đợi. Ngoài ra, khi giảm thời gian đến đích, đ�
 Ba bài báo \cite{cooke1966shortest}, \cite{orda1990shortest}, \cite{dean2004shortest} đã đưa ra phương pháp
 cho bài toán tìm đường đi đến đích sớm nhất có thể,  xuất phát tại đỉnh nguồn với thời gian cố định. 
 Phương pháp này có độ phức tạp đa thức bằng cách mở rộng thuật toán tìm đường đi ngắn nhất
-tiêu chuẩn. Tương tự áp dụng với bài toán tìm đường đi 
+tiêu chuẩn. Điều tương tự áp dụng với bài toán tìm đường đi 
 xuất phát từ nguồn muộn nhất có thể, đến đích với thời gian cố định.
-Bằng cách tính trước các hàm thời gian di chuyển \emph{đảo chiều}: Với
-cạnh \((i, j)\) và thời gian \(t\), hàm \emph{đảo chiều} được tính toán
+\\
+Bằng cách tính trước các hàm vận tốc \emph{đảo chiều}:
+
+\begin{definition}
+\label{id:reverse}  
+Với
+cạnh \((i, j)\) và thời gian \(t\), hàm \textbf{đảo chiều} được tính toán
 tại \(t\) sẽ cho ra thời gian di chuyển \(\tau\) để kết quả thời gian
-đến đỉnh \(j\) là \(t-\tau\). Ý tưởng này dẫn đến việc giải bài toán
+đến đỉnh \(j\) là \(t-\tau\). 
+\end{definition}
+
+Từ ý tưởng của \autoref{id:reverse} dẫn đến việc giải bài toán
 TDSPP với nghiệm là đường đi ngắn nhất TDSP ở các phần sau.
 
 \backmatter

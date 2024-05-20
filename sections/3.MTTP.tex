@@ -10,7 +10,7 @@ Thuật toán cho MTTP được xây dựng dựa trên ý tưởng của thuậ
 MDP. Một mạng TEN duy nhất được tạo ra từ các ABSPT trong danh sách
 \(L\) từ \autoref{algo:1}. Mạng TEN bao gồm các cung có thời gian
 liên tiếp \(((1, t), (1, t^+)), t<t^+\); mô hình hóa việc chờ đợi tại
-nguồn đến thời gian thích hợp mới xuất phát và chờ đợi tại đích sau khi
+nguồn đến thời gian thích hợp mới khởi hành và chờ đợi tại đích sau khi
 kết thúc hành trình. UTT cho các cung này được đặt là 0. Cận dưới được
 cập nhật theo mỗi lần lặp là giá trị cận dưới của đường đi từ nút
 \((1,0)\) đến nút \((n, T)\). \autoref{algo:1} đã tận dụng được các quan sát
@@ -146,7 +146,8 @@ qua ít nhất một nút tại BP của hàm thời gian di chuyển.
 
 \begin{proof}
 
-  Giả sử \(P\) là một đường đi tối ưu cho một phiên bản MTTP có một đường con \(S\), không chứa nút tại BP của hàm thời gian di chuyển. Theo \autoref{lem:toi-uu}, \(S\) là nghiệm tối ưu cho phiên bản MDP trên cùng một mạng nhưng xuất phát từ đỉnh \(i\), kết thúc tại \(j\) và khung thời gian \([\tau^−,\tau^+]\) với các giá trị \(i, j, \tau^-, \tau^+\) được định nghĩa như trong mô tả của bổ đề. Theo \cite{foschini2011complexity}, luôn có một nghiệm tối ưu khác cho phiên bản MDP, gọi là \(S'\) chứa ít nhất một BP, hoặc xuất phát từ \(i\) tại \(\tau^-\) hoặc kết thúc ở \(j\) tại \(\tau^+\). Vì cả \(S\) và \(S'\) đều không chờ đợi, tổng thời gian di chuyển bằng thời gian thực hiện, và cả hai đều bằng nhau vì là nghiệm tối ưu cho phiên bản MDP đó. Bằng việc thay thế \(S\) bởi \(S'\) trong chuỗi các đường đi không chờ đợi của \(P\), ta thu được đường đi \(P'\) mới. Rõ ràng rằng \(P'\) cũng là nghiệm tối ưu cho bài toán MTTP, có tổng thời gian di chuyển bằng \(P\), và thêm một số đường con không đi qua BP. (Trong trường hợp \(S'\) xuất phát tại thời điểm \(\tau^-\) và \((i, \tau^-)\) không là BP, đường con ngay trước \(S\) không còn tối đa: giờ nó mở rộng thành \(S'\), dẫn đến có ít hơn một đường con trong \(P'\) so với \(P\). Trong trường hợp \(S'\) kết thúc tại thời điểm \(\tau^+\) và \((j, \tau^+)\) không là BP tương ứng: S' không là đường con của \(P'\)  nhưng mở rộng thành đường con ngay sau \(S\).)
+  Giả sử \(P\) là một đường đi tối ưu cho một phiên bản MTTP có một đường con \(S\), không chứa nút tại BP của hàm thời gian di chuyển. 
+  Theo \autoref{lem:toi-uu}, \(S\) là nghiệm tối ưu cho phiên bản MDP trên cùng một mạng nhưng xuất phát từ đỉnh \(i\), kết thúc tại \(j\) và khung thời gian \([\tau^−,\tau^+]\) với các giá trị \(i, j, \tau^-, \tau^+\) được định nghĩa như trong mô tả của bổ đề. Theo \cite{foschini2011complexity}, luôn có một nghiệm tối ưu khác cho phiên bản MDP, gọi là \(S'\) chứa ít nhất một BP, hoặc xuất phát từ \(i\) tại \(\tau^-\) hoặc kết thúc ở \(j\) tại \(\tau^+\). Vì cả \(S\) và \(S'\) đều không chờ đợi, tổng thời gian di chuyển bằng thời gian thực hiện, và cả hai đều bằng nhau vì là nghiệm tối ưu cho phiên bản MDP đó. Bằng việc thay thế \(S\) bởi \(S'\) trong chuỗi các đường đi không chờ đợi của \(P\), ta thu được đường đi \(P'\) mới. Rõ ràng rằng \(P'\) cũng là nghiệm tối ưu cho bài toán MTTP, có tổng thời gian di chuyển bằng \(P\), và thêm một số đường con không đi qua BP. (Trong trường hợp \(S'\) xuất phát tại thời điểm \(\tau^-\) và \((i, \tau^-)\) không là BP, đường con ngay trước \(S\) không còn tối đa: giờ nó mở rộng thành \(S'\), dẫn đến có ít hơn một đường con trong \(P'\) so với \(P\). Trong trường hợp \(S'\) kết thúc tại thời điểm \(\tau^+\) và \((j, \tau^+)\) không là BP tương ứng: S' không là đường con của \(P'\)  nhưng mở rộng thành đường con ngay sau \(S\).)
 
 \end{proof}
 
@@ -282,9 +283,9 @@ Giống với khi tính toán BSPT cho MDP, tính chất FIFO phải được đ
 cho bất kì đỉnh \(i\) nào. Tập tất cả các \(i-mangrove\) luôn được sắp
 xếp theo thời gian đối với các nút trong \(i-FSPT\) và tương tự với
 \(i-BSPT\) của chúng. Cụ thể, nếu \(\mathcal M^{i, t}=F^{i,t}\cup B^{i,t}\)
-và \(\mathcal M^{i, t'}=F^{i,t'}\cup B^{i,t'}\) với \((t’ > t\)), thì với
+và \(\mathcal M^{i, t'}=F^{i,t'}\cup B^{i,t'}\) với \((t' > t\)), thì với
 bất kì nút \(j\) nào có \((j,s) \in \mathcal F^{i, t}\) và
-\((j,s’) \in \mathcal F^{i, t’}\) thì \(s’ > s\). Tương tự với các nút trong
+\((j,s') \in \mathcal F^{i, t'}\) thì \(s' > s\). Tương tự với các nút trong
 \(i-BSPT\).
 
 Do đó, bất kỳ đường đi con i nào đến đỉnh \(i\) tại thời gian \(t\) hoặc
@@ -317,11 +318,11 @@ sau:
   \(mangrove\) cho \((i, t)\) đã được giải quyết. Đặt UTT thành thời
   gian di chuyển thực tế:
   \[\underline c_{(i, s), (k, s')}:=c_{j, k}(s)\] với mỗi cung
-  \(((j,s),(k,s’))\) trong \(\mathcal M^{i,t}\).
+  \(((j,s),(k,s'))\) trong \(\mathcal M^{i,t}\).
 \item[ii.]
   Trường hợp còn lại khi \(mangrove\) cho \((i, t)\) chưa được giải
   quyết: \\
-  Thuật toán đặt UTT trên mỗi cung \(((j, s), (k, s’))\) trong
+  Thuật toán đặt UTT trên mỗi cung \(((j, s), (k, s'))\) trong
   \(\mathcal M^{i,t}\)
   \[\underline c_{(i, s), (k, s')}:=\min_\tau\{c_{i, k}(\tau):s\le \tau \le s^+\}\]
   với \(s^+\) là thời gian duy nhất để nút \((j, s^+)\) nằm trong
@@ -571,7 +572,7 @@ Thêm vào đó, các danh sách \(\{L^i\}_{i\in N}\) cũng được dùng để
   Với mỗi \((j,s)\) trong FSPT của một \(i-mangrove\) nào đó và với mỗi
   \(k\neq i\), tìm \(r\) là thời điểm ngay sau \(s\) mà nút \((j,r)\)
   xuất hiện trong BSPT của một \(k-mangrove\) (nếu có). Nếu tìm được
-  \(r\) thoả mãn, thêm cung đợi \(((j, s), (j, r))\) vào
+  \(r\) thỏa mãn, thêm cung đợi \(((j, s), (j, r))\) vào
   \(\mathcal D_{UB}\) và đặt thời gian di chuyển là \(0\).
 \item
   Thêm một nút bắt đầu ảo và kết thúc ảo vào \(\mathcal D_{UB}\). Thêm
@@ -583,7 +584,7 @@ Thêm vào đó, các danh sách \(\{L^i\}_{i\in N}\) cũng được dùng để
 
 Bất kì đường đi nào trong mạng \(\mathcal D_{UB}\), từ nút bắt đầu ảo
 đến kết thúc ảo, đều là một nghiệm khả thi, và tổng thời gian di chuyển
-tạo ra \textbf{cận trên} cho bài toán MTTP. Bằng cách tối thiểu hoá thời
+tạo ra \textbf{cận trên} cho bài toán MTTP. Bằng cách tối thiểu hóa thời
 gian di chuyển, ta sẽ dần tìm ra cận trên tốt hơn từ
 \(\mathcal D_{UB}\).
 
@@ -646,7 +647,7 @@ Hiệu năng của thuật toán này mấu chốt nằm ở hai vấn đề sau
 \end{enumerate}
 
 Chi tiết về vấn đề này sẽ được đề cập ở \autoref{kux1ecbch-bux1ea3n-vuxe0-cuxe0i-ux111ux1eb7t}. 
-Ở đây sẽ không đi vào chi tiết (để đơn giản hoá cho mã giả). Hàm \(FindBP(P, \{L^i\}_{i\in N})\) được dùng để xác định tập các BP
+Ở đây sẽ không đi vào chi tiết (để đơn giản hóa cho mã giả). Hàm \(FindBP(P, \{L^i\}_{i\in N})\) được dùng để xác định tập các BP
 mới thêm vào danh sách \(L^i\), dựa trên đường đi có UTT nhỏ nhất
 \(P\) tìm được từ \(\mathcal{D}_{LB}\). 
 

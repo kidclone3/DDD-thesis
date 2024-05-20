@@ -20,8 +20,8 @@ if __name__ == '__main__':
     y = 0
 
     # Width and height of the cropped image
-    w = 347
-    h = 294
+    w = 341
+    h = 290
 
     # Call the function
-    crop_images(input_folder, "Figure4e.jpg", x, y, w, h)
+    crop_images(input_folder, "Figure5d.jpg", x, y, w, h)
