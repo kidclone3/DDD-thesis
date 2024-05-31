@@ -69,6 +69,8 @@
 \usepackage{algorithm}
 \makeatletter
 \renewcommand{\ALG@name}{Thuật toán} % Algorithm -> Thuật toán
+\floatname{algorithm}{Thuật toán} 
+\renewcommand{\listalgorithmname}{Danh sách thuật toán} 
 \makeatother
 \usepackage[noEnd=false,indLines=true]{algpseudocodex}
 
@@ -107,7 +109,7 @@
 
 % Biblo
 \usepackage[
-    style=chem-angew,
+    style=ieee,
     sorting=nyt,
     maxbibnames=99
     ]{biblatex}
@@ -241,7 +243,8 @@ có yếu tố thời gian},
 {\thesubsection}{1em}{}
 
 \titleformat{\subsubsection}
-{\passthrough{\lstinline!\\bfseries\\fontsize\{16\}\{16\}\\selectfont!}}
+% {\passthrough{\lstinline!\\bfseries\\fontsize\{16\}\{16\}\\selectfont!}}
+{\bfseries\fontsize{16}{16}\selectfont}
 {\thesubsubsection}{1em}{}
 
 \titleformat{\paragraph}
@@ -280,6 +283,16 @@ có yếu tố thời gian},
 \end{minipage}%
 }%
 }
+% \usepackage{environ}
+%  \NewEnviron{centerboxed}[1][0.95]{
+%  \makebox[\linewidth][c]{
+%  \centerline{
+%  \begin{minipage}[t][#1\textheight][t]{0.95\linewidth}%
+%  \BODY
+%  \end{minipage}
+%  }
+%  }
+%  }
 
 \NewEnviron{sign}{
 \hfill\begin{tabular}{c}
@@ -294,8 +307,11 @@ có yếu tố thời gian},
     % change line spacing
 \renewcommand{\baselinestretch}{1.0}
 \tableofcontents
+\renewcommand{\baselinestretch}{1.2}
 \listoffigures
 \listoftables
+\listofalgorithms
+\renewcommand{\baselinestretch}{1.3}
 }
 
 \usepackage{tikz}
@@ -462,7 +478,7 @@ bài toán \\ tìm đường đi có yếu tố thời gian} }
 {\fontsize{14}{1}\selectfont Ngành: Khoa học máy tính và thông tin}  \\
 {\fontsize{14}{1}\selectfont (Chương trình đào tạo chuẩn)}  \\
 
-\vspace{2cm}
+\vspace{1.5cm}
 {\fontsize{14}{1}\selectfont \textbf{
 \begin{tabular}{ll}
 Cán bộ hướng dẫn:  & TS. Vũ Đức Minh
@@ -501,7 +517,7 @@ tocpagenumberformat=\usekomafont{chapter}
 \pagestyle{fancy}
 
 \chapter*{Lời cảm ơn}\label{cam-on}
-\addcontentsline{toc}{chapter}{Lời cảm ơn}
+% \addcontentsline{toc}{chapter}{Lời cảm ơn}
 
 \markboth{Lời cảm ơn}{Lời cảm ơn}
 Trong những năm tháng sinh viên, em đã được học hỏi và trải qua nhiều điều, trong đó có những khó khăn và thách thức. 
@@ -563,10 +579,10 @@ Bố cục của khóa luận như sau:
 \textbf{Từ khoá:} Dynamic Discretization Discovery, Time-dependent Shortest Path Problem, Minimum Duration Time-Dependent Path Problem.
 
 % Thêm phần bảng viết tắt.
-\chapter*{Bảng ký hiệu}\label{bang-ky-hieu}
-\addcontentsline{toc}{chapter}{Bảng ký hiệu}
+\chapter*{Danh mục viết tắt}\label{bang-ky-hieu}
+\addcontentsline{toc}{chapter}{Danh mục viết tắt}
 
-\markboth{Bảng ký hiệu}{Bảng ký hiệu}
+\markboth{Danh mục viết tắt}{Danh mục viết tắt}
 
 \begin{table}[h]
     \centering
@@ -590,7 +606,7 @@ Bố cục của khóa luận như sau:
     MD               & Minimum Duration                                  & Thời gian di chuyển tối thiểu (từ lúc khởi hành đến lúc tới đích)                   \\ \midrule
     MDP              & Minimum Duration Time-Dependent Path Problem      & Bài toán Đường đi thời gian di chuyển tối thiểu                                     \\ \midrule
     % MTTP             & Minimum Travel Time Time-Dependent Path Problem   & Bài toán Đường Đi Ngắn Nhất Theo Thời Gian thực hiện                                \\ \midrule
-    SSSP             & Single-source shortest path                       & Tìm đường đi ngắn nhất xuất phát từ một đỉnh, sử dụng Dijkstra với hàng đợi ưu tiên \\ \midrule
+    % SSSP             & Single-source shortest path                       & Tìm đường đi ngắn nhất xuất phát từ một đỉnh, sử dụng Dijkstra với hàng đợi ưu tiên \\ \midrule
     TDSP             & Time-dependent shortest path                      & Đường đi ngắn nhất phụ thuộc thời gian                                              \\ \midrule
     TDSPP            & Time-Dependent Shortest Path Problem              & Bài toán tìm đường đi ngắn nhất phụ thuộc thời gian                                 \\ \midrule
     TEN              & Time-expanded network                             & Mạng thời gian                                                                      \\ \midrule
@@ -601,17 +617,13 @@ Bố cục của khóa luận như sau:
 \end{table}
 
 % Change line spacing back to 1 in toc only
-
+\pagenumbering{arabic}
 \toc
 
 \subfile{sections/1.Introduce}%
 \subfile{sections/2.MDP}%
 % \subfile{sections/3.MTTP}%
 \subfile{sections/4.Computational}%
-% \subfile{sections/5.CaseStudy}%
-
-% \chapter*{Kết luận}\label{kux1ebft-luux1eadn}
-% \addcontentsline{toc}{chapter}{Kết luận}
 
 \subfile{sections/7.Remark.tex}
 
