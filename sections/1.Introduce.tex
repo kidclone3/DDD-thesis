@@ -9,7 +9,7 @@
 
 Thuộc họ các bài toán tìm đường đi có thời gian đến nhỏ nhất (MATP), phương pháp đầu
 tiên được phát triển để giải quyết vấn đề này dựa trên thuật toán
-Bellman-Ford trong hai bài báo \cite{bellman1958routing}, \cite{ford2010flows} và được mô tả bởi
+Bellman-Ford trong hai bài báo \cite{bellman1958routing,ford2010flows} và được mô tả bởi
 bài \cite{cooke1966shortest} của tác giả Cooke và các cộng sự. Tổng quan về các phương pháp giải khác cho biến thể
 này được đề cập trong \cite{dean2004shortest} với lý thuyết về sử dụng mạng FIFO. Đây cũng là một thuộc tính quan trọng sẽ sử dụng trong bài luận.
 
@@ -113,10 +113,10 @@ Hai hàm mục tiêu chính được quan tâm ở đây là:
 %   \[\min_{P\in \mathcal P}\sum_{k=1}^{m(P)-1}c_{i_k^P, i_{k+1}^P}(t_k^P)\]
 \end{enumerate}
 
-Trong phần còn lại của bài luận, tôi sẽ bỏ đi phần chữ \(P\) ở trên các đỉnh cùng một đường đi để thuận tiện cho ký hiệu và dễ nhìn
+Trong phần còn lại của khóa luận sẽ bỏ đi phần chữ \(P\) ở trên các đỉnh cùng một đường đi để thuận tiện cho ký hiệu và dễ nhìn
 hơn.
 
-Để minh họa ba hàm mục tiêu này, hãy xem xét đồ thị \autoref{fig:1a} và các hàm vận tốc 
+Để minh họa hai hàm mục tiêu này, hãy xem xét đồ thị \autoref{fig:1a} và các hàm vận tốc 
 \autoref{fig:1}(b,c,d), với \(n = 3\) và khung thời gian
 là \([0, 4]\).
 
@@ -163,7 +163,7 @@ tính chất \(t_k + c_{i_k, i_{k+1}}(t_k) = t_{k+1}\) với
 xuất hiện chờ đợi. Ngoài ra, khi giảm thời gian đến đích, đường đi tối
 ưu sẽ có \(t_1^P = 0\).
 
-Ba bài báo \cite{cooke1966shortest}, \cite{orda1990shortest}, \cite{dean2004shortest} đã đưa ra phương pháp
+Ba bài báo \cite{cooke1966shortest,orda1990shortest,dean2004shortest} đã đưa ra phương pháp
 cho bài toán tìm đường đi đến đích sớm nhất có thể,  xuất phát tại đỉnh nguồn với thời gian cố định. 
 Phương pháp này có độ phức tạp đa thức bằng cách mở rộng thuật toán tìm đường đi ngắn nhất
 tiêu chuẩn. Điều tương tự áp dụng với bài toán tìm đường đi 

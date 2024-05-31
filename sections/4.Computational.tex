@@ -12,8 +12,9 @@
 \begin{document}
 \chapter{Các thử nghiệm}\label{cuxe1c-thux1eed-nghiux1ec7m}
 
-Để tiến hành đánh giá hiệu năng thuật toán của các chương trước, tôi sử
-dụng dữ liệu được sinh ngẫu nhiên để chạy. Thuật toán được cài đặt và
+Để tiến hành đánh giá hiệu năng thuật toán của các chương trước, khóa luận dùng bộ dữ liệu được sinh ngẫu nhiên. 
+Chi tiết về cách tạo dữ liệu được trình bày dưới đây.
+Thuật toán được cài đặt và
 chạy bằng ngôn ngữ C++17, trên máy tính để bản với hệ điều hành Fedora
 39, CPU Intel i7-8700 (12) @ 4.600GHz và 128GB RAM. Việc chạy được thực hiện
 với các flag tối ưu hóa \texttt{-O2} và thư viện Boost 1.73.0
@@ -193,7 +194,7 @@ hiệu cho nút trong \(\overline{\mathcal{B}}^t\) là \((i,t_i)\) và trong
 \(\overline{\mathcal{B}}^{t^+}\) là \((i, t_i^+)\). Chọn cung \((i,j)\)
 sao cho mỗi cung thuộc \(\overline{\mathcal{B}}^{t}\) có BP trong
 khoảng thời gian \((t_i, t_i^+)\) và có chỉ số nhỏ nhất (khi xét các
-đỉnh từ \(1\) đến \(n\)). Dưới đây là ba cách chọn điểm gãy cho
+đỉnh từ \(1\) đến \(n\)). Dưới đây là ba cách chọn BP cho
 \(c_{i,j}(t)\) với \(t\in (t_i, t_i^+)\):
 
 \begin{enumerate}
@@ -333,8 +334,7 @@ Do đó, \(MED\) là lựa chọn ưu tiên trong ba cách.
 % \textbf{S}) lại vượt trội cả (\(MED\), \textbf{S}) và (\(MED\),
 % \textbf{M}) về thời gian chạy trung bình.
 
-\section{Những lợi ích của
-DDD}\label{nhux1eefng-lux1ee3i-uxedch-cux1ee7a-ddd}
+\section{Kết quả thử nghiệm}\label{nhux1eefng-lux1ee3i-uxedch-cux1ee7a-ddd}
 
 Trong phần này khóa luận sẽ so sánh hiệu năng của thuật toán DDD với các thuật
 toán liệt kê BP, với kịch bản chọn là \(MED\).

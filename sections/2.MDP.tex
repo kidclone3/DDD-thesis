@@ -93,9 +93,10 @@ với \(i \in N\) và \(t_i \in (-\infty, T]\), tập hợp các cung\footnote{�
 \end{itemize}
 
 \textbf{BSPT} được tính ra
-bằng cách giải bài toán \emph{TDSPP}, bằng cách áp dụng thuật toán SSSP
+bằng cách giải bài toán \emph{TDSPP}, bằng cách áp dụng thuật toán tìm đường 
+đi ngắn nhất từ một đỉnh (Dijkstra)
 với một vài điều chỉnh đơn giản. BSPT cho đỉnh \(4\) tại thời gian
-\(t=2.57\) được biểu diễn ở hình 5(b). Mạng TEN này bao gồm các nút
+\(t=2.57\) được biểu diễn ở \autoref{fig:5b}. Mạng TEN này bao gồm các nút
 \(\{(1, 0.00), (2, 1.34), (3, 1.76), (4, 2.57)\}\)\footnote{thời gian
   làm tròn thời gian đến 2 chữ số thập phân} và các cung
 \((1, 2), (2, 4), (3, 4)\) được xác định bởi các nút theo thời gian.
@@ -107,8 +108,8 @@ với một vài điều chỉnh đơn giản. BSPT cho đỉnh \(4\) tại th�
 \subcaptionbox{TDSP từ nút \((1,0)\)\label{fig:5a}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5a.jpg}}
 \subcaptionbox{BSPT từ nút \((4, 2.57)\)\label{fig:5b}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5b.jpg}}
 
-\subcaptionbox{ABSPT \(\overline{B}^{2.57}\)\label{fig:5c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5c.jpg}}
-\subcaptionbox{ABSPT \(\overline{B}^{2.57}\) với các UTT khi ghép với \(\mathcal{B}^5\)\label{fig:5d}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5d.jpg}}
+\subcaptionbox{ABSPT \(\overline{\mathcal{B}}^{2.57}\)\label{fig:5c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5c.jpg}}
+\subcaptionbox{ABSPT \(\overline{\mathcal{B}}^{2.57}\) với các UTT khi ghép với \(B^5\)\label{fig:5d}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5d.jpg}}
 \caption{Quy trình tạo ABSPT ứng với
 đỉnh xuất phát (1,0)}
 \label{fig:5}
@@ -120,9 +121,9 @@ Giải thích các hình trong \autoref{fig:5}:
   \item \autoref{fig:5a}: đường đi TDSP từ đỉnh \((1, 0)\) đến \(n\) với thời gian là \(2.57\). 
   Các nút thời gian màu xanh, giá trị hàm vận tốc màu đen.
   \item \autoref{fig:5b}: BSPT tương ứng với đỉnh \((4, 2.57)\).
-  \item \autoref{fig:5c}: ABSPT \(\overline{B}^{2.57}\) tương ứng với đỉnh \((4, 2.57)\). 
+  \item \autoref{fig:5c}: ABSPT \(\overline{\mathcal{B}}^{2.57}\) tương ứng với đỉnh \((4, 2.57)\). 
   Thời gian di chuyển thực tế có màu đỏ.
-  \item \autoref{fig:5d}: ABSPT \(\overline{B}^{2.57}\) với các UTT khi ghép với \(\mathcal{B}^5\) (có màu đen),
+  \item \autoref{fig:5d}: ABSPT \(\overline{\mathcal{B}}^{2.57}\) với các UTT khi ghép với \(B^5\) (có màu đen),
   đường đi tối thiểu có màu xanh lá.
 \end{itemize}
 
@@ -359,7 +360,7 @@ các cách chọn được sử dụng.
 \subsection{Mã giả}\label{muxe3-giux1ea3}
 
 \begin{algorithm}[H]
-\caption{Dynamic Discretization Discovery (DDD) Algorithm for the MDP}
+\caption{DDD cho bài toán MDP}
 \label{algo:1}
 \begin{algorithmic}
 \Input{digraph $D=(N,A)$, latest time $T$, arc travel time function $c_{i,j}(t)$ for all $t\in [0, T]$, each $(i, j) \in A$}
@@ -437,7 +438,7 @@ Các giá trị \(LB=1.25\) và \(UB=2.10\) đã được tính toán ở trên.
 \item
   Tìm thấy TDSP \(((1, 1), (2, 1.66), (4, 3.0826))\), đi đến đỉnh \(4\)
   tại thời gian \(3.08\) nên tạo ra \(\overline{\mathcal B}^{3.08}\) và thêm
-  vào danh sách (Hình 6(b), có 3 ABSPT).
+  vào danh sách (\autoref{fig:6_b}, có 3 ABSPT).
 \item
   Cập nhật cận trên và cận dưới: \(UB^{3.08} = 2.08\) và
   \(LB^{3.08} = 1.45\).
@@ -457,7 +458,7 @@ lặp.
 \item
   Thêm ABSPT \(\overline{\mathcal B}^{3.89}\) và
   \(\overline{\mathcal B}^{3.63}\) tương ứng với \((1, 2)\) và \((2, 2)\).
-  Cái thứ hai cũng là ABSPT thứ ba trong danh sách tại Iteration 4.
+  Cái thứ hai cũng là ABSPT thứ ba trong danh sách tại Lặp 4.
 \item
   Cập nhật cận dưới hiện tại: \(LB = 1.71\) (từ
   \(\overline{\mathcal B}^{3.08}\)).
