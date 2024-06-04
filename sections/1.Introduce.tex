@@ -14,9 +14,6 @@ bài \cite{cooke1966shortest} của tác giả Cooke và các cộng sự. Tổn
 này được đề cập trong \cite{dean2004shortest} với lý thuyết về sử dụng mạng FIFO. Đây cũng là một thuộc tính quan trọng sẽ sử dụng trong bài luận.
 
 Bài toán tìm đường đi thời gian tối thiểu (MDP) được nghiên cứu trong bối cảnh mạng lưới giao thông (\cite{demiryurek2011online}), thậm chí trong phân tích mạng xã hội (\cite{gunturi2012information}).
-% Bài toán tìm đường đi ngắn nhất theo thời gian thực hiện (MTTP) đặc biệt quan trọng trong việc tính toán giảm khí thải trong môi trường đô thị, vì khí thải của một xe hơi trên tuyến đường có thể xấp xỉ
-% theo tỉ lệ với thời gian di chuyển trên tuyến đường đó; phạm vi tốc độ
-% giới hạn trong đô thị (công thức khi thải được đề cập ở \cite{jabali2012analysis} với bài toán định tuyến phương tiện phụ thuộc thời gian).
 
 Trong \cite{boland2017continuous} có giới thiệu thuật toán khám phá rời rạc động (DDD) để giải quyết bài
 toán tối thiểu hóa chi phí cho mạng dịch vụ theo thời gian liên tục,
@@ -28,19 +25,6 @@ ra một giới hạn kép (cận trên và dưới) cho giá trị tối ưu c�
 liên tục. Sau khi tìm được tập thích hợp (số ít các thời điểm xác định), mô hình
 quy hoạch nguyên sẽ cho ra kết quả tối ưu.
 
-
-% Trong bài luận này, tôi trình bày và phân tích thuật toán tìm kiếm
-% rời rạc động cho bài toán MDP và bài toán MTTP khi thời gian di chuyển
-% trên các cung (cạnh) được xác định bởi các hàm tuyến tính từng đoạn
-% (piecewise linear function). Thuật toán sẽ tìm một \textbf{chuỗi} các
-% bài toán con (bài toán tìm đường đi ngắn nhất) và giải chúng trong mạng
-% thời gian từng phần, cho ra kết quả là cận dưới của bài toán với thời
-% gian liên tục. Mỗi đỉnh trong mạng là một cặp (thời gian - vị trí) được
-% lấy từ các điểm dừng (breakpoint) của hàm tuyến tính từng đoạn cho việc
-% di chuyển.
-
-% \textbf{Chuỗi} kết thúc khi độ dài của đường đi ngắn nhất trong mạng
-% thời gian từng phần hiện tại khớp với cận trên tốt nhất.
 
 Phần mô tả bài toán, phương pháp giải quyết và kết quả từ khu vực Atlanta của khoá luận 
 tham khảo từ bài báo \cite{he2022dynamic}.
@@ -107,10 +91,6 @@ Hai hàm mục tiêu chính được quan tâm ở đây là:
 \item
   \textbf{Tối thiểu thời gian thực hiện (đi từ nguồn đến đích):}
   \[\min_{P\in \mathcal P}(t_{m(P)}^P-t_1^P)\]
-% \item
-%   \textbf{Tối thiểu tổng thời gian di chuyển trên các cạnh của đường đi
-%   từ nguồn đến đích:}
-%   \[\min_{P\in \mathcal P}\sum_{k=1}^{m(P)-1}c_{i_k^P, i_{k+1}^P}(t_k^P)\]
 \end{enumerate}
 
 Trong phần còn lại của khóa luận sẽ bỏ đi phần chữ \(P\) ở trên các đỉnh cùng một đường đi để thuận tiện cho ký hiệu và dễ nhìn
@@ -134,14 +114,6 @@ là \([0, 4]\).
   \(t = 3\), đi qua cạnh \((2, 3)\) và đến đỉnh đích tại \(t = 4\), giá
   trị mục tiêu là \(2.5\). Vì không phải chờ đợi trên đường đi này nên
   tổng thời gian di chuyển cũng là \(2.5\).
-% \item
-%   Tuy nhiên, đường đi trên không cho ra tổng thời gian di chuyển trên
-%   các cạnh là tối thiểu. Có nhiều nghiệm tối ưu cho bài toán này. Đối
-%   với \(t_1 \in [0, 1]\) bất kỳ, đường đi \(((1, t_1), (2, 3), (3, 4))\)
-%   có thời gian di chuyển tối thiểu: nó sẽ đi qua cạnh \((1, 2)\), bắt
-%   đầu từ thời gian \(t_1\) và đến hết cạnh tại \(t_1 + 1 \in [1, 2]\),
-%   sau đó chờ tại đỉnh \(2\) cho đến \(t = 3\) và đi qua cạnh \((2, 3)\)
-%   tại \(t = 4\), mang lại giá trị mục tiêu là \(2\).
 \end{itemize}
 
 \begin{figure}[h]
