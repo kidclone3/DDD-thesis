@@ -1,6 +1,6 @@
-\PassOptionsToPackage{unicode}{hyperref}
-\PassOptionsToPackage{hyphens}{url}
-\PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
+% \PassOptionsToPackage{unicode}{hyperref}
+% \PassOptionsToPackage{hyphens}{url}
+% \PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
 \documentclass[fontsize=14pt,DIV=15pt,twoside=false]{scrbook}
 % Fix old font command bugs
 \DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
@@ -52,6 +52,12 @@
 \renewcommand\subfigureautorefname{(\alph{subfigure})}
 \renewcommand{\tableautorefname}{Bảng}
 }
+
+% Set the counter
+\usepackage{chngcntr}
+ 
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
 
 \usepackage[%
     font={small,sf},
@@ -109,11 +115,39 @@
 
 % Biblo
 \usepackage[
-    style=ieee,
+    % style=chem-angew,
+    % articletitle=true,
+    style=numeric-comp, 
+    % citestyle=numeric-comp,
+    % bibstyle=verbose,
+    autolang=hyphen,
+    giveninits=true,
+    backend=biber,
     sorting=nyt,
-    maxbibnames=99
+    minnames=1,
+    maxcitenames=2, maxbibnames=6,
+    bibencoding=utf8
     ]{biblatex}
 \addbibresource{refs.bib}
+\renewcommand*{\UrlFont}{\rmfamily}
+
+\renewbibmacro{in:}{} % bỏ luôn "in"
+% Bỏ dấu ? ở title
+\DeclareFieldFormat{title}{\textbf{#1}}
+\renewcommand*{\nameyeardelim}{\addcomma\space} % thêm dấu phẩy giữa tên và năm
+\renewcommand*{\finalnamedelim}{\addspace\&\addspace}% thay `and` bằng dấu &
+\renewcommand*{\mkbibnamefamily}[1]{\textsc{#1}} % in hoa tên tác giả
+% FORMATTING
+\DeclareFieldFormat[inbook,suppbooksupplemental,bookinbook,booksingle,mvbook]{title}{\textit{#1}}
+\DeclareFieldFormat[inbook,suppbooksupplemental,bookinbook,booksingle,mvbook]{publisher}{#1}
+\DeclareFieldFormat[article,inproceedings]{title}{\mkbibquote{#1}}
+\DeclareFieldFormat{pages}{#1}
+\DeclareFieldFormat{volumes}{#1}
+\DeclareFieldFormat{number}{#1}
+\DeclareFieldFormat{month}{#1}
+
+
+
 \usepackage{csquotes} % biblatex recommended
 
 \usepackage{parcolumns} % For parallel text
@@ -542,7 +576,7 @@ Mặc dù đã có nhiều cố gắng hoàn thiện nhưng do hạn chế ở k
 \chapter*{Mở đầu}\label{lux1eddi-mux1edf-ux111ux1ea7u}
 \addcontentsline{toc}{chapter}{Mở đầu}
 
-\markboth{Mở đầu}{Mở đầu}
+% \markboth{Mở đầu}{Mở đầu}
 
 \textbf{Tìm đường đi ngắn nhất trong mạng} vốn là một trong những bài toán tối ưu cơ bản. Tuy nhiên những biến thể  của nó vẫn luôn hấp dẫn và có ý nghĩa thực tiễn cao. Các ứng dụng của bài toán này rất đa dạng, từ việc tìm đường đi cho mô hình mạng lưới giao thông đến các bài toán vận tải.
 Ngoài ra, đường đi ngắn nhất không dừng lại ở khoảng cách, nó còn có thể là nhỏ nhất về thời gian, chi phí, hoặc một tiêu chí nào đó khác. 
@@ -596,14 +630,14 @@ Bố cục của khóa luận như sau:
     % AMG              & Arc-completed Mangrove                            & Mangrove hoàn chỉnh                                                                 \\ \midrule
     % \(i-MG\)             & \(i-mangrove\)                                    & Hợp của \(i-FSPT\) và \(i-BSPT\) cho cùng một điểm dừng tại đỉnh                    \\ \midrule
     ABSPT            & Arc-completed Backwards Shortest Path Tree        & Cây đường đi ngắn nhất hoàn chỉnh lùi                                               \\ \midrule
-    AFSPT            & Arc-completed Forwards Shortest Path Tree         & Cây đường đi ngắn nhất hoàn chỉnh tiến                                              \\ \midrule
-    BP               & Breakpoint                                        & Thời điểm dừng: thời điểm có thời gian nguyên.                                     \\ \midrule
+    % AFSPT            & Arc-completed Forwards Shortest Path Tree         & Cây đường đi ngắn nhất hoàn chỉnh tiến                                              \\ \midrule
+    BP               & Breakpoint                                        & Thời điểm dừng: thời điểm \(t\) làm thay đổi độ dốc của hàm vận tốc                                     \\ \midrule
     BSPT             & Backwards Shortest Path Tree                      & Cây đường đi ngắn nhất lùi                                                          \\ \midrule
     DDD              & Dynamic Discretization Discovery                  & Khám phá rời rạc động                                                               \\ \midrule
     FIFO             & First in first out                                & Vào trước ra trước                                                                  \\ \midrule
     FSPT             & Forwards Shortest Path Tree                       & Cây đường đi ngắn nhất tiến                                                         \\ \midrule
     MATP             & Minimum Arrival Time Path Problem                 & Bài toán Đường đi thời gian đến tối thiểu                                           \\ \midrule
-    MD               & Minimum Duration                                  & Thời gian di chuyển tối thiểu (từ lúc khởi hành đến lúc tới đích)                   \\ \midrule
+    % MD               & Minimum Duration                                  & Thời gian di chuyển tối thiểu (từ lúc khởi hành đến lúc tới đích)                   \\ \midrule
     MDP              & Minimum Duration Time-Dependent Path Problem      & Bài toán Đường đi thời gian di chuyển tối thiểu                                     \\ \midrule
     % MTTP             & Minimum Travel Time Time-Dependent Path Problem   & Bài toán Đường Đi Ngắn Nhất Theo Thời Gian thực hiện                                \\ \midrule
     % SSSP             & Single-source shortest path                       & Tìm đường đi ngắn nhất xuất phát từ một đỉnh, sử dụng Dijkstra với hàng đợi ưu tiên \\ \midrule
@@ -611,7 +645,7 @@ Bố cục của khóa luận như sau:
     TDSPP            & Time-Dependent Shortest Path Problem              & Bài toán tìm đường đi ngắn nhất phụ thuộc thời gian                                 \\ \midrule
     TEN              & Time-expanded network                             & Mạng thời gian                                                                      \\ \midrule
     % TENL             & Time-expanded network with associated arc lengths & Mạng thời gian có độ dài của cung                                                   \\ \midrule
-    TT               & Travel time                                       & Thời gian di chuyển                                                                 \\ \midrule
+    % TT               & Travel time                                       & Thời gian di chuyển                                                                 \\ \midrule
     UTT              & Underestimated travel time                        & Cận dưới của thời gian di chuyển                                                    \\ \bottomrule
     \end{tabularx}
 \end{table}

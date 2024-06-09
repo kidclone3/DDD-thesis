@@ -4,16 +4,25 @@
 
 \begin{document}
 
-\chapter{Giới thiệu}\label{introduce}
+\chapter*{Giới thiệu}\label{introduce}
+\addcontentsline{toc}{chapter}{Giới thiệu}
 
+Bài toán tìm đường đi ngắn nhất là bài toán tìm một đường đi giữa hai đỉnh sao cho tổng các trọng số của các cạnh tạo nên đường đi đó là nhỏ nhất.
 
-Thuộc họ các bài toán tìm đường đi có thời gian đến nhỏ nhất (MATP), phương pháp đầu
+Bên cạnh đó là bài toán tìm đường đi có thời gian đến nhỏ nhất (MATP), phương pháp đầu
 tiên được phát triển để giải quyết vấn đề này dựa trên thuật toán
 Bellman-Ford trong hai bài báo \cite{bellman1958routing,ford2010flows} và được mô tả bởi
 bài \cite{cooke1966shortest} của tác giả Cooke và các cộng sự. Tổng quan về các phương pháp giải khác cho biến thể
-này được đề cập trong \cite{dean2004shortest} với lý thuyết về sử dụng mạng FIFO. Đây cũng là một thuộc tính quan trọng sẽ sử dụng trong bài luận.
+này được đề cập trong \cite{dean2004shortest} với lý thuyết về sử dụng mạng FIFO.
 
-Bài toán tìm đường đi thời gian tối thiểu (MDP) được nghiên cứu trong bối cảnh mạng lưới giao thông (\cite{demiryurek2011online}), thậm chí trong phân tích mạng xã hội (\cite{gunturi2012information}).
+Bài toán tìm đường đi thời gian tối thiểu (MDP) được nghiên cứu trong bối cảnh mạng lưới giao thông \cite{demiryurek2011online}, thậm chí trong phân tích mạng xã hội \cite{gunturi2012information}.
+Thuộc họ các bài toán Tìm đường đi ngắn nhất phụ thuộc thời gian (TDSPP) \cite{he2018dynamic}, 
+trong đó thời gian di chuyển phụ thuộc thời gian thường là kết quả của sự tắc nghẽn. Thời gian di chuyển trên các cung 
+thường được giả định thỏa mãn tính chất FIFO: không thể đi đến cuối của cung vào thời điểm sớm hơn so với thời điểm bắt đầu di chuyển từ đầu cung.
+
+Do tắc nghẽn khác nhau trên các con đường trong ngày, cả thời gian di chuyển từ điểm nguồn \(s\) đến đích \(d\) và đường đi tối ưu giữa chúng có thể thay đổi theo thời gian.
+Trong thực trạng giao thông, có những tuyến đường bị tắc vào giờ cao điểm. Việc xuất phát sớm hay muộn hơn có thể đi đến đích cùng lúc. 
+Vậy nên việc lùi thời gian khởi hành có thể giảm tổng thời gian di chuyển.
 
 Trong \cite{boland2017continuous} có giới thiệu thuật toán khám phá rời rạc động (DDD) để giải quyết bài
 toán tối thiểu hóa chi phí cho mạng dịch vụ theo thời gian liên tục,
@@ -41,7 +50,7 @@ nút gốc \(s\) đến nút \(v\) luôn là đường đi ngắn nhất.
   từ \(s\) đến \(u\).
 \end{itemize}
 
-\section{Mô tả bài toán}\label{problem-description}
+\section*{Mô tả bài toán}\label{problem-description}
 
 Cho một đồ thị có hướng 
 \[
@@ -52,8 +61,9 @@ là tập đỉnh, \(A \subseteq N \times N\) là tập cạnh; khung thời gia
 \([0, T]\) và các hàm vận tốc tuyến tính từng khúc
 \(c_{i,j}(t) > 0\) với \(t \in [0, T]\) thỏa mãn tính chất FIFO cho mọi
 cạnh \((i, j) \in A\).\\
-Tính chất FIFO, trong hàm tuyến tính, nghĩa là
-\textbf{độ dốc của các khúc lớn hơn hoặc bằng \(-1\).} 
+Tính chất FIFO trong hàm tuyến tính, nghĩa là
+độ dốc của các khúc lớn hơn hoặc bằng \(-1\). Đồng thời việc chờ đợi ở bất kì đỉnh nào khác không phải 
+nguồn được cho là không tối ưu.
 
 Không mất tính tổng
 quát, ta luôn đi từ đỉnh nguồn \(1\) và kết thúc ở đỉnh đích
@@ -71,7 +81,8 @@ các nút cần thỏa mãn tính chất:
 \[t_{k+1}^P \ge t_k^P + c_{i_k^P, i_{k+1}^P}(t_k^P)\] với
 \(k=1, \dots m(P)-1\). \\
 Nếu
-\(t_{k}^P \ge t_{k-1}^P + c_{i_{k-1}^P, i_{k}^P}(t_{k-1}^P)\) với \(k \ge 2\) bất kì (hoặc \(t_1^P > 0\) nếu \(k=1\)), thì ta nói rằng đỉnh \(i_k^P\)
+\(t_{k}^P \ge t_{k-1}^P + c_{i_{k-1}^P, i_{k}^P}(t_{k-1}^P)\) với \(k \ge 2\) bất kì 
+(hoặc \(t_1^P > 0\) nếu \(k=1\)), thì ta nói rằng đỉnh \(i_k^P\)
 cần phải \textbf{đợi}.\\ 
 Nếu \(t_{k}^P = t_{k-1}^P + c_{i_{k-1}^P, i_{k}^P}(t_{k-1}^P)\) với mọi
 \(k \ge 2\) thì ta nói rằng \(P\) không có chờ đợi (waiting-free). \\
@@ -80,19 +91,15 @@ Nếu \(P\) bắt đầu tại đỉnh \(i_1^P = 1\) với \(t_1^P\ge0\) và k�
 đường đi khả thi. Ta kí hiệu \(\mathcal{P}\) biểu diễn tập hợp tất cả các
 đường đi khả thi như vậy.
 
-Hai hàm mục tiêu chính được quan tâm ở đây là:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \textbf{Tối thiểu thời gian đến đích:}
-  \[\min_{P\in \mathcal P}t_{m(P)}^P\]
-\item
-  \textbf{Tối thiểu thời gian thực hiện (đi từ nguồn đến đích):}
+Hàm mục tiêu chính được quan tâm ở đây là \textbf{Tìm một đường đi có thời gian thực hiện tối thiểu (từ nguồn đến đích):}
   \[\min_{P\in \mathcal P}(t_{m(P)}^P-t_1^P)\]
-\end{enumerate}
 
+
+
+Bên cạnh đó, ở một số trường hợp, ta cũng quan tâm đến mục tiêu phụ \textbf{Tìm một đường đi có thời gian đến đích tối thiểu:}
+    \[\min_{P\in \mathcal P}t_{m(P)}^P\]
+
+  
 Trong phần còn lại của khóa luận sẽ bỏ đi phần chữ \(P\) ở trên các đỉnh cùng một đường đi để thuận tiện cho ký hiệu và dễ nhìn
 hơn.
 

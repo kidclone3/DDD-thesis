@@ -24,7 +24,7 @@ với các flag tối ưu hóa \texttt{-O2} và thư viện Boost 1.73.0
 \section{Tập dữ liệu}\label{tux1eadp-dux1eef-liux1ec7u}
 
 Dữ liệu được chuẩn bị cho việc chạy các thuật toán. Có 4 kiểu dữ liệu
-tương ứng với 4 kiểu mạng \(D=(N,A)\) và tập các đỉnh
+tương ứng với 3 kiểu mạng \(D=(N,A)\) và tập các đỉnh
 \(N =\{1,2,\dots, n\}\);\\
 \textbf{Kiểu 1:} \(A = \{(i, j) \in N \times N | i < j \}\);
 
@@ -102,7 +102,7 @@ tương ứng với 4 kiểu mạng \(D=(N,A)\) và tập các đỉnh
 \section{Hàm vận tốc}\label{huxe0m-thux1eddi-gian}
 
 Để đánh giá mức độ ảnh hưởng của hàm vận tốc đến hiệu năng
-của thuật toán, có ba loại hàm được sử dụng. \autoref{fig:11} minh họa cho mỗi
+của thuật toán, có hai loại hàm được sử dụng. \autoref{fig:11} minh họa cho mỗi
 loại. Hàm vận tốc được tạo ra như sau: với mỗi cung
 \((i,j)\), sử dụng nội suy tuyến tính từng khúc của một hàm \(f\) (mô tả
 chi tiết ở dưới) với các điểm là số nguyên.
@@ -155,7 +155,7 @@ Với \(B_{i, j}, U_{i, j} \sim U[0, 1]\).
   \label{fig:11}
 \end{figure}
 
-\subsection{Nguồn gốc}\label{nguux1ed3n-gux1ed1c-cux1ee7a-cuxe1c-huxe0m-thux1eddi-gian}
+\section{Nguồn gốc của dữ liệu}\label{nguux1ed3n-gux1ed1c-cux1ee7a-cuxe1c-huxe0m-thux1eddi-gian}
 
 Hàm \textbf{Loại 1} được lấy ý tưởng từ \cite{figliozzi2012time} về
 việc chia 5 khoảng thời gian bằng nhau, mỗi khoảng có tốc độ di chuyển
@@ -177,10 +177,10 @@ Ngoài ra các hàm khác được đề xuất trong \cite{figliozzi2012time} c
 Các nghiệm tối ưu thường bắt đầu ở thời điểm sớm nhất hoặc muộn nhất có
 thể, do đó không giúp ích cho việc phân tích hiệu năng của thuật toán.
 
-Hiệu năng của cả hai bài toán với phương pháp DDD phụ thuộc rất nhiều
+Hiệu năng của cả bài toán với phương pháp DDD phụ thuộc rất nhiều
 vào việc tính toán UTT: có thể tính toán một cách hiệu quả thời gian tối
 thiểu di chuyển qua các cung ngay khi bắt đầu chạy thuật toán. Bảng tra
-cứu là một cấu trúc dữ liệu hiệu quả cho việc tính toán trước khi chạy.
+cứu (hash map) là một cấu trúc dữ liệu hiệu quả để lưu trữ các giá trị của việc tính toán trước khi chạy.
 
 \section{Kịch bản và cài
 đặt}\label{kux1ecbch-bux1ea3n-vuxe0-cuxe0i-ux111ux1eb7t}
@@ -202,7 +202,7 @@ khoảng thời gian \((t_i, t_i^+)\) và có chỉ số nhỏ nhất (khi xét 
 \tightlist
 \item
   Chọn điểm có giá trị \(c_{i, j}(t)\) nhỏ nhất với
-  \(t\in (t_i, t_i^+)\) (\(MIN\)).
+  \(t\in (t_i, t_i^+)\) (\(MIN\))
 \item
   Chọn điểm trung vị (trong tập các BP sắp xếp theo thời gian)
   (\(MED\))
@@ -336,10 +336,28 @@ Do đó, \(MED\) là lựa chọn ưu tiên trong ba cách.
 
 \section{Kết quả thử nghiệm}\label{nhux1eefng-lux1ee3i-uxedch-cux1ee7a-ddd}
 
-Trong phần này khóa luận sẽ so sánh hiệu năng của thuật toán DDD với thuật
-toán vét cạn BP, với kịch bản chọn là \(MED\).
+\subsection{Phương pháp liệt kê Enum}\label{phuong-phap-enum}
+Phương pháp DDD sẽ được so sánh với phương pháp Enum liệt kê BP (từ \cite{foschini2011complexity}).
 
-Phương pháp DDD sẽ được so sánh với phương pháp vét cạn BP (từ \cite{foschini2011complexity}).
+Trong bài báo gốc, phương pháp Enum được tóm tắt như sau: 
+
+Ý tưởng chính của cách này là chạy thuật toán Dijkstra cho một thời gian khởi hành cụ thể \(t\)
+và xây dựng một tập các \emph{chứng nhận}. Mỗi \emph{chứng nhận} này đảm bảo tính chính xác của cây đường đi ngắn nhất được tìm thấy bởi Dijkstra.
+Sau đó dần thay đổi thời gian \(t\) và chạy Dijkstra lại để tìm ra các \emph{chứng nhận} mới. Bằng cách liên tục điều chỉnh này, phương pháp khám phá
+một cách có hệ thống cho tất cả các cây đường đi ngắn nhất riêng biệt có thể tồn tại với mối thời gian khởi hành khác nhau. 
+Dẫn tới việc khám phá toàn diện các khả năng dựa trên ràng buộc thời gian.
+Có hai loại \emph{chứng nhận} được sử dụng: \emph{chứng nhận cơ bản} và \emph{chứng nhận tối thiểu}. \emph{Chứng nhận cơ bản} đảm bảo hàm tuyến tính tương ứng với một đường đi duy nhất không thay đổi cho đến thời điểm thất bại của \emph{chứng nhận}; 
+sự thất bại của một \emph{chứng nhận cơ bản} tương ứng với một BP tại một cạnh nào đó.
+\emph{Chứng nhận tối thiểu} đảm bảo một đường đi nhất định đến một nút nhất định đầu tiên; sự thất bại của một \emph{chứng nhận tối thiểu} tương ứng với một BP tối thiểu trong đồ thị \(D\).
+Mỗi \emph{chứng nhận} có một thời điểm thất bại \(t_{fail}\), là thời gian khởi hành sớm nhất sau thời gian hiện tại \(t\) mà \emph{chứng nhận} đó không còn hiệu lực.
+
+
+\subsection{Kết quả so sánh}\label{ket-qua-so-sanh}
+
+Trong phần này khóa luận sẽ so sánh hiệu năng của thuật toán DDD với thuật
+toán Enum liệt kê BP, với kịch bản chọn là \(MED\).
+
+
 
 \autoref{table:mdp-result} trình bày kết quả chạy của bài toán MDP với trung bình 10 mẫu được sinh ngẫu
 nhiên, có kích thước mạng khác nhau (\(n=30,50\) và khung thời gian
@@ -352,7 +370,7 @@ nhiên, có kích thước mạng khác nhau (\(n=30,50\) và khung thời gian
 % \label{table:mdp1}
 % \end{figure}
 
-\begin{table}[h]
+\begin{table}[H]
   \caption{Kết quả của MDP với \(n=[30, 50]\) và \(T=40\)}
   \label{table:mdp-result}
   \resizebox{\textwidth}{!}{
@@ -384,16 +402,16 @@ Các cột trong bảng có ý nghĩa như sau:
   \item \textbf{g-type}: loại mạng lưới, có ba loại 1,2,3.
   \item \textbf{t-type}: loại hàm vận tốc, có hai loại 1 và 2.
   \item \textbf{Avg. BP}: số BP khám phá được trung bình bằng phương pháp DDD.
-  \item \textbf{Total BP}: tổng số BP trong mẫu (phương pháp vét cạn).
+  \item \textbf{Total BP}: tổng số BP trong mẫu (phương pháp Enum liệt kê).
   \item \textbf{\% BP}: tỉ lệ phần trăm số BP được khám phá.
   \item \textbf{Avg. Arcs}: số lượng cung trung bình trong nghiệm tối ưu.
   \item \textbf{Avg. Time DDD}: thời gian chạy trung bình của phương pháp DDD (đơn vị ms).
-  \item \textbf{Avg. Time Enum}: thời gian chạy trung bình của phương pháp vét cạn (đơn vị ms).
-  \item \textbf{\% Time}: tỉ lệ phần trăm thời gian chạy của DDD với phương pháp vét cạn.
+  \item \textbf{Avg. Time Enum}: thời gian chạy trung bình của phương pháp Enum (đơn vị ms).
+  \item \textbf{\% Time}: tỉ lệ phần trăm thời gian chạy của DDD với phương pháp Enum.
   \item \textbf{Iters}: số lần lặp trung bình của phương pháp DDD.
 \end{itemize}
 
-Lưu ý rằng tổng sô BP có thể có trong các mẫu này là
+Lưu ý rằng tổng số BP có thể có trong các mẫu này là
 \(|N − 1| \times (T − 1) + 2\), khác với công thức
 \(|A| \times (T − 1) + 2\) của \cite{foschini2011complexity}. Vì đối
 với các cung có cùng hai đỉnh đầu cuối, ta chỉ cần xử lý một lần.
@@ -401,22 +419,36 @@ với các cung có cùng hai đỉnh đầu cuối, ta chỉ cần xử lý m�
 
 
 Kết quả cho thấy phương pháp DDD chỉ cần khám phá một phần nhỏ (từ
-\(2.4\%\) đến \(4.1\%\)) tổng số BP. Điều này cho thấy phương pháp này
+\(2.4\%\) đến \(4.1\%\)) tổng số BP, được minh họa bằng \autoref{fig:ddd-enum-bp}. Điều này cho thấy phương pháp này
 hoạt động hiệu quả, chỉ tập trung vào các BP tiềm năng thay vì toàn bộ.
 Ta cũng có thể thấy rằng khi kích cỡ mẫu tăng lên thì
 lợi ích của phương pháp DDD càng rõ rệt, như ở các mẫu \(n=50\) thì phần trăm BP được khám phá
 giảm nhiều hơn so với ở các mẫu \(n=30\). Các kết quả chạy với tập mẫu lớn hơn được
 trình bày ở \autoref{tab:mdp-res2}, với các giá trị \textbf{\% BP} và \textbf{\% Time} trung bình giảm dần khi mẫu
-càng lớn. Ngoài ra thời gian chạy của phương pháp DDD đã cho thấy sự vượt trội so với phương pháp vét cạn, mô tả ở hình \autoref{fig:ddd-enum}.
+càng lớn. Ngoài ra thời gian chạy của phương pháp DDD đã cho thấy sự vượt trội so với phương pháp Enum, mô tả ở hình \autoref{fig:ddd-enum}.
 
-\begin{figure}[h]
-  \includegraphics{plots/compare_ddd_enum.png}
-  \caption{So sánh thời gian chạy giữa DDD và phương pháp vét cạn}
-  \label{fig:ddd-enum}
-\end{figure}
+
 
 
 \subfile{5.CaseStudy.tex}%
+
+\begin{figure}[]
+  \captionbox{So sánh số BP của \(n=[30, 50]\) và \(T=40\)\label{fig:ddd-enum-bp}}{%
+    \includegraphics{plots/compare_ddd_enum_bp.png}
+  }
+  \captionbox{So sánh thời gian chạy của \(n=[30, 50]\) và \(T=40\)\label{fig:ddd-enum}}{%
+    \includegraphics{plots/compare_ddd_enum.png}
+  }
+  % \includegraphics{plots/compare_ddd_enum_bp.png}
+  % \caption{So sánh số BP của \(n=[30, 50]\) và \(T=40\)}
+  % \label{fig:ddd-enum-bp}
+\end{figure}
+
+% \begin{figure}[]
+%   \includegraphics{plots/compare_ddd_enum.png}
+%   \caption{So sánh thời gian chạy của \(n=[30, 50]\) và \(T=40\)}
+%   \label{fig:ddd-enum}
+% \end{figure}
 \backmatter
 \end{document}
 % END DOCUMENT

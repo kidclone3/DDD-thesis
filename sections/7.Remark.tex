@@ -4,14 +4,15 @@
 
 \begin{document}
 
-\chapter{Kết luận}\label{kux1ebft-luux1eadn}
+\chapter*{Kết luận}\label{kux1ebft-luux1eadn}
+\addcontentsline{toc}{chapter}{Kết luận}
 
 Khoá luận đã trình bày về thuật toán khám phá rời rạc động cho bài toán tìm đường có thời gian di chuyển tối thiểu, trong đó thời gian di chuyển trên cung là hàm vận tốc tuyến tính từng khúc của thời gian khởi hành trên cung đó. 
 
 Thuật toán này tận dụng các BP của mỗi hàm vận tốc và các giá trị trước đó cho việc giải bài toán thời gian tối thiểu. Ưu điểm vượt trội của thuật toán là việc chỉ cần sử dụng một phần nhỏ các BP của hàm vận tốc để tìm nghiệm và khẳng định tính tối ưu của nó. 
 Bài toán khoá luận này nghiên cứu là bài toán tìm đường đi có thời gian di chuyển tối thiểu (MDP), tức là bài toán tìm đường đi có thời gian di chuyển ít nhất với hàm vận tốc phụ thuộc thời điểm. Bài toán này chỉ cho phép việc chờ đợi ở nút nguồn.
 
-Kết quả của khóa luận đã cho thấy thuật toán DDD có thể giải quyết bài toán đề ra với kết quả vượt trội phương pháp vét cạn, thời gian chạy nhanh. Đây là tiền đề để ứng dụng trong các bài toán thực tế. 
+Kết quả của khóa luận đã cho thấy thuật toán DDD có thể giải quyết bài toán đề ra với kết quả vượt trội phương pháp Enum, thời gian chạy nhanh. Đây là tiền đề để ứng dụng trong các bài toán thực tế. 
 Tuy nhiên vẫn còn hai hạn chế chính của bài luận này. 
 Thứ nhất, thuật toán đã đơn giản hóa các ràng buộc ngoại lai như thời gian chờ đợi và chi phí di chuyển khác giữa các nút, điều này làm giảm tính thực tế của bài toán. 
 Thứ hai là các dữ liệu sử dụng để thử nghiệm vẫn còn khá nhỏ, chưa đánh giá được hiệu suất của thuật toán với các bộ lớn hơn. 
@@ -31,9 +32,9 @@ Mã nguồn của chương trình cài đặt thuật toán sử dụng ngôn ng
 Dựa vào những điều đã kết luận ở trên, đây là những hướng phát triển cho tương lai:
 
 \begin{itemize}
-    \item Nghiên cứu thêm các ràng buộc về việc chờ đợi ở các nút trong mạng.
+    \item Nghiên cứu thêm bài toán các nút có thể chờ đợi trong mạng.
     \item Cài đặt các thuật toán tìm đường đi ngắn nhất khác như A*.
-    \item Sử dụng với các bộ dữ liệu thực tế lớn hơn để kiểm tra hiệu suất của thuật toán.
+    \item Sử dụng với các bộ dữ liệu thực tế để đánh giá hiệu quả thuật toán.
 \end{itemize}
 
 

@@ -61,72 +61,160 @@ def line_plot():
 def example_plot():
 
     # Data
+    # col1 = [
+    #     49.7,
+
+    #     66.5,
+
+    #     32.8,
+
+    #     34.2,
+
+    #     33.7,
+
+    #     45.7,
+
+    #     115.6,
+
+    #     126.8,
+
+    #     63.7,
+
+    #     68.7,
+
+    #     116.9,
+
+    #     98.4]
+    # col2 = [
+    #     774.7,
+    #     856.2,
+
+    #     474.9,
+    #     515.4,
+
+    #     621.1,
+    #     667.4,
+
+    #     2375.9,
+    #     2496.5,
+
+    #     1352.1,
+    #     1461.1,
+
+    #     1934.2,
+    #     2043.5]
+    # percent = [
+    #     6.4,
+
+    #     7.8,
+
+    #     6.9,
+
+    #     6.6,
+
+    #     5.4,
+
+    #     6.8,
+
+    #     4.9,
+
+    #     5.1,
+
+    #     4.7,
+
+    #     4.7,
+
+    #     6.0,
+
+    #     4.8,
+    # ]
     col1 = [
-        49.7,
+        35.2,
 
-        66.5,
+        44.8,
 
-        32.8,
+        46.5,
+
+        46.5,
 
         34.2,
 
-        33.7,
+        45.6,
 
-        45.7,
+        45.5,
 
-        115.6,
+        52.7,
 
-        126.8,
+        53.7,
 
-        63.7,
+        56.2,
 
-        68.7,
+        58.9,
 
-        116.9,
-
-        98.4]
+        49.2,
+    ]
     col2 = [
-        774.7,
-        856.2,
 
-        474.9,
-        515.4,
+        1133,
 
-        621.1,
-        667.4,
 
-        2375.9,
-        2496.5,
+        1133,
 
-        1352.1,
-        1461.1,
 
-        1934.2,
-        2043.5]
+        1133,
+
+        1133,
+
+
+        1133,
+
+
+        1133,
+
+
+        1913,
+
+
+        1913,
+
+
+        1913,
+
+
+        1913,
+
+
+        1913,
+
+
+        1913
+
+    ]
     percent = [
-        6.4,
 
-        7.8,
+        3.1,
+        4.0,
 
-        6.9,
 
-        6.6,
+        4.1,
+        4.1,
 
-        5.4,
 
-        6.8,
+        3.0,
+        4.0,
 
-        4.9,
 
-        5.1,
+        2.4,
+        2.8,
 
-        4.7,
 
-        4.7,
+        2.8,
+        2.9,
 
-        6.0,
 
-        4.8,
+        3.1,
+        2.6
+
     ]
     percent_orig = percent[::]
     percent = [x*100 for x in percent]
@@ -167,7 +255,7 @@ def example_plot():
     # Set axis labels and title, bold the title
     plt.xlabel("Các bộ ba (n, g-type, t-type)", fontsize=12, fontweight='bold')
     plt.ylabel("Thời gian (ms)", fontsize=12, fontweight='bold')
-    plt.title("So sánh thời gian của DDD và Enum", fontsize=16, fontweight='bold')
+    plt.title("So sánh số BP khám phá của DDD và Enum", fontsize=16, fontweight='bold')
 
     # Add data labels (optional)
     # You can uncomment this section to add data labels to the bars
@@ -233,8 +321,8 @@ if __name__ == '__main__':
     # f3 = lambda t: 0.72 + 0.06*t
     # f4 = ""
     # f5 = ""
-    plot_functions(f1, f2, f3, f4, f5, name)
+    # plot_functions(f1, f2, f3, f4, f5, name)
 
     # line_plot()
-    # example_plot()
+    example_plot()
     # example_plot2()

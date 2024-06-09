@@ -8,6 +8,12 @@
 Khoá luận sẽ chỉ tập trung vào trường hợp mạng có thuộc tính
 \emph{FIFO ngặt}: với mọi cung trong mạng, không thể đi đến cuối một cung sớm hơn bằng cách khởi hành ở thời điểm sau đó.
 
+Trước khi đi vào các chi tiết về cách giải và ví dụ minh họa, cần làm rõ hai yếu tố sau:
+\begin{itemize}
+  \item \textbf{Đầu vào:} Một mạng thời gian \(D = (N, A)\); khung thời gian \([0, T]\); hàm vận tốc \(c_{i,j}(t)\) tuyến tính từng khúc dưới dạng danh sách cạnh và tập hợp các giá trị tại từng BP. Các BP ở đây đều có thời gian là số nguyên.
+  \item \textbf{Đầu ra:} Đường đi có thời gian di chuyển tối thiểu từ đỉnh nguồn đến đỉnh đích. Ngoài ra còn có các thông tin khác đề cập ở phần \autoref{cuxe1c-thux1eed-nghiux1ec7m}.
+\end{itemize}
+
 \section{Ví dụ}\label{vuxed-dux1ee5}
 
 Xét mạng ở \autoref{fig:2} với các hàm vận tốc được biểu diễn ở \autoref{fig:4}. 
@@ -17,31 +23,32 @@ nguyên. Ngoại lệ là cung \((3, 4)\) chỉ có BP tại \(0, 1, 2\) và
 
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
-\begin{minipage}[b]{0.45\textwidth}
+\begin{minipage}{0.45\textwidth}
   \centering
   \includegraphics{edited-images/Figure2.jpg}
   \caption{Mạng \(D\)}
   \label{fig:2}
 \end{minipage}
-\begin{minipage}[b]{0.45\textwidth}
+\begin{minipage}{0.49\textwidth}
   \centering
-  \begin{small}
-      \caption{Bảng Thời gian di chuyển với mỗi BP}
+
+      \captionof{table}{Bảng Thời gian di chuyển với mỗi BP}
       \label{table:1}
-      \begin{tabular}{|c||ccccc|}
-      \toprule
-      \multirow{2}{*}{BP} & \multicolumn{5}{c|}{Cung di chuyển}                                                                                       \\ \cmidrule{2-6} 
-                          & \multicolumn{1}{c|}{(1,2)} & \multicolumn{1}{c|}{(1,3)} & \multicolumn{1}{c|}{(2,3)} & \multicolumn{1}{c|}{(2,4)} & (3,4) \\ \midrule
-      0                   & \multicolumn{1}{c|}{1.34}  & \multicolumn{1}{c|}{2.85}  & \multicolumn{1}{c|}{1.99}  & \multicolumn{1}{c|}{1.29}  & 0.61  \\ \midrule
-      1                   & \multicolumn{1}{c|}{0.66}  & \multicolumn{1}{c|}{2.95}  & \multicolumn{1}{c|}{1.82}  & \multicolumn{1}{c|}{1.02}  & 0.73  \\ \midrule
-      2                   & \multicolumn{1}{c|}{0.14}  & \multicolumn{1}{c|}{3.00}  & \multicolumn{1}{c|}{1.51}  & \multicolumn{1}{c|}{1.63}  & 0.83  \\ \midrule
-      3                   & \multicolumn{1}{c|}{0.01}  & \multicolumn{1}{c|}{2.98}  & \multicolumn{1}{c|}{1.10}  & \multicolumn{1}{c|}{2.57}  & ---     \\ \midrule
-      4                   & \multicolumn{1}{c|}{0.35}  & \multicolumn{1}{c|}{2.90}  & \multicolumn{1}{c|}{0.67}  & \multicolumn{1}{c|}{3.00}  & ---     \\ \midrule
-      5                   & \multicolumn{1}{c|}{1.00}  & \multicolumn{1}{c|}{2.76}  & \multicolumn{1}{c|}{0.30}  & \multicolumn{1}{c|}{2.54}  & 1.00  \\ \bottomrule
-      \end{tabular}
-  \end{small}
+      \resizebox{0.8\linewidth}{!}{%
+        \begin{tabular}{|c||ccccc|}
+        \toprule
+        \multirow{2}{*}{BP} & \multicolumn{5}{c|}{Cung di chuyển}                                                                                       \\ \cmidrule{2-6} 
+                            & \multicolumn{1}{c|}{(1,2)} & \multicolumn{1}{c|}{(1,3)} & \multicolumn{1}{c|}{(2,3)} & \multicolumn{1}{c|}{(2,4)} & (3,4) \\ \midrule
+        0                   & \multicolumn{1}{c|}{1.34}  & \multicolumn{1}{c|}{2.85}  & \multicolumn{1}{c|}{1.99}  & \multicolumn{1}{c|}{1.29}  & 0.61  \\ \midrule
+        1                   & \multicolumn{1}{c|}{0.66}  & \multicolumn{1}{c|}{2.95}  & \multicolumn{1}{c|}{1.82}  & \multicolumn{1}{c|}{1.02}  & 0.73  \\ \midrule
+        2                   & \multicolumn{1}{c|}{0.14}  & \multicolumn{1}{c|}{3.00}  & \multicolumn{1}{c|}{1.51}  & \multicolumn{1}{c|}{1.63}  & 0.83  \\ \midrule
+        3                   & \multicolumn{1}{c|}{0.01}  & \multicolumn{1}{c|}{2.98}  & \multicolumn{1}{c|}{1.10}  & \multicolumn{1}{c|}{2.57}  & ---     \\ \midrule
+        4                   & \multicolumn{1}{c|}{0.35}  & \multicolumn{1}{c|}{2.90}  & \multicolumn{1}{c|}{0.67}  & \multicolumn{1}{c|}{3.00}  & ---     \\ \midrule
+        5                   & \multicolumn{1}{c|}{1.00}  & \multicolumn{1}{c|}{2.76}  & \multicolumn{1}{c|}{0.30}  & \multicolumn{1}{c|}{2.54}  & 1.00  \\ \bottomrule
+        \end{tabular}
+      }
 \end{minipage}
 
 \end{figure}
@@ -69,7 +76,7 @@ nguyên. Ngoại lệ là cung \((3, 4)\) chỉ có BP tại \(0, 1, 2\) và
 
 Cho thời điểm \(t\) bất kỳ thuộc khoảng \([0, T]\) biểu diễn thời gian
 đi đến đỉnh \(n\), ta có thể xây dựng BSPT tương ứng. BSPT là một Mạng
-thời gian-không gian (\textbf{TEN}) được kí hiệu là \(B^t\), có gốc là
+thời gian-không gian (\textbf{TEN}) được kí hiệu là \(B^t\), luôn có gốc là
 \((n, t)\). Cây này được định nghĩa bởi tập hợp các nút\footnote{để phân
   biệt mạng với đồ thị, sử dụng từ \emph{nút} thay cho \emph{đỉnh}.} \((i, t_i)\)
 với \(i \in N\) và \(t_i \in (-\infty, T]\), tập hợp các cung\footnote{để
@@ -82,20 +89,19 @@ với \(i \in N\) và \(t_i \in (-\infty, T]\), tập hợp các cung\footnote{�
   Với mỗi \(i\in N\), chỉ tồn tại \(t_i\) là thời gian khởi hành muộn
   nhất để đi từ \(i\) đến \(n\). Lúc này \((i, t_i)\in B^t\),
 \item
-  \((i, j) \in A\),
+  Cung \((i, j) \in A\),
 \item
   \(t_i + c_{i, j}(t_i) = t_j\), và
 \item
   \textbf{Chỉ có một đường đi duy nhất}~từ \(i\) đến \(n\) trong
-  \(B^t\). Đường đi này được xác định bởi~nghiệm của \emph{TDSPP}~(được
-  gọi là \emph{TDSP}) bắt đầu từ \(i\) tại thời gian \(t_i\) và kết thúc
+  \(B^t\). Đường đi này được xác định bởi việc thực hiện \emph{TDSP} bắt đầu từ \(i\) tại thời gian \(t_i\) và kết thúc
   ở \(n\).
 \end{itemize}
 
-\textbf{BSPT} được tính ra
-bằng cách giải bài toán \emph{TDSPP}, bằng cách áp dụng thuật toán tìm đường 
+\textbf{BSPT} được tạo từ nghiệm của TDSP (là một đường đi) bằng cách áp dụng thuật toán tìm đường 
 đi ngắn nhất từ một đỉnh (Dijkstra)
-với một vài điều chỉnh đơn giản. BSPT cho đỉnh \(4\) tại thời gian
+với một vài điều chỉnh đơn giản liên quan đến chọn các BP thay vì trọng số cố định như thông thường. 
+BSPT cho đỉnh \(4\) tại thời gian
 \(t=2.57\) được biểu diễn ở \autoref{fig:5b}. Mạng TEN này bao gồm các nút
 \(\{(1, 0.00), (2, 1.34), (3, 1.76), (4, 2.57)\}\)\footnote{thời gian
   làm tròn thời gian đến 2 chữ số thập phân} và các cung
@@ -105,25 +111,25 @@ với một vài điều chỉnh đơn giản. BSPT cho đỉnh \(4\) tại th�
 
 \centering
 % \includegraphics{images/Figure5.png}
-\subcaptionbox{TDSP từ nút \((1,0)\)\label{fig:5a}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5a.jpg}}
-\subcaptionbox{BSPT từ nút \((4, 2.57)\)\label{fig:5b}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5b.jpg}}
+\subcaptionbox{TDSP từ nút \((1,0)\)\label{fig:5a}}{\includegraphics[width=.4\textwidth]{edited-images/Figure5a.jpg}}
+\subcaptionbox{BSPT có gốc \((4, 2.57)\)\label{fig:5b}}{\includegraphics[width=.4\textwidth]{edited-images/Figure5b.jpg}}
 
-\subcaptionbox{ABSPT \(\overline{\mathcal{B}}^{2.57}\)\label{fig:5c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5c.jpg}}
-\subcaptionbox{ABSPT \(\overline{\mathcal{B}}^{2.57}\) với các UTT khi ghép với \(B^5\)\label{fig:5d}}{\includegraphics[width=.45\textwidth]{edited-images/Figure5d.jpg}}
+\subcaptionbox{ABSPT \(\overline{\mathcal{B}}^{2.57}\)\label{fig:5c}}{\includegraphics[width=.4\textwidth]{edited-images/Figure5c.jpg}}
+\subcaptionbox{ABSPT \(\overline{\mathcal{B}}^{2.57}\) với các UTT khi ghép với \(\overline{\mathcal{B}}^{5}\)\label{fig:5d}}{\includegraphics[width=.4\textwidth]{edited-images/Figure5d.jpg}}
 \caption{Quy trình tạo ABSPT ứng với
 đỉnh xuất phát (1,0)}
 \label{fig:5}
 \end{figure}
 
 \newpage
-Giải thích các hình trong \autoref{fig:5}: 
+Giải thích \autoref{fig:5}: 
 \begin{itemize}
   \item \autoref{fig:5a}: đường đi TDSP từ đỉnh \((1, 0)\) đến \(n\) với thời gian là \(2.57\). 
   Các nút thời gian màu xanh, giá trị hàm vận tốc màu đen.
   \item \autoref{fig:5b}: BSPT tương ứng với đỉnh \((4, 2.57)\).
   \item \autoref{fig:5c}: ABSPT \(\overline{\mathcal{B}}^{2.57}\) tương ứng với đỉnh \((4, 2.57)\). 
   Thời gian di chuyển thực tế có màu đỏ.
-  \item \autoref{fig:5d}: ABSPT \(\overline{\mathcal{B}}^{2.57}\) với các UTT khi ghép với \(B^5\) (có màu đen),
+  \item \autoref{fig:5d}: ABSPT \(\overline{\mathcal{B}}^{2.57}\) với các UTT khi ghép với \(\overline{\mathcal{B}}^5\) (có màu đen),
   đường đi tối thiểu có màu xanh lá.
 \end{itemize}
 
@@ -356,6 +362,8 @@ Vì \autoref{algo:1} thực chất là một họ các thuật toán nên không
 phương án chọn BP khi có nhiều lựa chọn. \autoref{kux1ecbch-bux1ea3n-vuxe0-cuxe0i-ux111ux1eb7t} sẽ đề cập đến
 các cách chọn được sử dụng.
 
+Độ phức tạp thuật toán sẽ là \(\mathcal{O}(K\times SSP)\) với \(K\) là tổng số BP khám phá được và \(SSP\) là độ phức tạp của thuật toán tìm đường đi ngắn nhất từ một đỉnh.
+
 \newpage
 \subsection{Mã giả}\label{muxe3-giux1ea3}
 
@@ -367,26 +375,26 @@ các cách chọn được sử dụng.
 \Output{minimum duration path from node $1$ to $n$ departing and arriving at times in $[0, T]$}
 
 \State Solve the TDSP starting from $(1, 0)$ to determine $t_0$, the earliest time that $n$ can be reached ;
-\State Initialize ordered list of ABSPTs: set $L \leftarrow (\overline{B}^{t_0}, \overline{B}^{T})$  ;
-\State $UB \leftarrow \min\{ computeUB(\overline{B}^{t_0}), computeUB(\overline{B}^{T})\}$ ;
-\State $LB^{t_0} \leftarrow computeLB(\overline{B}^{t_0})$ ;
+\State Initialize ordered list of ABSPTs: set $L \leftarrow (\overline{\mathcal{B}}^{t_0}, \overline{\mathcal{B}}^{T})$  ;
+\State $UB \leftarrow \min\{ computeUB(\overline{\mathcal{B}}^{t_0}), computeUB(\overline{\mathcal{B}}^{T})\}$ ;
+\State $LB^{t_0} \leftarrow computeLB(\overline{\mathcal{B}}^{t_0})$ ;
 \State Set $LB \leftarrow LB^{t_0}$, set $t \leftarrow t_0$ and set $t^+ \leftarrow T$ ;
 \While{$(LB < UB)$}
 
-    \If{some breakpoints $(j, \tau)$ lies between $\overline{B}^{t}$ and $\overline{B}^{t^+}$}
+    \If{some breakpoints $(j, \tau)$ lies between $\overline{\mathcal{B}}^{t}$ and $\overline{\mathcal{B}}^{t^+}$}
         \State Solve the TDSP starting from $(j, \tau)$ to determine, s, the earliest arrival at $n$ ;
-        \State Create the new ABSPT $\overline{B}^s$ and set $UB^s \leftarrow computeUB(\overline{B}^s)$ ;
+        \State Create the new ABSPT $\overline{\mathcal{B}}^s$ and set $UB^s \leftarrow computeUB(\overline{\mathcal{B}}^s)$ ;
         \If {$UB^s < UB$} 
             \State $UB \leftarrow UB^s$
         \EndIf
-        \State Insert $\overline{B}^s$ in the list $L$ between $\overline{B}^t$ and $\overline{B}^{t^+}$ ;
-        \State $LB^t \leftarrow computeLB(\overline{B}^t)$ ;
-        \State $LB^s \leftarrow computeLB(\overline{B}^s)$ ;
+        \State Insert $\overline{\mathcal{B}}^s$ in the list $L$ between $\overline{\mathcal{B}}^t$ and $\overline{\mathcal{B}}^{t^+}$ ;
+        \State $LB^t \leftarrow computeLB(\overline{\mathcal{B}}^t)$ ;
+        \State $LB^s \leftarrow computeLB(\overline{\mathcal{B}}^s)$ ;
     \Else
-        \State The status of $\overline{B}^t$ is resolved: set $LB^t \leftarrow UB^t$ ;
+        \State The status of $\overline{\mathcal{B}}^t$ is resolved: set $LB^t \leftarrow UB^t$ ;
     \EndIf
     \State Update the lower bound: set $t \leftarrow \arg\min_{\tau}LB^{\tau}$ and $LB\leftarrow LB^t$ 
-    \State Identify the next ABSPT in the list: $t^+ \leftarrow min\{\tau : \overline{B}^{\tau}$ is in $L$ and $\tau > t \}$ ;
+    \State Identify the next ABSPT in the list: $t^+ \leftarrow min\{\tau : \overline{\mathcal{B}}^{\tau}$ is in $L$ and $\tau > t \}$ ;
 \EndWhile
   
   \end{algorithmic}
@@ -398,14 +406,14 @@ các cách chọn được sử dụng.
 \centering
 % \includegraphics{images/Figure6a.png}
 % \includegraphics{images/Figure6b.png}
-\subcaptionbox{Lần lặp 1\label{fig:6_a}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6a.jpg}}
-\subcaptionbox{Lần lặp 2\label{fig:6_b}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6b.jpg}}
-\subcaptionbox{Lần lặp 3\label{fig:6_c}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6c.jpg}}
-\subcaptionbox{Lần lặp 4\label{fig:6_d}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6d.jpg}}
-\subcaptionbox{Lần lặp 5\label{fig:6_e}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6e.jpg}}
-\subcaptionbox{Lần lặp 6\label{fig:6_f}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6f.jpg}}
-\subcaptionbox{Lần lặp 7\label{fig:6_g}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6g.jpg}}
-\subcaptionbox{Chú thích\label{fig:6_h}}{\includegraphics[width=.45\textwidth]{edited-images/Figure6h.jpg}}
+\subcaptionbox{Lần lặp 1\label{fig:6_a}}{\includegraphics[width=.4\textwidth]{plot2/1 2.png}}
+\subcaptionbox{Lần lặp 2\label{fig:6_b}}{\includegraphics[width=.4\textwidth]{plot2/2 2.png}}
+\subcaptionbox{Lần lặp 3\label{fig:6_c}}{\includegraphics[width=.4\textwidth]{plot2/3 2.png}}
+\subcaptionbox{Lần lặp 4\label{fig:6_d}}{\includegraphics[width=.4\textwidth]{plot2/4 2.png}}
+\subcaptionbox{Lần lặp 5\label{fig:6_e}}{\includegraphics[width=.4\textwidth]{plot2/5 2.png}}
+\subcaptionbox{Lần lặp 6\label{fig:6_f}}{\includegraphics[width=.4\textwidth]{plot2/6 2.png}}
+\subcaptionbox{Lần lặp 7\label{fig:6_g}}{\includegraphics[width=.4\textwidth]{plot2/7 2.png}}
+\subcaptionbox{Chú thích\label{fig:6_h}}{\includegraphics[width=.4\textwidth]{edited-images/Figure6h.jpg}}
 
 \caption{Minh họa cách thức hoạt động của thuật toán trên ví dụ
 từ \autoref{fig:2} và \autoref{table:1}.}
@@ -441,13 +449,13 @@ Các giá trị \(LB=1.25\) và \(UB=2.10\) đã được tính toán ở trên.
   vào danh sách (\autoref{fig:6_b}, có 3 ABSPT).
 \item
   Cập nhật cận trên và cận dưới: \(UB^{3.08} = 2.08\) và
-  \(LB^{3.08} = 1.45\).
+  \(LB^{3.08} = 1.4\).
 \item
   Tính lại và cập nhật cận dưới cho
   \(\overline{\mathcal B}^{2.57} : LB^{2.57} = 1.89.\)
 \end{enumerate}
 
-Hiện tại thì \(LB=1.45\) và \(UB = 2.08\). Vì \(LB<UB\) nên tiếp tục
+Hiện tại thì \(LB=1.4\) và \(UB = 2.08\). Vì \(LB<UB\) nên tiếp tục
 lặp.
 
 \textbf{Các lần lặp tiếp theo:}
